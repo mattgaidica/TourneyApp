@@ -46,18 +46,18 @@ st.markdown("""
         }
         
         /* Remove the double container by fixing Streamlit's default wrappers */
-        [data-testid="stExpander"] > div[data-testid="stExpanderDetails"] > div:first-child {
+        .date-expander [data-testid="stExpander"] > div[data-testid="stExpanderDetails"] > div:first-child {
             padding: 0 !important;
             margin: 0 !important;
         }
         
-        [data-testid="stExpander"] > div[data-testid="stExpanderDetails"] > div:first-child > div {
+        .date-expander [data-testid="stExpander"] > div[data-testid="stExpanderDetails"] > div:first-child > div {
             padding: 0 !important;
             margin: 0 !important;
         }
         
         /* Fix overlap of Streamlit's border wrappers */
-        [data-testid="stVerticalBlockBorderWrapper"] {
+        .date-expander [data-testid="stVerticalBlockBorderWrapper"] {
             padding: 0 !important;
             margin: 0 !important;
         }
@@ -437,8 +437,11 @@ def display_schedule_table(date, games, bootcamp):
     # Check if any games are completed to determine if we should show winners
     show_winners = any(game['status'] == 'completed' for game in games)
     
+    # Create a unique identifier for this date section
+    date_id = "date_" + date.replace(" ", "_").replace(".", "")
+    
     # Create an expander with custom styling for the date (expanded by default)
-    with st.expander("", expanded=True):
+    with st.expander("", expanded=True, key=date_id):
         # Apply custom CSS to style the expander
         st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
         
@@ -486,13 +489,13 @@ def display_schedule_table(date, games, bootcamp):
     
     # Apply custom class to the expander after it's created
     components.html(
-        """
+        f"""
         <script>
-            // Add custom class to expanders
-            const expanders = window.parent.document.querySelectorAll('[data-testid="stExpander"]');
-            expanders.forEach(expander => {
-                expander.parentElement.classList.add('date-expander');
-            });
+            // Add custom class to the specific expander for this date
+            const dateExpander = window.parent.document.querySelector('[data-baseweb="accordion-item"][data-testid="{date_id}"]');
+            if (dateExpander) {{
+                dateExpander.closest('[data-testid="stVerticalBlock"]').classList.add('date-expander');
+            }}
         </script>
         """,
         height=0,
