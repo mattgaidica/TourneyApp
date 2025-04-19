@@ -92,20 +92,6 @@ st.markdown("""
         
         /* Date header */
         .date-header {
-            color: var(--text-color);
-            font-size: 32px;
-            font-weight: bold;
-            padding: var(--spacing-lg);
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin: 0;
-            position: relative;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Enhanced date header styling */
-        .date-header {
             color: var(--accent-blue);
             font-size: 38px;
             font-weight: 800;
