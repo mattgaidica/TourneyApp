@@ -45,6 +45,23 @@ st.markdown("""
             transition: all 0.2s ease-in-out;
         }
         
+        /* Remove the double container by fixing Streamlit's default wrappers */
+        [data-testid="stExpander"] > div[data-testid="stExpanderDetails"] > div:first-child {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
+        [data-testid="stExpander"] > div[data-testid="stExpanderDetails"] > div:first-child > div {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
+        /* Fix overlap of Streamlit's border wrappers */
+        [data-testid="stVerticalBlockBorderWrapper"] {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
         .date-expander:hover {
             transform: translateY(-2px) translateZ(0);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 204, 255, 0.3) !important;
@@ -420,56 +437,52 @@ def display_schedule_table(date, games, bootcamp):
     # Check if any games are completed to determine if we should show winners
     show_winners = any(game['status'] == 'completed' for game in games)
     
-    # Add a container with some padding to visually separate each date section
-    with st.container():
-        st.markdown('<div style="height: 20px;"></div>', unsafe_allow_html=True)
+    # Create an expander with custom styling for the date (expanded by default)
+    with st.expander("", expanded=True):
+        # Apply custom CSS to style the expander
+        st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
         
-        # Create an expander with custom styling for the date (expanded by default)
-        with st.expander(f"", expanded=True):
-            # Apply custom CSS to style the expander
-            st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
-            
-            # Create a 2-column layout for the main time slots
-            time_col1, time_col2 = st.columns(2)
-            
-            # Time slots row
-            with time_col1:
-                st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
-            with time_col2:
-                st.markdown('<div class="time-slot">1630</div>', unsafe_allow_html=True)
-            
-            # Create a 4-column layout for the fields
-            field_cols = st.columns(4)
-            
-            # Helper function to create field HTML
-            def field_html(game, field_label):
-                winner_html = f'<div class="winner-cell">Winner: {game["winner"]}</div>' if show_winners else ''
-                return f'''
-                    <div class="field-column">
-                        <div class="field-label">{field_label}</div>
-                        <div class="team-info">{game["teams"]}</div>
-                        {winner_html}
-                    </div>
-                '''
-            
-            # Field labels and team info
-            for i, col in enumerate(field_cols):
-                with col:
-                    field_label = "Field A" if i % 2 == 0 else "Field B"
-                    st.markdown(field_html(games[i], field_label), unsafe_allow_html=True)
-            
-            # Bootcamp section
-            st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
-            bootcamp_col1, bootcamp_col2 = st.columns(2)
-            
-            with bootcamp_col1:
-                st.markdown(f'<div class="bootcamp-info">{bootcamp["games1_2"]}</div>', unsafe_allow_html=True)
-            
-            with bootcamp_col2:
-                st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
+        # Create a 2-column layout for the main time slots
+        time_col1, time_col2 = st.columns(2)
         
-        # Add spacing and separator after the expander
-        st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
+        # Time slots row
+        with time_col1:
+            st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
+        with time_col2:
+            st.markdown('<div class="time-slot">1630</div>', unsafe_allow_html=True)
+        
+        # Create a 4-column layout for the fields
+        field_cols = st.columns(4)
+        
+        # Helper function to create field HTML
+        def field_html(game, field_label):
+            winner_html = f'<div class="winner-cell">Winner: {game["winner"]}</div>' if show_winners and "winner" in game else ''
+            return f'''
+                <div class="field-column">
+                    <div class="field-label">{field_label}</div>
+                    <div class="team-info">{game["teams"]}</div>
+                    {winner_html}
+                </div>
+            '''
+        
+        # Field labels and team info
+        for i, col in enumerate(field_cols):
+            with col:
+                field_label = "Field A" if i % 2 == 0 else "Field B"
+                st.markdown(field_html(games[i], field_label), unsafe_allow_html=True)
+        
+        # Bootcamp section
+        st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
+        bootcamp_col1, bootcamp_col2 = st.columns(2)
+        
+        with bootcamp_col1:
+            st.markdown(f'<div class="bootcamp-info">{bootcamp["games1_2"]}</div>', unsafe_allow_html=True)
+        
+        with bootcamp_col2:
+            st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
+    
+    # Add spacing and separator after the expander
+    st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
     
     # Apply custom class to the expander after it's created
     components.html(
