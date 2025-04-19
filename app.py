@@ -22,6 +22,10 @@ st.markdown("""
             --accent-blue: #00CCFF;
             --accent-green: #00FF00;
             --text-color: #FAFAFA;
+            --field-a-bg: #473800;
+            --field-a-glow: rgba(255, 217, 0, 0.15);
+            --field-b-bg: #4D0000;
+            --field-b-glow: rgba(255, 0, 0, 0.15);
             --spacing-sm: 8px;
             --spacing-md: 16px;
             --spacing-lg: 24px;
@@ -83,6 +87,7 @@ st.markdown("""
         .date-expander > div[data-testid="stExpander"] > div:nth-child(2) {
             background-color: var(--secondary-bg) !important;
             padding: var(--spacing-lg) !important;
+            padding-bottom: calc(var(--spacing-lg) * 1.5) !important;
         }
         
         /* Date header */
@@ -123,6 +128,22 @@ st.markdown("""
             border-radius: var(--border-radius);
             margin-bottom: var(--spacing-sm);
             border: 1px solid var(--border-color);
+        }
+        
+        /* Field A styling */
+        .field-a .field-label {
+            background-color: var(--field-a-bg);
+            border-color: #8B7500;
+            box-shadow: 0 0 10px var(--field-a-glow);
+            color: #FFD700;
+        }
+        
+        /* Field B styling */
+        .field-b .field-label {
+            background-color: var(--field-b-bg);
+            border-color: #8B0000;
+            box-shadow: 0 0 10px var(--field-b-glow);
+            color: #FF6B6B;
         }
         
         /* Team info */
@@ -461,8 +482,12 @@ def display_schedule_table(date, games, bootcamp):
         # Helper function to create field HTML
         def field_html(game, field_label):
             winner_html = f'<div class="winner-cell">Winner: {game["winner"]}</div>' if show_winners and "winner" in game else ''
+            
+            # Set CSS class based on field
+            field_class = "field-a" if field_label == "Field A" else "field-b"
+            
             return f'''
-                <div class="field-column">
+                <div class="field-column {field_class}">
                     <div class="field-label">{field_label}</div>
                     <div class="team-info">{game["teams"]}</div>
                     {winner_html}
