@@ -193,11 +193,12 @@ st.markdown("""
             border-bottom: 1px solid #333 !important;
             display: flex;
             justify-content: center;
-            gap: 5px;
-            padding-bottom: 0;
+            gap: 10px;
+            padding: 10px 0 0 0 !important;
+            margin-bottom: 5px !important;
         }
         
-        /* Style individual tabs */
+        /* Style individual tabs with more padding */
         .stTabs [data-baseweb="tab"] {
             background-color: #1E1E1E !important;
             border: 1px solid #333 !important;
@@ -206,6 +207,8 @@ st.markdown("""
             margin: 0 5px !important;
             font-weight: 400;
             transition: all 0.2s ease;
+            padding: 12px 24px !important;
+            font-size: 16px !important;
         }
         
         /* Active tab styling */
