@@ -105,46 +105,46 @@ TOURNAMENT_SCHEDULE = {
     "2025-04-08": {
         "date": "08 Apr 2025",
         "games": [
-            {"time": "1600", "field": "Field A", "status": "completed"},
-            {"time": "1600", "field": "Field B", "status": "completed"},
-            {"time": "1630", "field": "Field A", "status": "completed"},
-            {"time": "1630", "field": "Field B", "status": "completed"}
+            {"time": "1600", "field": "Field A", "status": "completed", "teams": "Alpha vs. Bravo"},
+            {"time": "1600", "field": "Field B", "status": "completed", "teams": "Charlie vs. Delta"},
+            {"time": "1630", "field": "Field A", "status": "completed", "teams": ""},
+            {"time": "1630", "field": "Field B", "status": "completed", "teams": ""}
         ]
     },
     "2025-04-15": {
         "date": "15 Apr 2025",
         "games": [
-            {"time": "1600", "field": "Field A", "status": "completed"},
-            {"time": "1600", "field": "Field B", "status": "completed"},
-            {"time": "1630", "field": "Field A", "status": "completed"},
-            {"time": "1630", "field": "Field B", "status": "completed"}
+            {"time": "1600", "field": "Field A", "status": "completed", "teams": "Echo vs. Cadre"},
+            {"time": "1600", "field": "Field B", "status": "completed", "teams": "Bravo vs. Delta"},
+            {"time": "1630", "field": "Field A", "status": "completed", "teams": ""},
+            {"time": "1630", "field": "Field B", "status": "completed", "teams": ""}
         ]
     },
     "2025-04-23": {
         "date": "23 Apr 2025",
         "games": [
-            {"time": "1600", "field": "Field A", "status": "upcoming"},
-            {"time": "1600", "field": "Field B", "status": "upcoming"},
-            {"time": "1630", "field": "Field A", "status": "upcoming"},
-            {"time": "1630", "field": "Field B", "status": "upcoming"}
+            {"time": "1600", "field": "Field A", "status": "upcoming", "teams": "Bravo vs. Charlie"},
+            {"time": "1600", "field": "Field B", "status": "upcoming", "teams": "Alpha vs. Echo"},
+            {"time": "1630", "field": "Field A", "status": "upcoming", "teams": "Charlie vs. Cadre"},
+            {"time": "1630", "field": "Field B", "status": "upcoming", "teams": "Bravo vs. Echo"}
         ]
     },
     "2025-04-29": {
         "date": "29 Apr 2025",
         "games": [
-            {"time": "1600", "field": "Field A", "status": "upcoming"},
-            {"time": "1600", "field": "Field B", "status": "upcoming"},
-            {"time": "1630", "field": "Field A", "status": "upcoming"},
-            {"time": "1630", "field": "Field B", "status": "upcoming"}
+            {"time": "1600", "field": "Field A", "status": "upcoming", "teams": "Alpha vs. Cadre"},
+            {"time": "1600", "field": "Field B", "status": "upcoming", "teams": "Delta vs. Echo"},
+            {"time": "1630", "field": "Field A", "status": "upcoming", "teams": "Bravo vs. Cadre"},
+            {"time": "1630", "field": "Field B", "status": "upcoming", "teams": "Alpha vs. Delta"}
         ]
     },
     "2025-05-07": {
         "date": "07 May 2025",
         "games": [
-            {"time": "1600", "field": "Field A", "status": "upcoming"},
-            {"time": "1600", "field": "Field B", "status": "upcoming"},
-            {"time": "1630", "field": "Field A", "status": "upcoming"},
-            {"time": "1630", "field": "Field B", "status": "upcoming"}
+            {"time": "1600", "field": "Field A", "status": "upcoming", "teams": "Charlie vs. Echo"},
+            {"time": "1600", "field": "Field B", "status": "upcoming", "teams": "Delta vs. Cadre"},
+            {"time": "1630", "field": "Field A", "status": "upcoming", "teams": "Alpha vs. Charlie"},
+            {"time": "1630", "field": "Field B", "status": "upcoming", "teams": "Sudden Death"}
         ]
     }
 }
@@ -175,10 +175,10 @@ def display_schedule_table(date, games):
                 <th colspan='2' class='time-slot'>1630</th>
             </tr>
             <tr>
-                <td class='field-cell'>Field A</td>
-                <td class='field-cell'>Field B</td>
-                <td class='field-cell'>Field A</td>
-                <td class='field-cell'>Field B</td>
+                <td class='field-cell'>{games[0]['teams']}</td>
+                <td class='field-cell'>{games[1]['teams']}</td>
+                <td class='field-cell'>{games[2]['teams']}</td>
+                <td class='field-cell'>{games[3]['teams']}</td>
             </tr>
         </table>
     </div>
