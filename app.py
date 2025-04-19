@@ -102,8 +102,8 @@ st.markdown("""
 
 # Tournament Schedule Data
 TOURNAMENT_SCHEDULE = {
-    "2024-04-08": {
-        "date": "08 Apr 2024",
+    "2025-04-08": {
+        "date": "08 Apr 2025",
         "games": [
             {"time": "1600", "field": "Field A", "status": "completed"},
             {"time": "1600", "field": "Field B", "status": "completed"},
@@ -111,8 +111,8 @@ TOURNAMENT_SCHEDULE = {
             {"time": "1630", "field": "Field B", "status": "completed"}
         ]
     },
-    "2024-04-15": {
-        "date": "15 Apr 2024",
+    "2025-04-15": {
+        "date": "15 Apr 2025",
         "games": [
             {"time": "1600", "field": "Field A", "status": "completed"},
             {"time": "1600", "field": "Field B", "status": "completed"},
@@ -120,8 +120,8 @@ TOURNAMENT_SCHEDULE = {
             {"time": "1630", "field": "Field B", "status": "completed"}
         ]
     },
-    "2024-04-23": {
-        "date": "23 Apr 2024",
+    "2025-04-23": {
+        "date": "23 Apr 2025",
         "games": [
             {"time": "1600", "field": "Field A", "status": "upcoming"},
             {"time": "1600", "field": "Field B", "status": "upcoming"},
@@ -129,8 +129,8 @@ TOURNAMENT_SCHEDULE = {
             {"time": "1630", "field": "Field B", "status": "upcoming"}
         ]
     },
-    "2024-04-29": {
-        "date": "29 Apr 2024",
+    "2025-04-29": {
+        "date": "29 Apr 2025",
         "games": [
             {"time": "1600", "field": "Field A", "status": "upcoming"},
             {"time": "1600", "field": "Field B", "status": "upcoming"},
@@ -138,8 +138,8 @@ TOURNAMENT_SCHEDULE = {
             {"time": "1630", "field": "Field B", "status": "upcoming"}
         ]
     },
-    "2024-05-07": {
-        "date": "07 May 2024",
+    "2025-05-07": {
+        "date": "07 May 2025",
         "games": [
             {"time": "1600", "field": "Field A", "status": "upcoming"},
             {"time": "1600", "field": "Field B", "status": "upcoming"},
