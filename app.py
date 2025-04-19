@@ -256,55 +256,57 @@ def display_schedule_table(date, games, bootcamp):
     # Check if any games are completed to determine if we should show winners
     show_winners = any(game['status'] == 'completed' for game in games)
     
-    # Create the HTML table with proper formatting
-    table_html = f"""
-    <div class='schedule-container'>
-        <div class='date-header'>{date}</div>
-        <table class='schedule-table'>
-            <tr>
-                <th colspan='2' class='time-slot'>1600</th>
-                <th colspan='2' class='time-slot'>1630</th>
-            </tr>
-            <tr>
-                <td class='field-cell'>Field A</td>
-                <td class='field-cell'>Field B</td>
-                <td class='field-cell'>Field A</td>
-                <td class='field-cell'>Field B</td>
-            </tr>
-            <tr>
-                <td class='team-cell'>{games[0]['teams']}</td>
-                <td class='team-cell'>{games[1]['teams']}</td>
-                <td class='team-cell'>{games[2]['teams']}</td>
-                <td class='team-cell'>{games[3]['teams']}</td>
-            </tr>
-    """
-    
-    # Add winner row if games are completed
-    if show_winners:
-        table_html += f"""
-            <tr>
-                <td class='winner-cell'>Winner: {games[0]['winner']}</td>
-                <td class='winner-cell'>Winner: {games[1]['winner']}</td>
-                <td class='winner-cell'>Winner: {games[2]['winner']}</td>
-                <td class='winner-cell'>Winner: {games[3]['winner']}</td>
-            </tr>
-        """
-    
-    # Add bootcamp information
-    table_html += f"""
-            <tr>
-                <th colspan='4' class='bootcamp-header'>BOOTCAMP</th>
-            </tr>
-            <tr>
-                <td colspan='2' class='bootcamp-cell'>{bootcamp['games1_2']}</td>
-                <td colspan='2' class='bootcamp-cell'>{bootcamp['games3_4']}</td>
-            </tr>
-        </table>
-    </div>
-    """
-    
-    # Display the HTML table
-    st.markdown(table_html, unsafe_allow_html=True)
+    # Create a container for the schedule
+    with st.container():
+        # Date header
+        st.markdown(f"<div class='date-header'>{date}</div>", unsafe_allow_html=True)
+        
+        # Create columns for the time slots
+        col1, col2 = st.columns(2)
+        
+        # 1600 time slot
+        with col1:
+            st.markdown("### 1600", help="First game time")
+            
+            # Field A
+            st.markdown("**Field A**")
+            st.write(games[0]['teams'])
+            if show_winners:
+                st.markdown(f"<div class='winner-cell'>Winner: {games[0]['winner']}</div>", unsafe_allow_html=True)
+            
+            # Field B
+            st.markdown("**Field B**")
+            st.write(games[1]['teams'])
+            if show_winners:
+                st.markdown(f"<div class='winner-cell'>Winner: {games[1]['winner']}</div>", unsafe_allow_html=True)
+        
+        # 1630 time slot
+        with col2:
+            st.markdown("### 1630", help="Second game time")
+            
+            # Field A
+            st.markdown("**Field A**")
+            st.write(games[2]['teams'])
+            if show_winners:
+                st.markdown(f"<div class='winner-cell'>Winner: {games[2]['winner']}</div>", unsafe_allow_html=True)
+            
+            # Field B
+            st.markdown("**Field B**")
+            st.write(games[3]['teams'])
+            if show_winners:
+                st.markdown(f"<div class='winner-cell'>Winner: {games[3]['winner']}</div>", unsafe_allow_html=True)
+        
+        # Bootcamp section
+        st.markdown("### BOOTCAMP")
+        bootcamp_col1, bootcamp_col2 = st.columns(2)
+        
+        with bootcamp_col1:
+            st.write("**Games 1-2**")
+            st.write(bootcamp['games1_2'])
+        
+        with bootcamp_col2:
+            st.write("**Games 3-4**")
+            st.write(bootcamp['games3_4'])
 
 # Upcoming Events Tab
 with tab1:
