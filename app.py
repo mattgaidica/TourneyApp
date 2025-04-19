@@ -394,21 +394,17 @@ st.markdown("""
 
         /* Style the note under the title */
         .note {
-            background-color: var(--secondary-bg);
-            border-left: 4px solid var(--accent-blue);
-            padding: 12px 15px;
-            margin: 20px auto;
-            border-radius: 4px;
+            color: #999999;
+            font-size: 14px;
+            margin: 15px auto;
             max-width: 800px;
+            text-align: center;
             font-style: italic;
-            color: #CCCCCC;
-            text-align: left;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .note strong {
-            color: var(--accent-blue);
-            font-weight: bold;
+            color: #BBBBBB;
+            font-weight: 500;
         }
     </style>
 """, unsafe_allow_html=True)
