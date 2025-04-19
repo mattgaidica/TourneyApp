@@ -686,6 +686,43 @@ st.markdown("""
             width: 0 !important;
             min-width: 0 !important;
         }
+
+        /* Override Streamlit's default emotion class styles that cause stacking */
+        @media (max-width: 640px) {
+            /* Target the specific emotion class that controls min-width */
+            .st-emotion-cache-t74pzu,
+            .st-emotion-cache-180ybpv,
+            [class*="st-emotion-cache-"] {
+                min-width: 0 !important;
+                width: auto !important;
+                flex: 1 !important;
+            }
+            
+            /* Override any grid-based layouts */
+            [data-testid="stHorizontalBlock"] {
+                display: flex !important;
+                grid-template-columns: none !important;
+                grid-gap: 0 !important;
+            }
+            
+            /* Make contents fit without overflow */
+            .field-label, .team-info, .time-slot, .bootcamp-header, .bootcamp-info {
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
+        }
+
+        /* Add specific overrides for Streamlit's column gaps */
+        [data-testid="stHorizontalBlock"] {
+            gap: 0.5rem !important;
+        }
+
+        @media (max-width: 480px) {
+            [data-testid="stHorizontalBlock"] {
+                gap: 0.25rem !important;
+            }
+        }
     </style>
 """, unsafe_allow_html=True)
 
