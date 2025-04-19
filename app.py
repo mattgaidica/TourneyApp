@@ -28,7 +28,7 @@ st.markdown("""
         
         /* Event container */
         .event-container {
-            background-color: var(--primary-bg);
+            background-color: var(--secondary-bg);
             border-radius: var(--border-radius);
             margin: var(--spacing-lg) auto;
             border: 1px solid var(--border-color);
@@ -44,14 +44,14 @@ st.markdown("""
             padding: var(--spacing-lg);
             background-color: var(--primary-bg);
             text-align: center;
-            border-bottom: 1px solid var(--border-color);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--border-color);
+            margin: 0;
         }
         
-        /* Content container */
-        .content-container {
-            background-color: var(--secondary-bg);
+        /* Game content section */
+        .game-content {
             padding: var(--spacing-lg);
         }
         
@@ -236,8 +236,8 @@ def display_schedule_table(date, games, bootcamp):
     # Date header
     st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
     
-    # Content container
-    st.markdown('<div class="content-container">', unsafe_allow_html=True)
+    # Game content section
+    st.markdown('<div class="game-content">', unsafe_allow_html=True)
     
     # Create a 2-column layout for the main time slots
     time_col1, time_col2 = st.columns(2)
@@ -292,7 +292,7 @@ def display_schedule_table(date, games, bootcamp):
     with bootcamp_col2:
         st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
     
-    # Close the content container
+    # Close the game content section
     st.markdown('</div>', unsafe_allow_html=True)
     
     # Close the event container
