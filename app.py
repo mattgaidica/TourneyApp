@@ -800,7 +800,7 @@ TOURNAMENT_SCHEDULE = {
         ],
         "bootcamp": {
             "games1_2": "Delta, Echo",
-            "games3_4": "Alpha, Bravo"
+            "games3_4": "Alpha, Delta"
         }
     },
     "2025-04-29": {
