@@ -104,6 +104,33 @@ st.markdown("""
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
+        /* Enhanced date header styling */
+        .date-header {
+            color: var(--accent-blue);
+            font-size: 38px;
+            font-weight: 800;
+            padding: var(--spacing-lg) var(--spacing-lg) calc(var(--spacing-lg) * 1.2);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 0;
+            position: relative;
+            text-shadow: 0 0 15px rgba(0, 204, 255, 0.4);
+            border-bottom: 2px solid var(--accent-blue);
+            background: linear-gradient(180deg, rgba(0, 204, 255, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+        }
+        
+        .date-header::before,
+        .date-header::after {
+            content: "⬥";
+            color: var(--accent-blue);
+            position: relative;
+            margin: 0 15px;
+            font-size: 24px;
+            opacity: 0.8;
+            text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+        }
+        
         /* Time slot */
         .time-slot {
             color: var(--accent-blue);
