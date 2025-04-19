@@ -429,6 +429,98 @@ st.markdown("""
             color: #BBBBBB;
             font-weight: 500;
         }
+
+        /* Standings table styling */
+        .standings-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .standings-table th {
+            background-color: var(--primary-bg);
+            color: var(--accent-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 1px;
+            padding: 15px 10px;
+            text-align: center;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .standings-table td {
+            padding: 12px 10px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 15px;
+            color: var(--text-color);
+        }
+
+        .standings-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Flight column styling */
+        .standings-table td:first-child {
+            font-weight: 600;
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        /* Highlight top rows */
+        .highlight-row td {
+            background-color: rgba(0, 204, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 204, 255, 0.3);
+        }
+
+        .highlight-row td:first-child {
+            border-left: 3px solid var(--accent-blue);
+            padding-left: 17px; /* Adjust for the border */
+        }
+
+        /* Win rate styling */
+        .win-rate {
+            font-weight: 500;
+        }
+
+        /* Placing column styling */
+        .placing {
+            font-style: italic;
+        }
+
+        .placing-first {
+            color: #FFD700; /* Gold */
+        }
+
+        .placing-middle {
+            color: #C0C0C0; /* Silver */
+        }
+
+        .placing-last {
+            color: #CD7F32; /* Bronze */
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .standings-table th,
+            .standings-table td {
+                padding: 8px 5px;
+                font-size: 14px;
+            }
+            
+            .standings-table td:first-child {
+                padding-left: 10px;
+            }
+            
+            .highlight-row td:first-child {
+                padding-left: 7px;
+            }
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -612,22 +704,69 @@ with tab2:
     
 # Standings Tab
 with tab3:
-    # Example standings table (mobile-friendly)
-    col1, col2, col3 = st.columns([2,1,1])
-    with col1:
-        st.markdown("**Team**")
-    with col2:
-        st.markdown("**W-L**")
-    with col3:
-        st.markdown("**Points**")
+    st.markdown("<h2 style='text-align: center; margin-bottom: 30px;'>MGT101 25B Tournament Standings</h2>", unsafe_allow_html=True)
     
+    # Standings data
+    standings_data = [
+        {"flight": "Alpha", "plays": 1, "wins": 1, "win_rate": "100%", "placing": "First, tied", "highlight": True},
+        {"flight": "Charlie", "plays": 1, "wins": 1, "win_rate": "100%", "placing": "First, tied", "highlight": True},
+        {"flight": "Cadre", "plays": 1, "wins": 1, "win_rate": "100%", "placing": "First, tied", "highlight": True},
+        {"flight": "Bravo", "plays": 2, "wins": 1, "win_rate": "50%", "placing": "Middle", "highlight": False},
+        {"flight": "Delta", "plays": 2, "wins": 0, "win_rate": "0%", "placing": "Last, tied", "highlight": False},
+        {"flight": "Echo", "plays": 1, "wins": 0, "win_rate": "0%", "placing": "Last, tied", "highlight": False}
+    ]
+    
+    # Generate HTML for the standings table
+    table_html = """
+    <table class="standings-table">
+        <thead>
+            <tr>
+                <th>Flight</th>
+                <th>Plays</th>
+                <th>Wins</th>
+                <th>Win Rate</th>
+                <th>Placing</th>
+            </tr>
+        </thead>
+        <tbody>
+    """
+    
+    for team in standings_data:
+        # Determine row class for highlighting
+        row_class = "highlight-row" if team["highlight"] else ""
+        
+        # Determine placing class
+        placing_class = ""
+        if "First" in team["placing"]:
+            placing_class = "placing-first"
+        elif "Middle" in team["placing"]:
+            placing_class = "placing-middle"
+        elif "Last" in team["placing"]:
+            placing_class = "placing-last"
+        
+        # Add row to table
+        table_html += f"""
+        <tr class="{row_class}">
+            <td>{team["flight"]}</td>
+            <td>{team["plays"]}</td>
+            <td>{team["wins"]}</td>
+            <td class="win-rate">{team["win_rate"]}</td>
+            <td class="placing {placing_class}">{team["placing"]}</td>
+        </tr>
+        """
+    
+    table_html += """
+        </tbody>
+    </table>
+    """
+    
+    # Display the standings table
+    st.markdown(table_html, unsafe_allow_html=True)
+    
+    # Add explanatory text
     st.markdown("""
-    <div style='padding: 5px; border-bottom: 1px solid #e0e0e0;'>
-        <div style='display: flex; justify-content: space-between;'>
-            <span style='flex: 2;'>Team A</span>
-            <span style='flex: 1;'>2-0</span>
-            <span style='flex: 1;'>42</span>
-        </div>
+    <div style="margin-top: 20px; text-align: center; font-style: italic; color: #AAAAAA;">
+    Standings updated after completed games. Teams with the same win percentage are placed in the same tier.
     </div>
     """, unsafe_allow_html=True)
 
