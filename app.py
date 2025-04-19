@@ -405,17 +405,6 @@ st.markdown("""
             text-shadow: 0 0 20px rgba(0, 204, 255, 0.4);
         }
 
-        .main-title::before,
-        .main-title::after {
-            content: "⬥";
-            color: var(--accent-blue);
-            position: relative;
-            margin: 0 15px;
-            font-size: 30px;
-            opacity: 0.8;
-            text-shadow: 0 0 15px rgba(0, 204, 255, 0.5);
-        }
-
         /* Main description styling */
         .main-description {
             color: #FFFFFF;
