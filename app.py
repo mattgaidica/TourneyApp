@@ -378,6 +378,13 @@ st.markdown("""
                 font-size: 18px !important;
             }
         }
+
+        /* Style the expander details */
+        [data-testid="stExpanderDetails"] {
+            padding-bottom: 2rem !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
     </style>
 """, unsafe_allow_html=True)
 
