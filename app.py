@@ -52,10 +52,10 @@ st.markdown("""
         /* Schedule container styling */
         .schedule-container {
             background-color: #262730;
-            border-radius: 8px;
+            border-radius: 12px;
             margin: 20px 0;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         /* Date header styling */
         .date-header {
@@ -71,7 +71,8 @@ st.markdown("""
         /* Game schedule table styling */
         .schedule-table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
             margin: 0;
             background-color: #262730;
         }
@@ -82,9 +83,10 @@ st.markdown("""
             text-align: center;
             border-bottom: 2px solid #404040;
             font-size: 18px;
+            font-weight: bold;
         }
         .schedule-table td {
-            padding: 15px;
+            padding: 12px 15px;
             text-align: center;
             color: #FAFAFA;
             border-bottom: 1px solid #404040;
@@ -93,12 +95,20 @@ st.markdown("""
         .time-slot {
             font-weight: bold;
             color: #00CCFF;
+            background-color: #1E1E1E;
         }
         .field-cell {
             background-color: #2D2D2D;
+            color: #B0B0B0;
+            font-weight: 500;
         }
         .team-cell {
-            background-color: #2D2D2D;
+            background-color: #262730;
+            color: #FAFAFA;
+            font-weight: normal;
+        }
+        .schedule-table tr:last-child td {
+            border-bottom: none;
         }
     </style>
 """, unsafe_allow_html=True)
