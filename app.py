@@ -57,7 +57,7 @@ st.markdown("""
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             max-width: 800px;
-            padding: 0;
+            padding: 20px;
         }
         /* Date header styling */
         .date-header {
@@ -66,103 +66,70 @@ st.markdown("""
             font-weight: bold;
             padding: 20px;
             background-color: #1E1E1E;
-            margin: 0;
+            margin: -20px -20px 20px -20px;
             text-align: center;
+            border-radius: 12px 12px 0 0;
         }
-        /* Game schedule table styling */
-        .schedule-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin: 0;
-            background-color: #262730;
-            table-layout: fixed;
-            border: 0;
-        }
-        .schedule-table th {
-            background-color: #1E1E1E;
-            color: #FAFAFA;
-            padding: 15px 10px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            border-right: 1px solid #404040;
-            border-left: 0;
-            border-top: 0;
-            border-bottom: 0;
-        }
-        .schedule-table th:first-child {
-            border-left: 0;
-        }
-        .schedule-table th:last-child {
-            border-right: 0;
-        }
-        .schedule-table td {
-            padding: 10px;
-            text-align: center;
-            color: #FAFAFA;
-            font-size: 16px;
-            vertical-align: middle;
-            height: 40px;
-            border-right: 1px solid #404040;
-            border-left: 0;
-            border-top: 0;
-            border-bottom: 0;
-        }
-        .schedule-table td:first-child {
-            border-left: 0;
-        }
-        .schedule-table td:last-child {
-            border-right: 0;
-        }
+        /* Time slot styling */
         .time-slot {
-            font-weight: bold;
             color: #00CCFF;
-            background-color: #1E1E1E;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
         }
-        .field-cell {
-            background-color: #2D2D2D;
+        /* Field styling */
+        .field-label {
             color: #B0B0B0;
+            font-size: 18px;
             font-weight: 500;
-            height: 35px;
+            margin-bottom: 5px;
         }
-        .team-cell {
-            background-color: #262730;
+        /* Team styling */
+        .team-info {
+            background-color: #2D2D2D;
             color: #FAFAFA;
-            font-weight: normal;
-            height: 45px;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 16px;
         }
+        /* Winner styling */
         .winner-cell {
             background-color: #1E1E1E;
             color: #00FF00;
             font-weight: bold;
-            height: 35px;
+            padding: 8px;
+            border-radius: 6px;
+            margin-top: 5px;
             font-size: 14px;
+            text-align: center;
         }
+        /* Bootcamp styling */
         .bootcamp-header {
-            background-color: #1E1E1E;
             color: #FAFAFA;
             font-size: 20px;
             font-weight: bold;
-            padding: 10px;
             text-align: center;
-            border-top: 1px solid #404040;
-            border-left: 0;
-            border-right: 0;
+            margin: 20px 0 10px 0;
+            padding: 10px;
+            background-color: #1E1E1E;
+            border-radius: 8px;
         }
-        .bootcamp-cell {
+        .bootcamp-info {
             background-color: #2D2D2D;
             color: #FAFAFA;
-            font-size: 18px;
-            font-weight: 500;
             padding: 10px;
-            text-align: center;
-            border-top: 1px solid #404040;
-            border-left: 0;
-            border-right: 0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 16px;
         }
-        .schedule-table tr:last-child td {
-            border-bottom: 0;
+        /* Column styling */
+        .st-emotion-cache-1r6slb0 {
+            background-color: #262730;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 5px;
         }
     </style>
 """, unsafe_allow_html=True)
