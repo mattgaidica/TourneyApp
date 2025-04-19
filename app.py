@@ -142,8 +142,8 @@ TOURNAMENT_SCHEDULE = {
         "games": [
             {"time": "1600", "field": "Field A", "status": "completed", "teams": "Alpha vs. Bravo"},
             {"time": "1600", "field": "Field B", "status": "completed", "teams": "Charlie vs. Delta"},
-            {"time": "1630", "field": "Field A", "status": "completed", "teams": ""},
-            {"time": "1630", "field": "Field B", "status": "completed", "teams": ""}
+            {"time": "1630", "field": "Field A", "status": "completed", "teams": "Alpha vs. Bravo"},
+            {"time": "1630", "field": "Field B", "status": "completed", "teams": "Charlie vs. Delta"}
         ],
         "bootcamp": {
             "games1_2": "Echo, Cadre",
@@ -155,8 +155,8 @@ TOURNAMENT_SCHEDULE = {
         "games": [
             {"time": "1600", "field": "Field A", "status": "completed", "teams": "Echo vs. Cadre"},
             {"time": "1600", "field": "Field B", "status": "completed", "teams": "Bravo vs. Delta"},
-            {"time": "1630", "field": "Field A", "status": "completed", "teams": ""},
-            {"time": "1630", "field": "Field B", "status": "completed", "teams": ""}
+            {"time": "1630", "field": "Field A", "status": "completed", "teams": "Echo vs. Cadre"},
+            {"time": "1630", "field": "Field B", "status": "completed", "teams": "Bravo vs. Delta"}
         ],
         "bootcamp": {
             "games1_2": "Alpha, Charlie",
