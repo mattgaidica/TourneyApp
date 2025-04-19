@@ -230,6 +230,164 @@ def display_schedule_table(date, games, bootcamp):
     # Check if any games are completed to determine if we should show winners
     show_winners = any(game['status'] == 'completed' for game in games)
     
+    # Update CSS to handle the structure
+    st.markdown("""
+        <style>
+            /* Base styles */
+            :root {
+                --primary-bg: #1E1E1E;
+                --secondary-bg: #262730;
+                --border-color: #404040;
+                --accent-blue: #00CCFF;
+                --accent-green: #00FF00;
+                --text-color: #FAFAFA;
+                --spacing-sm: 8px;
+                --spacing-md: 16px;
+                --spacing-lg: 24px;
+                --border-radius: 8px;
+            }
+            
+            .event-container {
+                background-color: var(--secondary-bg);
+                border-radius: var(--border-radius);
+                margin: var(--spacing-lg) auto;
+                border: 1px solid var(--border-color);
+                max-width: 800px;
+                overflow: hidden;
+            }
+            
+            .date-header {
+                color: var(--text-color);
+                font-size: 32px;
+                font-weight: bold;
+                padding: var(--spacing-lg);
+                background-color: var(--primary-bg);
+                text-align: center;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                border-bottom: 1px solid var(--border-color);
+                margin: 0;
+            }
+            
+            .game-content {
+                padding: var(--spacing-lg);
+            }
+            
+            .time-slots {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--spacing-md);
+                margin-bottom: var(--spacing-md);
+            }
+            
+            .time-slot {
+                color: var(--accent-blue);
+                font-size: 22px;
+                font-weight: bold;
+                text-align: center;
+                background-color: var(--primary-bg);
+                padding: var(--spacing-md);
+                border-radius: var(--border-radius);
+                border: 1px solid var(--border-color);
+            }
+            
+            .fields-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: var(--spacing-md);
+                margin-bottom: var(--spacing-lg);
+            }
+            
+            .field-column {
+                display: flex;
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+            
+            .field-label {
+                color: var(--text-color);
+                font-size: 18px;
+                font-weight: 500;
+                text-align: center;
+                background-color: var(--primary-bg);
+                padding: var(--spacing-sm);
+                border-radius: var(--border-radius);
+                border: 1px solid var(--border-color);
+            }
+            
+            .team-info {
+                background-color: var(--primary-bg);
+                color: var(--text-color);
+                padding: var(--spacing-md);
+                border-radius: var(--border-radius);
+                font-size: 16px;
+                border: 1px solid var(--border-color);
+                text-align: center;
+            }
+            
+            .winner-cell {
+                background-color: var(--primary-bg);
+                color: var(--accent-green);
+                font-weight: bold;
+                padding: var(--spacing-sm);
+                border-radius: var(--border-radius);
+                font-size: 14px;
+                text-align: center;
+                border: 1px solid var(--accent-green);
+            }
+            
+            .bootcamp-section {
+                margin-top: var(--spacing-lg);
+            }
+            
+            .bootcamp-header {
+                color: var(--text-color);
+                font-size: 20px;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: var(--spacing-md);
+                padding: var(--spacing-md);
+                background-color: var(--primary-bg);
+                border-radius: var(--border-radius);
+                border: 1px solid var(--border-color);
+            }
+            
+            .bootcamp-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--spacing-md);
+            }
+            
+            .bootcamp-info {
+                background-color: var(--primary-bg);
+                color: var(--text-color);
+                padding: var(--spacing-md);
+                border-radius: var(--border-radius);
+                font-size: 16px;
+                border: 1px solid var(--border-color);
+                text-align: center;
+            }
+            
+            @media (max-width: 768px) {
+                .fields-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                
+                .time-slot {
+                    font-size: 18px;
+                }
+                
+                .field-label {
+                    font-size: 16px;
+                }
+                
+                .team-info {
+                    font-size: 14px;
+                }
+            }
+        </style>
+    """, unsafe_allow_html=True)
+    
     # Create the event container
     st.markdown('<div class="event-container">', unsafe_allow_html=True)
     
