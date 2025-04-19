@@ -812,7 +812,7 @@ TOURNAMENT_SCHEDULE = {
             {"time": "1630", "field": "Field B", "status": "upcoming", "teams": "Alpha vs. Delta"}
         ],
         "bootcamp": {
-            "games1_2": "Bravo, Cadre",
+            "games1_2": "Bravo, Charlie",
             "games3_4": "Charlie, Echo"
         }
     },
