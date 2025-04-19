@@ -29,30 +29,42 @@ st.markdown("""
             padding-left: 1rem;
             padding-right: 1rem;
         }
-        /* Game card styling */
-        .game-card {
-            padding: 15px;
-            border-radius: 8px;
+        /* Game schedule table styling */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
             background-color: #262730;
-            margin: 10px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            color: #FAFAFA;
+            border-radius: 8px;
+            overflow: hidden;
         }
-        .game-card h3 {
+        .schedule-table th {
+            background-color: #1E1E1E;
             color: #FAFAFA;
-            margin-bottom: 10px;
+            padding: 12px;
+            text-align: center;
+            border-bottom: 2px solid #404040;
         }
-        .game-card p {
+        .schedule-table td {
+            padding: 12px;
+            text-align: center;
             color: #FAFAFA;
-            margin: 5px 0;
+            border-bottom: 1px solid #404040;
         }
-        .game-time {
+        .time-slot {
+            font-weight: bold;
             color: #00CCFF;
-            font-weight: bold;
         }
-        .game-field {
-            color: #00FF99;
-            font-weight: bold;
+        .field-cell {
+            background-color: #2D2D2D;
+        }
+        .date-header {
+            color: #FAFAFA;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #1E1E1E;
+            border-radius: 8px;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -62,46 +74,46 @@ TOURNAMENT_SCHEDULE = {
     "2024-04-08": {
         "date": "08 Apr 2024",
         "games": [
-            {"game": "Game 1", "time": "1600", "field": "Field A", "status": "completed"},
-            {"game": "Game 2", "time": "1600", "field": "Field B", "status": "completed"},
-            {"game": "Game 3", "time": "1630", "field": "Field A", "status": "completed"},
-            {"game": "Game 4", "time": "1630", "field": "Field B", "status": "completed"}
+            {"time": "1600", "field": "Field A", "status": "completed"},
+            {"time": "1600", "field": "Field B", "status": "completed"},
+            {"time": "1630", "field": "Field A", "status": "completed"},
+            {"time": "1630", "field": "Field B", "status": "completed"}
         ]
     },
     "2024-04-15": {
         "date": "15 Apr 2024",
         "games": [
-            {"game": "Game 1", "time": "1600", "field": "Field A", "status": "completed"},
-            {"game": "Game 2", "time": "1600", "field": "Field B", "status": "completed"},
-            {"game": "Game 3", "time": "1630", "field": "Field A", "status": "completed"},
-            {"game": "Game 4", "time": "1630", "field": "Field B", "status": "completed"}
+            {"time": "1600", "field": "Field A", "status": "completed"},
+            {"time": "1600", "field": "Field B", "status": "completed"},
+            {"time": "1630", "field": "Field A", "status": "completed"},
+            {"time": "1630", "field": "Field B", "status": "completed"}
         ]
     },
     "2024-04-23": {
         "date": "23 Apr 2024",
         "games": [
-            {"game": "Game 1", "time": "1600", "field": "Field A", "status": "upcoming"},
-            {"game": "Game 2", "time": "1600", "field": "Field B", "status": "upcoming"},
-            {"game": "Game 3", "time": "1630", "field": "Field A", "status": "upcoming"},
-            {"game": "Game 4", "time": "1630", "field": "Field B", "status": "upcoming"}
+            {"time": "1600", "field": "Field A", "status": "upcoming"},
+            {"time": "1600", "field": "Field B", "status": "upcoming"},
+            {"time": "1630", "field": "Field A", "status": "upcoming"},
+            {"time": "1630", "field": "Field B", "status": "upcoming"}
         ]
     },
     "2024-04-29": {
         "date": "29 Apr 2024",
         "games": [
-            {"game": "Game 1", "time": "1600", "field": "Field A", "status": "upcoming"},
-            {"game": "Game 2", "time": "1600", "field": "Field B", "status": "upcoming"},
-            {"game": "Game 3", "time": "1630", "field": "Field A", "status": "upcoming"},
-            {"game": "Game 4", "time": "1630", "field": "Field B", "status": "upcoming"}
+            {"time": "1600", "field": "Field A", "status": "upcoming"},
+            {"time": "1600", "field": "Field B", "status": "upcoming"},
+            {"time": "1630", "field": "Field A", "status": "upcoming"},
+            {"time": "1630", "field": "Field B", "status": "upcoming"}
         ]
     },
     "2024-05-07": {
         "date": "07 May 2024",
         "games": [
-            {"game": "Game 1", "time": "1600", "field": "Field A", "status": "upcoming"},
-            {"game": "Game 2", "time": "1600", "field": "Field B", "status": "upcoming"},
-            {"game": "Game 3", "time": "1630", "field": "Field A", "status": "upcoming"},
-            {"game": "Game 4", "time": "1630", "field": "Field B", "status": "upcoming"}
+            {"time": "1600", "field": "Field A", "status": "upcoming"},
+            {"time": "1600", "field": "Field B", "status": "upcoming"},
+            {"time": "1630", "field": "Field A", "status": "upcoming"},
+            {"time": "1630", "field": "Field B", "status": "upcoming"}
         ]
     }
 }
@@ -117,17 +129,24 @@ Welcome to the MGT101 Ultimate Football Tournament management system. Each game 
 # Create tabs
 tab1, tab2, tab3 = st.tabs(["Upcoming Games", "Past Games", "Standings"])
 
-# Function to display game card
-def display_game_card(game, date, is_past=False):
-    card_html = f"""
-    <div class="game-card">
-        <h3 style='margin: 0;'>{game['game']}</h3>
-        <p style='margin: 5px 0;'>📅 {date}</p>
-        <p style='margin: 5px 0;' class='game-time'>⏰ {game['time']}</p>
-        <p style='margin: 5px 0;' class='game-field'>📍 {game['field']}</p>
-    </div>
+# Function to display game schedule table
+def display_schedule_table(date, games):
+    table_html = f"""
+    <div class='date-header'>{date}</div>
+    <table class='schedule-table'>
+        <tr>
+            <th colspan='2' class='time-slot'>1600</th>
+            <th colspan='2' class='time-slot'>1630</th>
+        </tr>
+        <tr>
+            <td class='field-cell'>Field A</td>
+            <td class='field-cell'>Field B</td>
+            <td class='field-cell'>Field A</td>
+            <td class='field-cell'>Field B</td>
+        </tr>
+    </table>
     """
-    st.markdown(card_html, unsafe_allow_html=True)
+    st.markdown(table_html, unsafe_allow_html=True)
 
 # Upcoming Games Tab
 with tab1:
@@ -137,10 +156,7 @@ with tab1:
     # Display upcoming games
     for date, schedule in TOURNAMENT_SCHEDULE.items():
         if any(game['status'] == 'upcoming' for game in schedule['games']):
-            st.subheader(schedule['date'])
-            for game in schedule['games']:
-                if game['status'] == 'upcoming':
-                    display_game_card(game, schedule['date'])
+            display_schedule_table(schedule['date'], schedule['games'])
     
 # Past Games Tab
 with tab2:
@@ -150,10 +166,7 @@ with tab2:
     # Display past games
     for date, schedule in TOURNAMENT_SCHEDULE.items():
         if any(game['status'] == 'completed' for game in schedule['games']):
-            st.subheader(schedule['date'])
-            for game in schedule['games']:
-                if game['status'] == 'completed':
-                    display_game_card(game, schedule['date'], is_past=True)
+            display_schedule_table(schedule['date'], schedule['games'])
     
 # Standings Tab
 with tab3:
