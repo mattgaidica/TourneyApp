@@ -53,7 +53,7 @@ st.markdown("""
         .schedule-container {
             background-color: #262730;
             border-radius: 12px;
-            margin: 20px auto;
+            margin: 30px auto;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             max-width: 800px;
@@ -147,6 +147,14 @@ st.markdown("""
             padding: 10px;
             margin: 5px;
         }
+        /* Date section styling */
+        .date-section {
+            margin-bottom: 30px;
+            border: 1px solid #404040;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -239,6 +247,9 @@ def display_schedule_table(date, games, bootcamp):
     # Check if any games are completed to determine if we should show winners
     show_winners = any(game['status'] == 'completed' for game in games)
     
+    # Create the date section container
+    st.markdown('<div class="date-section">', unsafe_allow_html=True)
+    
     # Create the schedule container
     st.markdown('<div class="schedule-container">', unsafe_allow_html=True)
     
@@ -306,6 +317,9 @@ def display_schedule_table(date, games, bootcamp):
     st.markdown('</div>', unsafe_allow_html=True)
     
     # Close the schedule container
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Close the date section container
     st.markdown('</div>', unsafe_allow_html=True)
 
 # Upcoming Events Tab
