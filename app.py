@@ -1029,7 +1029,28 @@ with tab3:
 # Add a sidebar with mobile-friendly controls
 with st.sidebar:
     st.header("Quick Actions")
-    st.button("Ultimate Rules GPT", use_container_width=True)
+    
+    # Create a button that links to the Ultimate Rules GPT
+    st.markdown(
+        """
+        <a href="https://chatgpt.com/g/g-67f06da3e3d48191a2057ffb5cbd7341-mgt101-ultimate-gpt" target="_blank">
+            <button style="
+                background-color: #262730;
+                color: #FAFAFA;
+                border: 1px solid #404040;
+                border-radius: 4px;
+                padding: 0.5rem 1rem;
+                font-size: 1rem;
+                cursor: pointer;
+                width: 100%;
+                transition: all 0.2s;
+            ">
+                Ultimate Rules GPT
+            </button>
+        </a>
+        """,
+        unsafe_allow_html=True
+    )
     
     st.markdown("---")
     st.markdown("### Game Play:")
