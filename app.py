@@ -12,121 +12,127 @@ st.set_page_config(
 # Custom CSS for mobile responsiveness
 st.markdown("""
     <style>
-        /* Event container */
-        .event-container {
-            background-color: #1E1E1E;
-            border-radius: 15px;
-            margin: 2rem auto;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            border: 1px solid #404040;
-            max-width: 800px;
+        /* Base styles */
+        :root {
+            --primary-bg: #1E1E1E;
+            --secondary-bg: #262730;
+            --border-color: #404040;
+            --accent-blue: #00CCFF;
+            --accent-green: #00FF00;
+            --text-color: #FAFAFA;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --border-radius: 8px;
         }
         
-        /* Date header styling */
+        /* Event container */
+        .event-container {
+            background-color: var(--primary-bg);
+            border-radius: var(--border-radius);
+            margin: var(--spacing-lg) auto;
+            border: 1px solid var(--border-color);
+            max-width: 800px;
+            overflow: hidden;
+        }
+        
+        /* Date header */
         .date-header {
-            color: #FAFAFA;
+            color: var(--text-color);
             font-size: 32px;
             font-weight: bold;
-            padding: 25px;
-            background-color: #1E1E1E;
+            padding: var(--spacing-lg);
+            background-color: var(--primary-bg);
             text-align: center;
-            border-bottom: 2px solid #404040;
+            border-bottom: 1px solid var(--border-color);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         
         /* Content container */
         .content-container {
-            background-color: #262730;
-            padding: 20px;
-            border-radius: 0 0 12px 12px;
+            background-color: var(--secondary-bg);
+            padding: var(--spacing-lg);
         }
         
-        /* Time slot styling */
+        /* Time slot */
         .time-slot {
-            color: #00CCFF;
+            color: var(--accent-blue);
             font-size: 22px;
             font-weight: bold;
-            margin-bottom: 15px;
             text-align: center;
-            background-color: #1E1E1E;
-            padding: 10px;
-            border-radius: 8px;
+            background-color: var(--primary-bg);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-md);
+            border: 1px solid var(--border-color);
         }
         
-        /* Field styling */
+        /* Field label */
         .field-label {
-            color: #B0B0B0;
+            color: var(--text-color);
             font-size: 18px;
             font-weight: 500;
-            margin-bottom: 5px;
             text-align: center;
-            background-color: #1E1E1E;
-            padding: 8px;
-            border-radius: 6px;
+            background-color: var(--primary-bg);
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-sm);
+            border: 1px solid var(--border-color);
         }
         
-        /* Team styling */
+        /* Team info */
         .team-info {
-            background-color: #2D2D2D;
-            color: #FAFAFA;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-sm);
             font-size: 16px;
-            border: 1px solid #404040;
+            border: 1px solid var(--border-color);
             text-align: center;
         }
         
-        /* Winner styling */
+        /* Winner cell */
         .winner-cell {
-            background-color: #1E1E1E;
-            color: #00FF00;
+            background-color: var(--primary-bg);
+            color: var(--accent-green);
             font-weight: bold;
-            padding: 8px;
-            border-radius: 6px;
-            margin-top: 5px;
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius);
             font-size: 14px;
             text-align: center;
-            border: 1px solid #00FF00;
+            border: 1px solid var(--accent-green);
         }
         
-        /* Bootcamp styling */
+        /* Bootcamp header */
         .bootcamp-header {
-            color: #FAFAFA;
+            color: var(--text-color);
             font-size: 20px;
             font-weight: bold;
             text-align: center;
-            margin: 20px 0 10px 0;
-            padding: 10px;
-            background-color: #1E1E1E;
-            border-radius: 8px;
-            border: 1px solid #404040;
+            margin: var(--spacing-lg) 0 var(--spacing-md);
+            padding: var(--spacing-md);
+            background-color: var(--primary-bg);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
         }
         
+        /* Bootcamp info */
         .bootcamp-info {
-            background-color: #2D2D2D;
-            color: #FAFAFA;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
             font-size: 16px;
-            border: 1px solid #404040;
+            border: 1px solid var(--border-color);
             text-align: center;
         }
         
-        /* Column styling */
-        .st-emotion-cache-1r6slb0 {
-            background-color: transparent;
-            padding: 10px;
-            margin: 5px;
-        }
-        
-        /* Streamlit column gaps */
+        /* Streamlit column spacing */
         div.stHorizontalBlock {
-            gap: 1rem;
-            padding: 0.5rem;
+            gap: var(--spacing-md);
+            padding: var(--spacing-sm);
         }
         
         div.stHorizontalBlock [data-testid="column"] {
