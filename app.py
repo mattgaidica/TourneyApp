@@ -132,6 +132,13 @@ st.markdown("""
             font-weight: normal;
             height: 45px;
         }
+        .winner-cell {
+            background-color: #1E1E1E;
+            color: #00FF00;
+            font-weight: bold;
+            height: 35px;
+            font-size: 14px;
+        }
         .bootcamp-header {
             background-color: #1E1E1E;
             color: #FAFAFA;
@@ -165,10 +172,10 @@ TOURNAMENT_SCHEDULE = {
     "2025-04-08": {
         "date": "08 Apr 2025",
         "games": [
-            {"time": "1600", "field": "Field A", "status": "completed", "teams": "Alpha vs. Bravo"},
-            {"time": "1600", "field": "Field B", "status": "completed", "teams": "Charlie vs. Delta"},
-            {"time": "1630", "field": "Field A", "status": "completed", "teams": "Alpha vs. Bravo"},
-            {"time": "1630", "field": "Field B", "status": "completed", "teams": "Charlie vs. Delta"}
+            {"time": "1600", "field": "Field A", "status": "completed", "teams": "Alpha vs. Bravo", "winner": "Alpha"},
+            {"time": "1600", "field": "Field B", "status": "completed", "teams": "Charlie vs. Delta", "winner": "Charlie"},
+            {"time": "1630", "field": "Field A", "status": "completed", "teams": "Alpha vs. Bravo", "winner": "Alpha"},
+            {"time": "1630", "field": "Field B", "status": "completed", "teams": "Charlie vs. Delta", "winner": "Charlie"}
         ],
         "bootcamp": {
             "games1_2": "Echo, Cadre",
@@ -178,10 +185,10 @@ TOURNAMENT_SCHEDULE = {
     "2025-04-15": {
         "date": "15 Apr 2025",
         "games": [
-            {"time": "1600", "field": "Field A", "status": "completed", "teams": "Echo vs. Cadre"},
-            {"time": "1600", "field": "Field B", "status": "completed", "teams": "Bravo vs. Delta"},
-            {"time": "1630", "field": "Field A", "status": "completed", "teams": "Echo vs. Cadre"},
-            {"time": "1630", "field": "Field B", "status": "completed", "teams": "Bravo vs. Delta"}
+            {"time": "1600", "field": "Field A", "status": "completed", "teams": "Echo vs. Cadre", "winner": "Cadre"},
+            {"time": "1600", "field": "Field B", "status": "completed", "teams": "Bravo vs. Delta", "winner": "Bravo"},
+            {"time": "1630", "field": "Field A", "status": "completed", "teams": "Echo vs. Cadre", "winner": "Cadre"},
+            {"time": "1630", "field": "Field B", "status": "completed", "teams": "Bravo vs. Delta", "winner": "Bravo"}
         ],
         "bootcamp": {
             "games1_2": "Alpha, Charlie",
@@ -246,6 +253,9 @@ tab1, tab2, tab3 = st.tabs(["Upcoming Events", "Past Events", "Standings"])
 
 # Function to display game schedule table
 def display_schedule_table(date, games, bootcamp):
+    # Check if any games are completed to determine if we should show winners
+    show_winners = any(game['status'] == 'completed' for game in games)
+    
     table_html = f"""
     <div class='schedule-container'>
         <div class='date-header'>{date}</div>
@@ -266,6 +276,14 @@ def display_schedule_table(date, games, bootcamp):
                 <td class='team-cell'>{games[2]['teams']}</td>
                 <td class='team-cell'>{games[3]['teams']}</td>
             </tr>
+            {f'''
+            <tr>
+                <td class='winner-cell'>Winner: {games[0]['winner']}</td>
+                <td class='winner-cell'>Winner: {games[1]['winner']}</td>
+                <td class='winner-cell'>Winner: {games[2]['winner']}</td>
+                <td class='winner-cell'>Winner: {games[3]['winner']}</td>
+            </tr>
+            ''' if show_winners else ''}
             <tr>
                 <th colspan='4' class='bootcamp-header'>BOOTCAMP</th>
             </tr>
