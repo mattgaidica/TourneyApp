@@ -57,18 +57,25 @@ st.markdown("""
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             max-width: 800px;
-            padding: 20px;
+            padding: 0;
+            border: 1px solid #404040;
         }
         /* Date header styling */
         .date-header {
             color: #FAFAFA;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
-            padding: 20px;
+            padding: 25px;
             background-color: #1E1E1E;
-            margin: -20px -20px 20px -20px;
+            margin: 0;
             text-align: center;
-            border-radius: 12px 12px 0 0;
+            border-bottom: 2px solid #404040;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        /* Content container */
+        .content-container {
+            padding: 20px;
         }
         /* Time slot styling */
         .time-slot {
@@ -77,6 +84,9 @@ st.markdown("""
             font-weight: bold;
             margin-bottom: 15px;
             text-align: center;
+            background-color: #1E1E1E;
+            padding: 10px;
+            border-radius: 8px;
         }
         /* Field styling */
         .field-label {
@@ -89,10 +99,11 @@ st.markdown("""
         .team-info {
             background-color: #2D2D2D;
             color: #FAFAFA;
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
             margin-bottom: 10px;
             font-size: 16px;
+            border: 1px solid #404040;
         }
         /* Winner styling */
         .winner-cell {
@@ -104,6 +115,7 @@ st.markdown("""
             margin-top: 5px;
             font-size: 14px;
             text-align: center;
+            border: 1px solid #00FF00;
         }
         /* Bootcamp styling */
         .bootcamp-header {
@@ -115,20 +127,21 @@ st.markdown("""
             padding: 10px;
             background-color: #1E1E1E;
             border-radius: 8px;
+            border: 1px solid #404040;
         }
         .bootcamp-info {
             background-color: #2D2D2D;
             color: #FAFAFA;
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
             margin-bottom: 10px;
             font-size: 16px;
+            border: 1px solid #404040;
         }
         /* Column styling */
         .st-emotion-cache-1r6slb0 {
-            background-color: #262730;
-            border-radius: 12px;
-            padding: 15px;
+            background-color: transparent;
+            padding: 10px;
             margin: 5px;
         }
     </style>
@@ -223,63 +236,67 @@ def display_schedule_table(date, games, bootcamp):
     # Check if any games are completed to determine if we should show winners
     show_winners = any(game['status'] == 'completed' for game in games)
     
-    # Create a container for the schedule
-    with st.container():
-        # Apply the schedule container class
-        st.markdown('<div class="schedule-container">', unsafe_allow_html=True)
+    # Create the schedule container
+    st.markdown('<div class="schedule-container">', unsafe_allow_html=True)
+    
+    # Date header
+    st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
+    
+    # Content container
+    st.markdown('<div class="content-container">', unsafe_allow_html=True)
+    
+    # Create columns for the time slots
+    col1, col2 = st.columns(2)
+    
+    # 1600 time slot
+    with col1:
+        st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
         
-        # Date header
-        st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
+        # Field A
+        st.markdown('<div class="field-label">Field A</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="team-info">{games[0]["teams"]}</div>', unsafe_allow_html=True)
+        if show_winners:
+            st.markdown(f'<div class="winner-cell">Winner: {games[0]["winner"]}</div>', unsafe_allow_html=True)
         
-        # Create columns for the time slots
-        col1, col2 = st.columns(2)
+        # Field B
+        st.markdown('<div class="field-label">Field B</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="team-info">{games[1]["teams"]}</div>', unsafe_allow_html=True)
+        if show_winners:
+            st.markdown(f'<div class="winner-cell">Winner: {games[1]["winner"]}</div>', unsafe_allow_html=True)
+    
+    # 1630 time slot
+    with col2:
+        st.markdown('<div class="time-slot">1630</div>', unsafe_allow_html=True)
         
-        # 1600 time slot
-        with col1:
-            st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
-            
-            # Field A
-            st.markdown('<div class="field-label">Field A</div>', unsafe_allow_html=True)
-            st.markdown(f'<div class="team-info">{games[0]["teams"]}</div>', unsafe_allow_html=True)
-            if show_winners:
-                st.markdown(f'<div class="winner-cell">Winner: {games[0]["winner"]}</div>', unsafe_allow_html=True)
-            
-            # Field B
-            st.markdown('<div class="field-label">Field B</div>', unsafe_allow_html=True)
-            st.markdown(f'<div class="team-info">{games[1]["teams"]}</div>', unsafe_allow_html=True)
-            if show_winners:
-                st.markdown(f'<div class="winner-cell">Winner: {games[1]["winner"]}</div>', unsafe_allow_html=True)
+        # Field A
+        st.markdown('<div class="field-label">Field A</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="team-info">{games[2]["teams"]}</div>', unsafe_allow_html=True)
+        if show_winners:
+            st.markdown(f'<div class="winner-cell">Winner: {games[2]["winner"]}</div>', unsafe_allow_html=True)
         
-        # 1630 time slot
-        with col2:
-            st.markdown('<div class="time-slot">1630</div>', unsafe_allow_html=True)
-            
-            # Field A
-            st.markdown('<div class="field-label">Field A</div>', unsafe_allow_html=True)
-            st.markdown(f'<div class="team-info">{games[2]["teams"]}</div>', unsafe_allow_html=True)
-            if show_winners:
-                st.markdown(f'<div class="winner-cell">Winner: {games[2]["winner"]}</div>', unsafe_allow_html=True)
-            
-            # Field B
-            st.markdown('<div class="field-label">Field B</div>', unsafe_allow_html=True)
-            st.markdown(f'<div class="team-info">{games[3]["teams"]}</div>', unsafe_allow_html=True)
-            if show_winners:
-                st.markdown(f'<div class="winner-cell">Winner: {games[3]["winner"]}</div>', unsafe_allow_html=True)
-        
-        # Bootcamp section
-        st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
-        bootcamp_col1, bootcamp_col2 = st.columns(2)
-        
-        with bootcamp_col1:
-            st.markdown('<div class="field-label">Games 1-2</div>', unsafe_allow_html=True)
-            st.markdown(f'<div class="bootcamp-info">{bootcamp["games1_2"]}</div>', unsafe_allow_html=True)
-        
-        with bootcamp_col2:
-            st.markdown('<div class="field-label">Games 3-4</div>', unsafe_allow_html=True)
-            st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
-        
-        # Close the schedule container
-        st.markdown('</div>', unsafe_allow_html=True)
+        # Field B
+        st.markdown('<div class="field-label">Field B</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="team-info">{games[3]["teams"]}</div>', unsafe_allow_html=True)
+        if show_winners:
+            st.markdown(f'<div class="winner-cell">Winner: {games[3]["winner"]}</div>', unsafe_allow_html=True)
+    
+    # Bootcamp section
+    st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
+    bootcamp_col1, bootcamp_col2 = st.columns(2)
+    
+    with bootcamp_col1:
+        st.markdown('<div class="field-label">Games 1-2</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="bootcamp-info">{bootcamp["games1_2"]}</div>', unsafe_allow_html=True)
+    
+    with bootcamp_col2:
+        st.markdown('<div class="field-label">Games 3-4</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
+    
+    # Close the content container
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Close the schedule container
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # Upcoming Events Tab
 with tab1:
