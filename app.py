@@ -24,32 +24,64 @@ st.markdown("""
                 font-size: 20px !important;
             }
         }
+        /* Center the title and description */
+        .title-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        /* Center and style the tabs */
+        .stTabs [data-baseweb="tab-list"] {
+            justify-content: center;
+        }
+        .stTabs [data-baseweb="tab"] {
+            font-size: 20px;
+            padding: 15px 30px;
+        }
         /* Ensure content doesn't overflow on mobile */
         .main .block-container {
             padding-left: 1rem;
             padding-right: 1rem;
         }
+        /* Schedule container styling */
+        .schedule-container {
+            background-color: #262730;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        /* Date header styling */
+        .date-header {
+            color: #FAFAFA;
+            font-size: 28px;
+            font-weight: bold;
+            padding: 20px;
+            background-color: #1E1E1E;
+            border-bottom: 2px solid #404040;
+            margin: 0;
+            text-align: center;
+        }
         /* Game schedule table styling */
         .schedule-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 15px 0;
+            margin: 0;
             background-color: #262730;
-            border-radius: 8px;
-            overflow: hidden;
         }
         .schedule-table th {
             background-color: #1E1E1E;
             color: #FAFAFA;
-            padding: 12px;
+            padding: 15px;
             text-align: center;
             border-bottom: 2px solid #404040;
+            font-size: 18px;
         }
         .schedule-table td {
-            padding: 12px;
+            padding: 15px;
             text-align: center;
             color: #FAFAFA;
             border-bottom: 1px solid #404040;
+            font-size: 16px;
         }
         .time-slot {
             font-weight: bold;
@@ -57,14 +89,6 @@ st.markdown("""
         }
         .field-cell {
             background-color: #2D2D2D;
-        }
-        .date-header {
-            color: #FAFAFA;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #1E1E1E;
-            border-radius: 8px;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -118,13 +142,13 @@ TOURNAMENT_SCHEDULE = {
     }
 }
 
-# Main title
-st.title("MGT101 25B Athletics 🏃")
-
-# Add a description
+# Main title and description in a centered container
+st.markdown('<div class="title-container">', unsafe_allow_html=True)
+st.title("MGT101 25B Athletics")
 st.markdown("""
 Welcome to the MGT101 25B Athletics portal. View upcoming and past games as well as other athletic events.
 """)
+st.markdown('</div>', unsafe_allow_html=True)
 
 # Create tabs
 tab1, tab2, tab3 = st.tabs(["Upcoming Events", "Past Events", "Standings"])
@@ -132,27 +156,26 @@ tab1, tab2, tab3 = st.tabs(["Upcoming Events", "Past Events", "Standings"])
 # Function to display game schedule table
 def display_schedule_table(date, games):
     table_html = f"""
-    <div class='date-header'>{date}</div>
-    <table class='schedule-table'>
-        <tr>
-            <th colspan='2' class='time-slot'>1600</th>
-            <th colspan='2' class='time-slot'>1630</th>
-        </tr>
-        <tr>
-            <td class='field-cell'>Field A</td>
-            <td class='field-cell'>Field B</td>
-            <td class='field-cell'>Field A</td>
-            <td class='field-cell'>Field B</td>
-        </tr>
-    </table>
+    <div class='schedule-container'>
+        <div class='date-header'>{date}</div>
+        <table class='schedule-table'>
+            <tr>
+                <th colspan='2' class='time-slot'>1600</th>
+                <th colspan='2' class='time-slot'>1630</th>
+            </tr>
+            <tr>
+                <td class='field-cell'>Field A</td>
+                <td class='field-cell'>Field B</td>
+                <td class='field-cell'>Field A</td>
+                <td class='field-cell'>Field B</td>
+            </tr>
+        </table>
+    </div>
     """
     st.markdown(table_html, unsafe_allow_html=True)
 
 # Upcoming Events Tab
 with tab1:
-    st.header("Upcoming Events")
-    st.write("View scheduled games and upcoming athletic events.")
-    
     # Display upcoming games
     for date, schedule in TOURNAMENT_SCHEDULE.items():
         if any(game['status'] == 'upcoming' for game in schedule['games']):
@@ -160,9 +183,6 @@ with tab1:
     
 # Past Events Tab
 with tab2:
-    st.header("Past Events")
-    st.write("Review completed games and past athletic events.")
-    
     # Display past games
     for date, schedule in TOURNAMENT_SCHEDULE.items():
         if any(game['status'] == 'completed' for game in schedule['games']):
@@ -170,9 +190,6 @@ with tab2:
     
 # Standings Tab
 with tab3:
-    st.header("Team Standings")
-    st.write("Current team rankings and statistics.")
-    
     # Example standings table (mobile-friendly)
     col1, col2, col3 = st.columns([2,1,1])
     with col1:
