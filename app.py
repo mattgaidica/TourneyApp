@@ -706,62 +706,69 @@ with tab2:
 with tab3:
     st.markdown("<h2 style='text-align: center; margin-bottom: 30px;'>MGT101 25B Tournament Standings</h2>", unsafe_allow_html=True)
     
-    # Standings data
-    standings_data = [
-        {"flight": "Alpha", "plays": 1, "wins": 1, "win_rate": "100%", "placing": "First, tied", "highlight": True},
-        {"flight": "Charlie", "plays": 1, "wins": 1, "win_rate": "100%", "placing": "First, tied", "highlight": True},
-        {"flight": "Cadre", "plays": 1, "wins": 1, "win_rate": "100%", "placing": "First, tied", "highlight": True},
-        {"flight": "Bravo", "plays": 2, "wins": 1, "win_rate": "50%", "placing": "Middle", "highlight": False},
-        {"flight": "Delta", "plays": 2, "wins": 0, "win_rate": "0%", "placing": "Last, tied", "highlight": False},
-        {"flight": "Echo", "plays": 1, "wins": 0, "win_rate": "0%", "placing": "Last, tied", "highlight": False}
-    ]
-    
-    # Generate HTML for the standings table
-    table_html = """
-    <table class="standings-table">
-        <thead>
-            <tr>
-                <th>Flight</th>
-                <th>Plays</th>
-                <th>Wins</th>
-                <th>Win Rate</th>
-                <th>Placing</th>
-            </tr>
-        </thead>
-        <tbody>
-    """
-    
-    for team in standings_data:
-        # Determine row class for highlighting
-        row_class = "highlight-row" if team["highlight"] else ""
-        
-        # Determine placing class
-        placing_class = ""
-        if "First" in team["placing"]:
-            placing_class = "placing-first"
-        elif "Middle" in team["placing"]:
-            placing_class = "placing-middle"
-        elif "Last" in team["placing"]:
-            placing_class = "placing-last"
-        
-        # Add row to table
-        table_html += f"""
-        <tr class="{row_class}">
-            <td>{team["flight"]}</td>
-            <td>{team["plays"]}</td>
-            <td>{team["wins"]}</td>
-            <td class="win-rate">{team["win_rate"]}</td>
-            <td class="placing {placing_class}">{team["placing"]}</td>
-        </tr>
-        """
-    
-    table_html += """
-        </tbody>
-    </table>
+    # Create a clean HTML table for the standings
+    html = """
+    <div style="display: flex; justify-content: center; width: 100%;">
+        <table class="standings-table">
+            <thead>
+                <tr>
+                    <th>Flight</th>
+                    <th>Plays</th>
+                    <th>Wins</th>
+                    <th>Win Rate</th>
+                    <th>Placing</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="highlight-row">
+                    <td>Alpha</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td class="win-rate">100%</td>
+                    <td class="placing placing-first">First, tied</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td>Charlie</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td class="win-rate">100%</td>
+                    <td class="placing placing-first">First, tied</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td>Cadre</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td class="win-rate">100%</td>
+                    <td class="placing placing-first">First, tied</td>
+                </tr>
+                <tr>
+                    <td>Bravo</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td class="win-rate">50%</td>
+                    <td class="placing placing-middle">Middle</td>
+                </tr>
+                <tr>
+                    <td>Delta</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td class="win-rate">0%</td>
+                    <td class="placing placing-last">Last, tied</td>
+                </tr>
+                <tr>
+                    <td>Echo</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td class="win-rate">0%</td>
+                    <td class="placing placing-last">Last, tied</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     """
     
     # Display the standings table
-    st.markdown(table_html, unsafe_allow_html=True)
+    st.markdown(html, unsafe_allow_html=True)
     
     # Add explanatory text
     st.markdown("""
