@@ -57,6 +57,7 @@ st.markdown("""
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             max-width: 800px;
+            padding: 0;
         }
         /* Date header styling */
         .date-header {
@@ -76,6 +77,7 @@ st.markdown("""
             margin: 0;
             background-color: #262730;
             table-layout: fixed;
+            border: none;
         }
         .schedule-table th {
             background-color: #1E1E1E;
@@ -85,6 +87,7 @@ st.markdown("""
             font-size: 18px;
             font-weight: bold;
             border-right: 1px solid #404040;
+            border-bottom: none;
         }
         .schedule-table th:last-child {
             border-right: none;
@@ -97,6 +100,7 @@ st.markdown("""
             vertical-align: middle;
             height: 40px;
             border-right: 1px solid #404040;
+            border-bottom: none;
         }
         .schedule-table td:last-child {
             border-right: none;
