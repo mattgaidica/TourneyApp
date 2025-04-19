@@ -187,36 +187,56 @@ st.markdown("""
             width: 100% !important;
         }
         
-        /* Style the tab list to be centered and more minimal */
+        /* More comprehensive tab styling */
+        .stTabs [data-baseweb="tab"] {
+            background-color: #1E1E1E !important;
+            border: 1px solid #333 !important;
+            border-bottom: none !important;
+            border-radius: 10px 10px 0 0 !important;
+            margin: 0 6px !important;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            padding: 14px 28px !important;
+            font-size: 17px !important;
+            letter-spacing: 0.5px;
+            min-width: 150px;
+            text-align: center;
+            color: #CCCCCC;
+        }
+        
+        /* Improved active tab styling */
+        .stTabs [aria-selected="true"] {
+            background-color: #2E2E3A !important;
+            border-color: var(--accent-blue) !important;
+            color: var(--accent-blue) !important;
+            font-weight: 500 !important;
+            box-shadow: 0 -2px 10px rgba(0, 204, 255, 0.2);
+        }
+        
+        /* Hover effect for tabs */
+        .stTabs [data-baseweb="tab"]:hover:not([aria-selected="true"]) {
+            background-color: #252530 !important;
+            color: #FFFFFF;
+        }
+        
+        /* Make tab list more prominent */
         .stTabs [data-baseweb="tab-list"] {
             background-color: transparent !important;
             border-bottom: 1px solid #333 !important;
             display: flex;
             justify-content: center;
             gap: 10px;
-            padding: 10px 0 0 0 !important;
-            margin-bottom: 5px !important;
+            padding: 15px 0 0 0 !important;
+            margin-bottom: 0 !important;
         }
         
-        /* Style individual tabs with more padding */
-        .stTabs [data-baseweb="tab"] {
-            background-color: #1E1E1E !important;
-            border: 1px solid #333 !important;
-            border-bottom: none !important;
-            border-radius: 8px 8px 0 0 !important;
-            margin: 0 5px !important;
-            font-weight: 400;
-            transition: all 0.2s ease;
-            padding: 12px 24px !important;
-            font-size: 16px !important;
-        }
-        
-        /* Active tab styling */
-        .stTabs [aria-selected="true"] {
-            background-color: #2E2E3A !important;
-            border-color: var(--accent-blue) !important;
-            color: var(--accent-blue) !important;
-            font-weight: 500 !important;
+        /* Fix mobile tabs */
+        @media (max-width: 768px) {
+            .stTabs [data-baseweb="tab"] {
+                padding: 10px 15px !important;
+                font-size: 15px !important;
+                min-width: 110px;
+            }
         }
         
         /* Add a decorative element before each expander */
@@ -283,19 +303,29 @@ st.markdown("""
             width: 100% !important;
         }
 
-        /* Fix tabs on mobile */
+        /* Fix mobile tabs and event display */
         @media (max-width: 768px) {
             .stTabs [data-baseweb="tab-list"] {
                 flex-wrap: wrap;
             }
             
             .stTabs [data-baseweb="tab"] {
+                padding: 10px 15px !important;
+                font-size: 15px !important;
+                min-width: 110px;
                 flex-grow: 1;
-                min-width: 120px;
             }
             
             .date-expander {
                 max-width: 98% !important;
+            }
+            
+            .date-header {
+                font-size: 28px !important;
+            }
+            
+            .time-slot {
+                font-size: 18px !important;
             }
         }
     </style>
