@@ -155,7 +155,7 @@ st.title("MGT101 25B Athletics")
 st.markdown("""
 **View upcoming and past games as well as other athletic events!**
 
-Each flight (plus Cadre) will play against each other once, with standings based on total number of wins and sudden death matches for tiebreakers.
+Tournament Format: Each flight (plus Cadre) will play against each other once, with standings based on total number of wins and sudden death matches for tiebreakers.
 
 <div class="note">Note: The standings are calculated based on the total number of wins—this eliminates the initial condition bias of typical brackets.</div>
 """, unsafe_allow_html=True)
