@@ -3,8 +3,8 @@ from datetime import datetime
 
 # Set page config with mobile-friendly settings
 st.set_page_config(
-    page_title="MGT101 Ultimate Football Tournament",
-    page_icon="🏈",
+    page_title="MGT101 25B Athletics",
+    page_icon="🏃",
     layout="wide",
     initial_sidebar_state="collapsed"  # Better for mobile
 )
@@ -119,15 +119,15 @@ TOURNAMENT_SCHEDULE = {
 }
 
 # Main title
-st.title("MGT101 Ultimate Football Tournament 🏈")
+st.title("MGT101 25B Athletics 🏃")
 
 # Add a description
 st.markdown("""
-Welcome to the MGT101 Ultimate Football Tournament management system. Each game day features four 30-minute games across two fields.
+Welcome to the MGT101 25B Athletics portal. View upcoming and past games as well as other athletic events.
 """)
 
 # Create tabs
-tab1, tab2, tab3 = st.tabs(["Upcoming Games", "Past Games", "Standings"])
+tab1, tab2, tab3 = st.tabs(["Upcoming Events", "Past Events", "Standings"])
 
 # Function to display game schedule table
 def display_schedule_table(date, games):
@@ -148,20 +148,20 @@ def display_schedule_table(date, games):
     """
     st.markdown(table_html, unsafe_allow_html=True)
 
-# Upcoming Games Tab
+# Upcoming Events Tab
 with tab1:
-    st.header("Upcoming Games")
-    st.write("View the tournament schedule and upcoming matchups.")
+    st.header("Upcoming Events")
+    st.write("View scheduled games and upcoming athletic events.")
     
     # Display upcoming games
     for date, schedule in TOURNAMENT_SCHEDULE.items():
         if any(game['status'] == 'upcoming' for game in schedule['games']):
             display_schedule_table(schedule['date'], schedule['games'])
     
-# Past Games Tab
+# Past Events Tab
 with tab2:
-    st.header("Past Games")
-    st.write("Review completed games and their results.")
+    st.header("Past Events")
+    st.write("Review completed games and past athletic events.")
     
     # Display past games
     for date, schedule in TOURNAMENT_SCHEDULE.items():
@@ -170,7 +170,7 @@ with tab2:
     
 # Standings Tab
 with tab3:
-    st.header("Tournament Standings")
+    st.header("Team Standings")
     st.write("Current team rankings and statistics.")
     
     # Example standings table (mobile-friendly)
@@ -195,12 +195,12 @@ with tab3:
 # Add a sidebar with mobile-friendly controls
 with st.sidebar:
     st.header("Quick Actions")
-    st.button("📝 Add New Game", use_container_width=True)
+    st.button("📝 Add New Event", use_container_width=True)
     st.button("📊 Update Scores", use_container_width=True)
     st.button("📋 View Rules", use_container_width=True)
     
     st.markdown("---")
-    st.markdown("### Tournament Info")
+    st.markdown("### Event Information")
     st.markdown("""
     - **Game Duration**: 30 minutes
     - **Game Times**: 1600 & 1630
