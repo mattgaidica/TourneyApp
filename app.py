@@ -1,4 +1,5 @@
 import streamlit as st
+from datetime import datetime
 
 # Set page config with mobile-friendly settings
 st.set_page_config(
@@ -28,50 +29,122 @@ st.markdown("""
             padding-left: 1rem;
             padding-right: 1rem;
         }
+        /* Game card styling */
+        .game-card {
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f0f2f6;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .game-time {
+            color: #1f77b4;
+            font-weight: bold;
+        }
+        .game-field {
+            color: #2ca02c;
+            font-weight: bold;
+        }
     </style>
 """, unsafe_allow_html=True)
+
+# Tournament Schedule Data
+TOURNAMENT_SCHEDULE = {
+    "2024-04-08": {
+        "date": "08 Apr 2024",
+        "games": [
+            {"game": "Game 1", "time": "1600", "field": "Field A", "status": "completed"},
+            {"game": "Game 2", "time": "1600", "field": "Field B", "status": "completed"},
+            {"game": "Game 3", "time": "1630", "field": "Field A", "status": "completed"},
+            {"game": "Game 4", "time": "1630", "field": "Field B", "status": "completed"}
+        ]
+    },
+    "2024-04-15": {
+        "date": "15 Apr 2024",
+        "games": [
+            {"game": "Game 1", "time": "1600", "field": "Field A", "status": "completed"},
+            {"game": "Game 2", "time": "1600", "field": "Field B", "status": "completed"},
+            {"game": "Game 3", "time": "1630", "field": "Field A", "status": "completed"},
+            {"game": "Game 4", "time": "1630", "field": "Field B", "status": "completed"}
+        ]
+    },
+    "2024-04-23": {
+        "date": "23 Apr 2024",
+        "games": [
+            {"game": "Game 1", "time": "1600", "field": "Field A", "status": "upcoming"},
+            {"game": "Game 2", "time": "1600", "field": "Field B", "status": "upcoming"},
+            {"game": "Game 3", "time": "1630", "field": "Field A", "status": "upcoming"},
+            {"game": "Game 4", "time": "1630", "field": "Field B", "status": "upcoming"}
+        ]
+    },
+    "2024-04-29": {
+        "date": "29 Apr 2024",
+        "games": [
+            {"game": "Game 1", "time": "1600", "field": "Field A", "status": "upcoming"},
+            {"game": "Game 2", "time": "1600", "field": "Field B", "status": "upcoming"},
+            {"game": "Game 3", "time": "1630", "field": "Field A", "status": "upcoming"},
+            {"game": "Game 4", "time": "1630", "field": "Field B", "status": "upcoming"}
+        ]
+    },
+    "2024-05-07": {
+        "date": "07 May 2024",
+        "games": [
+            {"game": "Game 1", "time": "1600", "field": "Field A", "status": "upcoming"},
+            {"game": "Game 2", "time": "1600", "field": "Field B", "status": "upcoming"},
+            {"game": "Game 3", "time": "1630", "field": "Field A", "status": "upcoming"},
+            {"game": "Game 4", "time": "1630", "field": "Field B", "status": "upcoming"}
+        ]
+    }
+}
 
 # Main title
 st.title("MGT101 Ultimate Football Tournament 🏈")
 
 # Add a description
 st.markdown("""
-Welcome to the MGT101 Ultimate Football Tournament management system. Track games, view schedules, and monitor team standings all in one place.
+Welcome to the MGT101 Ultimate Football Tournament management system. Each game day features four 30-minute games across two fields.
 """)
 
 # Create tabs
 tab1, tab2, tab3 = st.tabs(["Upcoming Games", "Past Games", "Standings"])
+
+# Function to display game card
+def display_game_card(game, date, is_past=False):
+    card_html = f"""
+    <div class="game-card">
+        <h3 style='margin: 0;'>{game['game']}</h3>
+        <p style='margin: 5px 0;'>📅 {date}</p>
+        <p style='margin: 5px 0;' class='game-time'>⏰ {game['time']}</p>
+        <p style='margin: 5px 0;' class='game-field'>📍 {game['field']}</p>
+    </div>
+    """
+    st.markdown(card_html, unsafe_allow_html=True)
 
 # Upcoming Games Tab
 with tab1:
     st.header("Upcoming Games")
     st.write("View the tournament schedule and upcoming matchups.")
     
-    # Example game card (mobile-friendly)
-    with st.container():
-        st.markdown("""
-        <div style='padding: 10px; border-radius: 5px; background-color: #f0f2f6; margin: 10px 0;'>
-            <h3 style='margin: 0;'>Game 1: Team A vs Team B</h3>
-            <p style='margin: 5px 0;'>📅 Date: March 15, 2024</p>
-            <p style='margin: 5px 0;'>⏰ Time: 14:00</p>
-            <p style='margin: 5px 0;'>📍 Location: Main Field</p>
-        </div>
-        """, unsafe_allow_html=True)
+    # Display upcoming games
+    for date, schedule in TOURNAMENT_SCHEDULE.items():
+        if any(game['status'] == 'upcoming' for game in schedule['games']):
+            st.subheader(schedule['date'])
+            for game in schedule['games']:
+                if game['status'] == 'upcoming':
+                    display_game_card(game, schedule['date'])
     
 # Past Games Tab
 with tab2:
     st.header("Past Games")
     st.write("Review completed games and their results.")
     
-    # Example past game result (mobile-friendly)
-    with st.container():
-        st.markdown("""
-        <div style='padding: 10px; border-radius: 5px; background-color: #f0f2f6; margin: 10px 0;'>
-            <h3 style='margin: 0;'>Team A 21 - Team B 14</h3>
-            <p style='margin: 5px 0;'>📅 March 10, 2024</p>
-            <p style='margin: 5px 0;'>🏆 MVP: John Doe</p>
-        </div>
-        """, unsafe_allow_html=True)
+    # Display past games
+    for date, schedule in TOURNAMENT_SCHEDULE.items():
+        if any(game['status'] == 'completed' for game in schedule['games']):
+            st.subheader(schedule['date'])
+            for game in schedule['games']:
+                if game['status'] == 'completed':
+                    display_game_card(game, schedule['date'], is_past=True)
     
 # Standings Tab
 with tab3:
@@ -107,8 +180,8 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("### Tournament Info")
     st.markdown("""
-    - **Start Date**: March 10, 2024
-    - **Teams**: 8
+    - **Game Duration**: 30 minutes
+    - **Game Times**: 1600 & 1630
+    - **Fields**: A & B
     - **Format**: Single Elimination
-    - **Location**: Main Field
     """) 
