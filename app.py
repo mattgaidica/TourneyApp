@@ -390,6 +390,40 @@ st.markdown("""
         .title-container {
             text-align: center;
             margin-bottom: 30px;
+            padding: var(--spacing-lg) 0;
+        }
+
+        /* Main app title styling */
+        .main-title {
+            color: var(--accent-blue);
+            font-size: 48px;
+            font-weight: 800;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 0 0 15px 0;
+            text-shadow: 0 0 20px rgba(0, 204, 255, 0.4);
+        }
+
+        .main-title::before,
+        .main-title::after {
+            content: "⬥";
+            color: var(--accent-blue);
+            position: relative;
+            margin: 0 15px;
+            font-size: 30px;
+            opacity: 0.8;
+            text-shadow: 0 0 15px rgba(0, 204, 255, 0.5);
+        }
+
+        /* Main description styling */
+        .main-description {
+            color: #FFFFFF;
+            font-size: 18px;
+            margin: 20px auto;
+            max-width: 800px;
+            text-align: center;
+            font-weight: 500;
         }
 
         /* Style the note under the title */
@@ -480,10 +514,9 @@ TOURNAMENT_SCHEDULE = {
 
 # Main title and description in a centered container
 st.markdown('<div class="title-container">', unsafe_allow_html=True)
-st.title("MGT101 25B Ultimate Tournament")
+st.markdown('<h1 class="main-title">MGT101 25B Ultimate Tournament</h1>', unsafe_allow_html=True)
+st.markdown('<div class="main-description">Each flight (plus Cadre) will play against each other once, with standings based on total number of wins and sudden death matches for tiebreakers.</div>', unsafe_allow_html=True)
 st.markdown("""
-**Each flight (plus Cadre) will play against each other once, with standings based on total number of wins and sudden death matches for tiebreakers.**
-
 <div class="note">Note: The standings are calculated based on the total number of wins—this eliminates the initial condition bias of typical brackets.</div>
 """, unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
