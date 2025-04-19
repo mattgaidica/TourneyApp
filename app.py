@@ -173,7 +173,7 @@ st.markdown("""
         
         /* Tab styling */
         .stTabs {
-            max-width: 90%;
+            max-width: 100% !important;
             margin: 0 auto 20px;
         }
         
@@ -182,7 +182,9 @@ st.markdown("""
             border: none;
             background-color: #121218;
             border-radius: 0 0 8px 8px;
-            padding-top: 20px;
+            padding: 30px !important;
+            max-width: 100% !important;
+            width: 100% !important;
         }
         
         /* Style the tab list to be centered and more minimal */
@@ -244,6 +246,54 @@ st.markdown("""
         /* Update the main background to be darker */
         .stApp {
             background-color: #0E1117 !important;
+        }
+
+        /* Make the content area use more of the screen width */
+        .main .block-container {
+            max-width: 1400px !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
+        /* Make content use full width */
+        .stApp > header + div > div > div > div:has(> [data-testid="stVerticalBlock"]) {
+            max-width: 100% !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        /* Make tab container use full width */
+        .stTabs {
+            max-width: 100% !important;
+            margin: 0;
+        }
+
+        /* Ensure event containers can use more width */
+        .date-expander {
+            margin: 0 auto 60px !important;
+            max-width: 92% !important;
+        }
+
+        /* Remove empty padding from expander content */
+        .date-expander > div[data-testid="stExpander"] > div:nth-child(2) {
+            padding: var(--spacing-lg) !important;
+            width: 100% !important;
+        }
+
+        /* Fix tabs on mobile */
+        @media (max-width: 768px) {
+            .stTabs [data-baseweb="tab-list"] {
+                flex-wrap: wrap;
+            }
+            
+            .stTabs [data-baseweb="tab"] {
+                flex-grow: 1;
+                min-width: 120px;
+            }
+            
+            .date-expander {
+                max-width: 98% !important;
+            }
         }
     </style>
 """, unsafe_allow_html=True)
