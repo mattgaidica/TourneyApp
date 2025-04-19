@@ -109,6 +109,7 @@ st.markdown("""
             padding: var(--spacing-md);
             border-radius: var(--border-radius);
             border: 1px solid var(--border-color);
+            margin-bottom: var(--spacing-md);
         }
         
         /* Field label */
@@ -160,11 +161,11 @@ st.markdown("""
             font-size: 20px;
             font-weight: bold;
             text-align: center;
-            margin: var(--spacing-lg) 0 var(--spacing-md);
             padding: var(--spacing-md);
             background-color: var(--primary-bg);
             border-radius: var(--border-radius);
             border: 1px solid var(--border-color);
+            margin: var(--spacing-lg) 0 var(--spacing-md);
         }
         
         /* Bootcamp info */
