@@ -94,6 +94,7 @@ st.markdown("""
             font-size: 18px;
             font-weight: 500;
             margin-bottom: 5px;
+            text-align: center;
         }
         /* Team styling */
         .team-info {
@@ -104,6 +105,7 @@ st.markdown("""
             margin-bottom: 10px;
             font-size: 16px;
             border: 1px solid #404040;
+            text-align: center;
         }
         /* Winner styling */
         .winner-cell {
@@ -137,6 +139,7 @@ st.markdown("""
             margin-bottom: 10px;
             font-size: 16px;
             border: 1px solid #404040;
+            text-align: center;
         }
         /* Column styling */
         .st-emotion-cache-1r6slb0 {
