@@ -706,12 +706,22 @@ st.markdown("""
             }
             
             /* Allow text to wrap instead of truncating with ellipsis */
-            .field-label, .team-info, .time-slot, .bootcamp-header, .bootcamp-info {
+            .field-label, .bootcamp-header, .bootcamp-info {
                 white-space: normal !important;
                 overflow: visible !important;
                 text-overflow: clip !important;
                 word-wrap: break-word !important;
                 hyphens: auto !important;
+            }
+            
+            /* Specific styling for team info on small screens */
+            .team-info {
+                white-space: normal !important;
+                overflow: visible !important;
+                text-overflow: clip !important;
+                word-wrap: break-word !important;
+                hyphens: auto !important;
+                font-size: 10px !important;
             }
         }
 
