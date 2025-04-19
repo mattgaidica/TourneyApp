@@ -97,6 +97,9 @@ st.markdown("""
         .field-cell {
             background-color: #2D2D2D;
         }
+        .team-cell {
+            background-color: #2D2D2D;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -175,10 +178,16 @@ def display_schedule_table(date, games):
                 <th colspan='2' class='time-slot'>1630</th>
             </tr>
             <tr>
-                <td class='field-cell'>{games[0]['teams']}</td>
-                <td class='field-cell'>{games[1]['teams']}</td>
-                <td class='field-cell'>{games[2]['teams']}</td>
-                <td class='field-cell'>{games[3]['teams']}</td>
+                <td class='field-cell'>Field A</td>
+                <td class='field-cell'>Field B</td>
+                <td class='field-cell'>Field A</td>
+                <td class='field-cell'>Field B</td>
+            </tr>
+            <tr>
+                <td class='team-cell'>{games[0]['teams']}</td>
+                <td class='team-cell'>{games[1]['teams']}</td>
+                <td class='team-cell'>{games[2]['teams']}</td>
+                <td class='team-cell'>{games[3]['teams']}</td>
             </tr>
         </table>
     </div>
