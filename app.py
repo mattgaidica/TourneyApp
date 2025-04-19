@@ -269,7 +269,16 @@ st.markdown("""
             color: #FFFFFF;
         }
         
-        /* Make tab list more prominent */
+        /* Fix mobile tabs */
+        @media (max-width: 768px) {
+            .stTabs [data-baseweb="tab"] {
+                padding: 10px 15px !important;
+                font-size: 15px !important;
+                min-width: 110px;
+            }
+        }
+        
+        /* Prevent tabs from stacking on mobile */
         .stTabs [data-baseweb="tab-list"] {
             background-color: transparent !important;
             border-bottom: 1px solid #333 !important;
@@ -278,14 +287,35 @@ st.markdown("""
             gap: 10px;
             padding: 15px 0 0 0 !important;
             margin-bottom: 0 !important;
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
         }
-        
-        /* Fix mobile tabs */
+
+        .stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        /* Make tabs appear as a single row on all screens */
         @media (max-width: 768px) {
+            .stTabs [data-baseweb="tab-list"] {
+                flex-wrap: nowrap !important;
+                justify-content: flex-start !important;
+                overflow-x: auto !important;
+                padding-bottom: 5px !important;
+            }
+            
             .stTabs [data-baseweb="tab"] {
                 padding: 10px 15px !important;
                 font-size: 15px !important;
-                min-width: 110px;
+                min-width: 130px !important;
+                flex-shrink: 0 !important;
+            }
+            
+            /* Hide scrollbar for cleaner appearance */
+            .stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
+                display: none;
             }
         }
         
@@ -351,32 +381,6 @@ st.markdown("""
         .date-expander > div[data-testid="stExpander"] > div:nth-child(2) {
             padding: var(--spacing-lg) !important;
             width: 100% !important;
-        }
-
-        /* Fix mobile tabs and event display */
-        @media (max-width: 768px) {
-            .stTabs [data-baseweb="tab-list"] {
-                flex-wrap: wrap;
-            }
-            
-            .stTabs [data-baseweb="tab"] {
-                padding: 10px 15px !important;
-                font-size: 15px !important;
-                min-width: 110px;
-                flex-grow: 1;
-            }
-            
-            .date-expander {
-                max-width: 98% !important;
-            }
-            
-            .date-header {
-                font-size: 28px !important;
-            }
-            
-            .time-slot {
-                font-size: 18px !important;
-            }
         }
 
         /* Style the expander details */
@@ -519,6 +523,21 @@ st.markdown("""
             
             .highlight-row td:first-child {
                 padding-left: 7px;
+            }
+        }
+
+        /* Additional mobile responsive styles */
+        @media (max-width: 768px) {
+            .date-expander {
+                max-width: 98% !important;
+            }
+            
+            .date-header {
+                font-size: 28px !important;
+            }
+            
+            .time-slot {
+                font-size: 18px !important;
             }
         }
     </style>
