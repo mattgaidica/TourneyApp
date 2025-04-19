@@ -146,7 +146,12 @@ TOURNAMENT_SCHEDULE = {
 st.markdown('<div class="title-container">', unsafe_allow_html=True)
 st.title("MGT101 25B Athletics")
 st.markdown("""
-View upcoming and past games as well as other athletic events! The tournament is setup to allow each flight (+cadre) to play each other once. The standings are calculated based on the total number of wins. Sudden death matches will be played if there is a tie.
+**Tournament Format:**
+- Each flight (plus cadre) plays against each other once
+- Standings based on total number of wins
+- Sudden death matches for tiebreakers
+
+**View upcoming and past games as well as other athletic events!**
 """)
 st.markdown('</div>', unsafe_allow_html=True)
 
