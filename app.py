@@ -301,21 +301,30 @@ st.markdown("""
         @media (max-width: 768px) {
             .stTabs [data-baseweb="tab-list"] {
                 flex-wrap: nowrap !important;
-                justify-content: flex-start !important;
-                overflow-x: auto !important;
-                padding-bottom: 5px !important;
+                justify-content: space-between !important;
+                width: 100% !important;
+                gap: 2px !important;
+                padding: 10px 0 5px 0 !important;
             }
             
             .stTabs [data-baseweb="tab"] {
-                padding: 10px 15px !important;
-                font-size: 15px !important;
-                min-width: 130px !important;
-                flex-shrink: 0 !important;
+                padding: 8px 8px !important;
+                font-size: 14px !important;
+                min-width: unset !important;
+                flex: 1 !important;
+                flex-shrink: 1 !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
             }
-            
-            /* Hide scrollbar for cleaner appearance */
-            .stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
-                display: none;
+        }
+        
+        /* Extra small screens */
+        @media (max-width: 400px) {
+            .stTabs [data-baseweb="tab"] {
+                padding: 6px 4px !important;
+                font-size: 12px !important;
+                letter-spacing: 0 !important;
             }
         }
         
