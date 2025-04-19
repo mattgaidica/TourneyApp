@@ -49,16 +49,23 @@ st.markdown("""
             padding-left: 1rem;
             padding-right: 1rem;
         }
+        /* Date section container */
+        .date-section {
+            background-color: #1E1E1E;
+            border-radius: 15px;
+            margin: 2rem auto;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border: 1px solid #404040;
+            max-width: 800px;
+        }
         /* Schedule container styling */
         .schedule-container {
             background-color: #262730;
             border-radius: 12px;
-            margin: 20px auto;
+            margin: 0;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            max-width: 800px;
             padding: 0;
-            border: 1px solid #404040;
         }
         /* Date header styling */
         .date-header {
@@ -76,6 +83,7 @@ st.markdown("""
         /* Content container */
         .content-container {
             padding: 20px;
+            background-color: #262730;
         }
         /* Time slot styling */
         .time-slot {
@@ -239,8 +247,8 @@ def display_schedule_table(date, games, bootcamp):
     # Check if any games are completed to determine if we should show winners
     show_winners = any(game['status'] == 'completed' for game in games)
     
-    # Create the schedule container
-    st.markdown('<div class="schedule-container">', unsafe_allow_html=True)
+    # Create the date section container
+    st.markdown('<div class="date-section">', unsafe_allow_html=True)
     
     # Date header
     st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
@@ -305,7 +313,7 @@ def display_schedule_table(date, games, bootcamp):
     # Close the content container
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Close the schedule container
+    # Close the date section container
     st.markdown('</div>', unsafe_allow_html=True)
 
 # Upcoming Events Tab
