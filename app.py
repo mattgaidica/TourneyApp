@@ -29,11 +29,51 @@ st.markdown("""
             --shadow-lg: 0 6px 16px rgba(0, 0, 0, 0.6);
         }
         
+        /* Event container wrapper and separator */
+        .event-container-wrapper {
+            position: relative;
+            margin: 3.5rem auto 5rem;
+            padding-top: 1.5rem;
+        }
+        
+        .event-separator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--accent-blue) 50%, transparent 100%);
+            box-shadow: 0 0 8px rgba(0, 204, 255, 0.5);
+        }
+        
+        .event-container-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary-bg);
+            border-radius: 50%;
+            border: 2px solid var(--accent-blue);
+            z-index: 2;
+            box-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
+        }
+        
+        /* First event wrapper shouldn't have a separator */
+        .stTabs [role="tabpanel"] .event-container-wrapper:first-child .event-separator {
+            display: none;
+        }
+        
+        .stTabs [role="tabpanel"] .event-container-wrapper:first-child {
+            margin-top: 1.5rem;
+        }
+        
         /* Event container */
         .event-container {
             background-color: var(--secondary-bg);
             border-radius: var(--border-radius);
-            margin: 3rem auto;
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-md);
             max-width: 800px;
@@ -296,62 +336,60 @@ def display_schedule_table(date, games, bootcamp):
     # Check if any games are completed to determine if we should show winners
     show_winners = any(game['status'] == 'completed' for game in games)
     
-    # Create a container for the entire event
-    with st.container():
-        # Apply the event container styling via HTML
-        st.markdown('<div class="event-container">', unsafe_allow_html=True)
-        
-        # Date header
-        st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
-        
-        # Game content
-        st.markdown('<div class="game-content">', unsafe_allow_html=True)
-        
-        # Create a 2-column layout for the main time slots
-        time_col1, time_col2 = st.columns(2)
-        
-        # Time slots row
-        with time_col1:
-            st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
-        with time_col2:
-            st.markdown('<div class="time-slot">1630</div>', unsafe_allow_html=True)
-        
-        # Create a 4-column layout for the fields
-        field_col1, field_col2, field_col3, field_col4 = st.columns(4)
-        
-        # Helper function to create field HTML
-        def field_html(game, field_label):
-            winner_html = f'<div class="winner-cell">Winner: {game["winner"]}</div>' if show_winners else ''
-            return f'''
-                <div class="field-column">
-                    <div class="field-label">{field_label}</div>
-                    <div class="team-info">{game["teams"]}</div>
-                    {winner_html}
-                </div>
-            '''
-        
-        # Field labels and team info
-        with field_col1:
-            st.markdown(field_html(games[0], "Field A"), unsafe_allow_html=True)
-        with field_col2:
-            st.markdown(field_html(games[1], "Field B"), unsafe_allow_html=True)
-        with field_col3:
-            st.markdown(field_html(games[2], "Field A"), unsafe_allow_html=True)
-        with field_col4:
-            st.markdown(field_html(games[3], "Field B"), unsafe_allow_html=True)
-        
-        # Bootcamp section
-        st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
-        bootcamp_col1, bootcamp_col2 = st.columns(2)
-        
-        with bootcamp_col1:
-            st.markdown(f'<div class="bootcamp-info">{bootcamp["games1_2"]}</div>', unsafe_allow_html=True)
-        
-        with bootcamp_col2:
-            st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
-        
-        # Close the containers
-        st.markdown('</div></div>', unsafe_allow_html=True)
+    # Create a container for the entire event with additional styling for separation
+    st.markdown(f'''
+        <div class="event-container-wrapper">
+            <div class="event-separator"></div>
+            <div class="event-container">
+                <div class="date-header">{date}</div>
+                <div class="game-content">
+    ''', unsafe_allow_html=True)
+    
+    # Create a 2-column layout for the main time slots
+    time_col1, time_col2 = st.columns(2)
+    
+    # Time slots row
+    with time_col1:
+        st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
+    with time_col2:
+        st.markdown('<div class="time-slot">1630</div>', unsafe_allow_html=True)
+    
+    # Create a 4-column layout for the fields
+    field_col1, field_col2, field_col3, field_col4 = st.columns(4)
+    
+    # Helper function to create field HTML
+    def field_html(game, field_label):
+        winner_html = f'<div class="winner-cell">Winner: {game["winner"]}</div>' if show_winners else ''
+        return f'''
+            <div class="field-column">
+                <div class="field-label">{field_label}</div>
+                <div class="team-info">{game["teams"]}</div>
+                {winner_html}
+            </div>
+        '''
+    
+    # Field labels and team info
+    with field_col1:
+        st.markdown(field_html(games[0], "Field A"), unsafe_allow_html=True)
+    with field_col2:
+        st.markdown(field_html(games[1], "Field B"), unsafe_allow_html=True)
+    with field_col3:
+        st.markdown(field_html(games[2], "Field A"), unsafe_allow_html=True)
+    with field_col4:
+        st.markdown(field_html(games[3], "Field B"), unsafe_allow_html=True)
+    
+    # Bootcamp section
+    st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
+    bootcamp_col1, bootcamp_col2 = st.columns(2)
+    
+    with bootcamp_col1:
+        st.markdown(f'<div class="bootcamp-info">{bootcamp["games1_2"]}</div>', unsafe_allow_html=True)
+    
+    with bootcamp_col2:
+        st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
+    
+    # Close the containers
+    st.markdown('</div></div></div>', unsafe_allow_html=True)
 
 # Upcoming Events Tab
 with tab1:
