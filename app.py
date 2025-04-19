@@ -723,6 +723,41 @@ st.markdown("""
                 gap: 0.25rem !important;
             }
         }
+
+        /* Specifically target field columns to prevent stacking */
+        @media (max-width: 640px) {
+            /* Target the emotion classes for the field columns */
+            .stHorizontalBlock:nth-of-type(2) [data-testid="column"],
+            .stHorizontalBlock:has([data-testid="column"] .field-column) [data-testid="column"] {
+                min-width: 0 !important;
+                width: 25% !important;
+                flex: 1 1 0 !important;
+                padding: 0 2px !important;
+            }
+            
+            /* Make field elements more compact */
+            .field-column {
+                display: flex !important;
+                flex-direction: column !important;
+                min-width: 0 !important;
+                width: 100% !important;
+            }
+            
+            .field-label, .team-info {
+                font-size: 11px !important;
+                padding: 3px 2px !important;
+                min-height: 0 !important;
+                margin-bottom: 3px !important;
+            }
+            
+            /* Very aggressive overrides for any remaining min-width issues */
+            [data-testid="stHorizontalBlock"] [data-testid="column"] > div,
+            [data-testid="stHorizontalBlock"] [data-testid="column"] > div > div,
+            [data-testid="stHorizontalBlock"] [data-testid="column"] > div > div > div {
+                min-width: 0 !important;
+                width: 100% !important;
+            }
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -897,6 +932,31 @@ def display_schedule_table(date, games, bootcamp):
                     block.style.flexDirection = 'row';
                     block.style.flexWrap = 'nowrap';
                 });
+                
+                // Force field columns to have proper widths
+                setTimeout(function() {
+                    // Target all columns in the horizontal block containing field columns
+                    const fieldBlocks = Array.from(window.parent.document.querySelectorAll('[data-testid="stHorizontalBlock"]'));
+                    
+                    fieldBlocks.forEach(block => {
+                        const columns = block.querySelectorAll('[data-testid="column"]');
+                        if (columns.length === 4) { // This is likely our field columns
+                            columns.forEach(col => {
+                                col.style.minWidth = '0';
+                                col.style.width = '25%';
+                                col.style.flex = '1 1 0%';
+                                
+                                // Also target inner divs
+                                const innerDivs = col.querySelectorAll('div');
+                                innerDivs.forEach(div => {
+                                    div.style.minWidth = '0';
+                                    div.style.maxWidth = '100%';
+                                    div.style.width = '100%';
+                                });
+                            });
+                        }
+                    });
+                }, 100); // Short delay to ensure elements are rendered
             })();
         </script>
         """,
