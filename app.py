@@ -549,6 +549,72 @@ st.markdown("""
                 font-size: 18px !important;
             }
         }
+
+        /* Improve mobile responsiveness for event elements */
+        @media (max-width: 768px) {
+            /* Time slots row improvements */
+            .stHorizontalBlock {
+                gap: var(--spacing-sm) !important;
+            }
+            
+            /* Better field display on small screens */
+            .field-column {
+                margin-bottom: var(--spacing-md);
+            }
+            
+            /* Prevent time slots from being too large */
+            .time-slot {
+                font-size: 18px !important;
+                padding: var(--spacing-sm) !important;
+            }
+            
+            /* Adjust field and team info for better small screen display */
+            .field-label, .team-info {
+                padding: 6px !important;
+                font-size: 14px !important;
+            }
+            
+            /* Make sure bootcamp elements stay aligned */
+            .bootcamp-header {
+                font-size: 16px !important;
+                padding: 8px !important;
+                margin-top: var(--spacing-md) !important;
+            }
+            
+            .bootcamp-info {
+                font-size: 14px !important;
+                padding: 6px !important;
+            }
+            
+            /* Fix for winner display on small screens */
+            .winner-cell {
+                font-size: 12px !important;
+                padding: 4px !important;
+            }
+        }
+
+        /* Very small screens (phone portrait) */
+        @media (max-width: 480px) {
+            /* Adjust spacing and sizing for very small screens */
+            .stHorizontalBlock [data-testid="column"] {
+                padding: 0 !important;
+            }
+            
+            .date-header {
+                font-size: 24px !important;
+                padding: var(--spacing-sm) !important;
+            }
+            
+            .field-label, .team-info, .bootcamp-info {
+                font-size: 12px !important;
+                padding: 4px !important;
+            }
+            
+            /* Make sure elements don't get cut off */
+            .date-expander > div[data-testid="stExpander"] > div:nth-child(2) {
+                padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-md) !important;
+            }
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -647,7 +713,7 @@ def display_schedule_table(date, games, bootcamp):
         st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
         
         # Create a 2-column layout for the main time slots
-        time_col1, time_col2 = st.columns(2)
+        time_col1, time_col2 = st.columns([1, 1])
         
         # Time slots row
         with time_col1:
@@ -655,8 +721,8 @@ def display_schedule_table(date, games, bootcamp):
         with time_col2:
             st.markdown('<div class="time-slot">1630</div>', unsafe_allow_html=True)
         
-        # Create a 4-column layout for the fields
-        field_cols = st.columns(4)
+        # Create a 4-column layout for the fields with flexible width
+        field_cols = st.columns([1, 1, 1, 1])
         
         # Helper function to create field HTML
         def field_html(game, field_label):
@@ -680,7 +746,7 @@ def display_schedule_table(date, games, bootcamp):
                 st.markdown(field_html(games[i], field_label), unsafe_allow_html=True)
         
         # Bootcamp section - now in two columns aligned with time slots
-        bootcamp_header_col1, bootcamp_header_col2 = st.columns(2)
+        bootcamp_header_col1, bootcamp_header_col2 = st.columns([1, 1])
         
         with bootcamp_header_col1:
             st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
@@ -688,7 +754,7 @@ def display_schedule_table(date, games, bootcamp):
             st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
         
         # Bootcamp info
-        bootcamp_col1, bootcamp_col2 = st.columns(2)
+        bootcamp_col1, bootcamp_col2 = st.columns([1, 1])
         
         with bootcamp_col1:
             st.markdown(f'<div class="bootcamp-info">{bootcamp["games1_2"]}</div>', unsafe_allow_html=True)
