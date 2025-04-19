@@ -37,6 +37,13 @@ st.markdown("""
             font-size: 20px;
             padding: 15px 30px;
         }
+        /* Note styling */
+        .note {
+            font-size: 0.9em;
+            color: #666;
+            font-style: italic;
+            margin-top: 1rem;
+        }
         /* Ensure content doesn't overflow on mobile */
         .main .block-container {
             padding-left: 1rem;
@@ -150,8 +157,8 @@ st.markdown("""
 
 Each flight (plus Cadre) will play against each other once, with standings based on total number of wins and sudden death matches for tiebreakers.
 
-^1 The standings are calculated based on the total number of wins—this eliminates the initial condition bias of typical brackets.
-""")
+<div class="note">Note: The standings are calculated based on the total number of wins—this eliminates the initial condition bias of typical brackets.</div>
+""", unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
 # Create tabs
