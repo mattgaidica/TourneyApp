@@ -221,7 +221,7 @@ st.markdown("""
             border: none;
             background-color: #121218;
             border-radius: 0 0 8px 8px;
-            padding: 0px !important;
+            padding-top: 30px !important;
             max-width: 100% !important;
             width: 100% !important;
         }
