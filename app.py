@@ -256,6 +256,7 @@ def display_schedule_table(date, games, bootcamp):
     # Check if any games are completed to determine if we should show winners
     show_winners = any(game['status'] == 'completed' for game in games)
     
+    # Create the HTML table with proper formatting
     table_html = f"""
     <div class='schedule-container'>
         <div class='date-header'>{date}</div>
@@ -276,14 +277,21 @@ def display_schedule_table(date, games, bootcamp):
                 <td class='team-cell'>{games[2]['teams']}</td>
                 <td class='team-cell'>{games[3]['teams']}</td>
             </tr>
-            {f'''
+    """
+    
+    # Add winner row if games are completed
+    if show_winners:
+        table_html += f"""
             <tr>
                 <td class='winner-cell'>Winner: {games[0]['winner']}</td>
                 <td class='winner-cell'>Winner: {games[1]['winner']}</td>
                 <td class='winner-cell'>Winner: {games[2]['winner']}</td>
                 <td class='winner-cell'>Winner: {games[3]['winner']}</td>
             </tr>
-            ''' if show_winners else ''}
+        """
+    
+    # Add bootcamp information
+    table_html += f"""
             <tr>
                 <th colspan='4' class='bootcamp-header'>BOOTCAMP</th>
             </tr>
@@ -294,6 +302,8 @@ def display_schedule_table(date, games, bootcamp):
         </table>
     </div>
     """
+    
+    # Display the HTML table
     st.markdown(table_html, unsafe_allow_html=True)
 
 # Upcoming Events Tab
