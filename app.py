@@ -104,6 +104,17 @@ st.markdown("""
             text-shadow: 0 0 15px rgba(0, 204, 255, 0.4);
         }
         
+        .date-header::before,
+        .date-header::after {
+            content: "⬥";
+            color: var(--accent-blue);
+            position: relative;
+            margin: 0 15px;
+            font-size: 24px;
+            opacity: 0.8;
+            text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+        }
+        
         /* Time slot */
         .time-slot {
             color: var(--accent-blue);
