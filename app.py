@@ -735,6 +735,30 @@ st.markdown("""
                 gap: 0.25rem !important;
             }
         }
+
+        /* Adjust main title and container on mobile */
+        @media (max-width: 640px) {
+            .title-container {
+                padding: 10px 0 !important;
+                margin-bottom: 15px !important;
+            }
+            
+            .main-title {
+                font-size: 36px !important;
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+            
+            .main-description {
+                font-size: 14px !important;
+                margin: 10px auto !important;
+            }
+            
+            /* Reduce space above the first tab content */
+            .stTabs [data-baseweb="tab-panel"] {
+                padding-top: 15px !important;
+            }
+        }
     </style>
 """, unsafe_allow_html=True)
 
