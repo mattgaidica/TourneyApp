@@ -230,88 +230,210 @@ def display_schedule_table(date, games, bootcamp):
     # Check if any games are completed to determine if we should show winners
     show_winners = any(game['status'] == 'completed' for game in games)
     
-    # Create the event container
-    st.markdown('<div class="event-container">', unsafe_allow_html=True)
-    
-    # Date header
-    st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
-    
-    # Game content
-    st.markdown('<div class="game-content">', unsafe_allow_html=True)
-    
-    # Create a 2-column layout for the main time slots
-    time_col1, time_col2 = st.columns(2)
-    
-    # Time slots row
-    with time_col1:
-        st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
-    with time_col2:
-        st.markdown('<div class="time-slot">1630</div>', unsafe_allow_html=True)
-    
-    # Create a 4-column layout for the fields
-    field_col1, field_col2, field_col3, field_col4 = st.columns(4)
-    
-    # Field labels and team info
-    with field_col1:
-        st.markdown(
-            f'''
-            <div class="field-column">
-                <div class="field-label">Field A</div>
-                <div class="team-info">{games[0]["teams"]}</div>
-                {f'<div class="winner-cell">Winner: {games[0]["winner"]}</div>' if show_winners else ''}
+    # Build the complete HTML structure
+    html = f'''
+        <div class="event-container">
+            <div class="date-header">{date}</div>
+            <div class="game-content">
+                <div class="time-slots">
+                    <div class="time-slot">1600</div>
+                    <div class="time-slot">1630</div>
+                </div>
+                
+                <div class="fields-grid">
+                    <div class="field-column">
+                        <div class="field-label">Field A</div>
+                        <div class="team-info">{games[0]["teams"]}</div>
+                        {f'<div class="winner-cell">Winner: {games[0]["winner"]}</div>' if show_winners else ''}
+                    </div>
+                    <div class="field-column">
+                        <div class="field-label">Field B</div>
+                        <div class="team-info">{games[1]["teams"]}</div>
+                        {f'<div class="winner-cell">Winner: {games[1]["winner"]}</div>' if show_winners else ''}
+                    </div>
+                    <div class="field-column">
+                        <div class="field-label">Field A</div>
+                        <div class="team-info">{games[2]["teams"]}</div>
+                        {f'<div class="winner-cell">Winner: {games[2]["winner"]}</div>' if show_winners else ''}
+                    </div>
+                    <div class="field-column">
+                        <div class="field-label">Field B</div>
+                        <div class="team-info">{games[3]["teams"]}</div>
+                        {f'<div class="winner-cell">Winner: {games[3]["winner"]}</div>' if show_winners else ''}
+                    </div>
+                </div>
+                
+                <div class="bootcamp-section">
+                    <div class="bootcamp-header">BOOTCAMP</div>
+                    <div class="bootcamp-grid">
+                        <div class="bootcamp-info">{bootcamp["games1_2"]}</div>
+                        <div class="bootcamp-info">{bootcamp["games3_4"]}</div>
+                    </div>
+                </div>
             </div>
-            ''',
-            unsafe_allow_html=True
-        )
+        </div>
+    '''
     
-    with field_col2:
-        st.markdown(
-            f'''
-            <div class="field-column">
-                <div class="field-label">Field B</div>
-                <div class="team-info">{games[1]["teams"]}</div>
-                {f'<div class="winner-cell">Winner: {games[1]["winner"]}</div>' if show_winners else ''}
-            </div>
-            ''',
-            unsafe_allow_html=True
-        )
+    # Update CSS to handle the new structure
+    st.markdown("""
+        <style>
+            /* Base styles */
+            :root {
+                --primary-bg: #1E1E1E;
+                --secondary-bg: #262730;
+                --border-color: #404040;
+                --accent-blue: #00CCFF;
+                --accent-green: #00FF00;
+                --text-color: #FAFAFA;
+                --spacing-sm: 8px;
+                --spacing-md: 16px;
+                --spacing-lg: 24px;
+                --border-radius: 8px;
+            }
+            
+            .event-container {
+                background-color: var(--secondary-bg);
+                border-radius: var(--border-radius);
+                margin: var(--spacing-lg) auto;
+                border: 1px solid var(--border-color);
+                max-width: 800px;
+                overflow: hidden;
+            }
+            
+            .date-header {
+                color: var(--text-color);
+                font-size: 32px;
+                font-weight: bold;
+                padding: var(--spacing-lg);
+                background-color: var(--primary-bg);
+                text-align: center;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                border-bottom: 1px solid var(--border-color);
+                margin: 0;
+            }
+            
+            .game-content {
+                padding: var(--spacing-lg);
+            }
+            
+            .time-slots {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--spacing-md);
+                margin-bottom: var(--spacing-md);
+            }
+            
+            .time-slot {
+                color: var(--accent-blue);
+                font-size: 22px;
+                font-weight: bold;
+                text-align: center;
+                background-color: var(--primary-bg);
+                padding: var(--spacing-md);
+                border-radius: var(--border-radius);
+                border: 1px solid var(--border-color);
+            }
+            
+            .fields-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: var(--spacing-md);
+                margin-bottom: var(--spacing-lg);
+            }
+            
+            .field-column {
+                display: flex;
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+            
+            .field-label {
+                color: var(--text-color);
+                font-size: 18px;
+                font-weight: 500;
+                text-align: center;
+                background-color: var(--primary-bg);
+                padding: var(--spacing-sm);
+                border-radius: var(--border-radius);
+                border: 1px solid var(--border-color);
+            }
+            
+            .team-info {
+                background-color: var(--primary-bg);
+                color: var(--text-color);
+                padding: var(--spacing-md);
+                border-radius: var(--border-radius);
+                font-size: 16px;
+                border: 1px solid var(--border-color);
+                text-align: center;
+            }
+            
+            .winner-cell {
+                background-color: var(--primary-bg);
+                color: var(--accent-green);
+                font-weight: bold;
+                padding: var(--spacing-sm);
+                border-radius: var(--border-radius);
+                font-size: 14px;
+                text-align: center;
+                border: 1px solid var(--accent-green);
+            }
+            
+            .bootcamp-section {
+                margin-top: var(--spacing-lg);
+            }
+            
+            .bootcamp-header {
+                color: var(--text-color);
+                font-size: 20px;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: var(--spacing-md);
+                padding: var(--spacing-md);
+                background-color: var(--primary-bg);
+                border-radius: var(--border-radius);
+                border: 1px solid var(--border-color);
+            }
+            
+            .bootcamp-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--spacing-md);
+            }
+            
+            .bootcamp-info {
+                background-color: var(--primary-bg);
+                color: var(--text-color);
+                padding: var(--spacing-md);
+                border-radius: var(--border-radius);
+                font-size: 16px;
+                border: 1px solid var(--border-color);
+                text-align: center;
+            }
+            
+            @media (max-width: 768px) {
+                .fields-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                
+                .time-slot {
+                    font-size: 18px;
+                }
+                
+                .field-label {
+                    font-size: 16px;
+                }
+                
+                .team-info {
+                    font-size: 14px;
+                }
+            }
+        </style>
+    """, unsafe_allow_html=True)
     
-    with field_col3:
-        st.markdown(
-            f'''
-            <div class="field-column">
-                <div class="field-label">Field A</div>
-                <div class="team-info">{games[2]["teams"]}</div>
-                {f'<div class="winner-cell">Winner: {games[2]["winner"]}</div>' if show_winners else ''}
-            </div>
-            ''',
-            unsafe_allow_html=True
-        )
-    
-    with field_col4:
-        st.markdown(
-            f'''
-            <div class="field-column">
-                <div class="field-label">Field B</div>
-                <div class="team-info">{games[3]["teams"]}</div>
-                {f'<div class="winner-cell">Winner: {games[3]["winner"]}</div>' if show_winners else ''}
-            </div>
-            ''',
-            unsafe_allow_html=True
-        )
-    
-    # Bootcamp section
-    st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
-    bootcamp_col1, bootcamp_col2 = st.columns(2)
-    
-    with bootcamp_col1:
-        st.markdown(f'<div class="bootcamp-info">{bootcamp["games1_2"]}</div>', unsafe_allow_html=True)
-    
-    with bootcamp_col2:
-        st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
-    
-    # Close the containers
-    st.markdown('</div></div>', unsafe_allow_html=True)
+    # Render the complete HTML structure
+    st.markdown(html, unsafe_allow_html=True)
 
 # Upcoming Events Tab
 with tab1:
