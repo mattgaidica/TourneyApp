@@ -245,8 +245,8 @@ def display_schedule_table(date, games, bootcamp):
                 <th colspan='4' class='bootcamp-header'>BOOTCAMP</th>
             </tr>
             <tr>
-                <td colspan='2' class='bootcamp-cell'>Games 1-2: {bootcamp['games1_2']}</td>
-                <td colspan='2' class='bootcamp-cell'>Games 3-4: {bootcamp['games3_4']}</td>
+                <td colspan='2' class='bootcamp-cell'>{bootcamp['games1_2']}</td>
+                <td colspan='2' class='bootcamp-cell'>{bootcamp['games3_4']}</td>
             </tr>
         </table>
     </div>
