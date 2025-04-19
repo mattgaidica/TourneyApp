@@ -385,6 +385,31 @@ st.markdown("""
             padding-left: 1rem !important;
             padding-right: 1rem !important;
         }
+
+        /* Style the title container */
+        .title-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Style the note under the title */
+        .note {
+            background-color: var(--secondary-bg);
+            border-left: 4px solid var(--accent-blue);
+            padding: 12px 15px;
+            margin: 20px auto;
+            border-radius: 4px;
+            max-width: 800px;
+            font-style: italic;
+            color: #CCCCCC;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .note strong {
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -459,11 +484,9 @@ TOURNAMENT_SCHEDULE = {
 
 # Main title and description in a centered container
 st.markdown('<div class="title-container">', unsafe_allow_html=True)
-st.title("MGT101 25B Athletics")
+st.title("MGT101 25B Ultimate Tournament")
 st.markdown("""
-**View upcoming and past games as well as other athletic events!**
-
-Tournament Format: Each flight (plus Cadre) will play against each other once, with standings based on total number of wins and sudden death matches for tiebreakers.
+**Each flight (plus Cadre) will play against each other once, with standings based on total number of wins and sudden death matches for tiebreakers.**
 
 <div class="note">Note: The standings are calculated based on the total number of wins—this eliminates the initial condition bias of typical brackets.</div>
 """, unsafe_allow_html=True)
