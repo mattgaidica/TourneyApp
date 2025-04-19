@@ -705,11 +705,13 @@ st.markdown("""
                 grid-gap: 0 !important;
             }
             
-            /* Make contents fit without overflow */
+            /* Allow text to wrap instead of truncating with ellipsis */
             .field-label, .team-info, .time-slot, .bootcamp-header, .bootcamp-info {
-                white-space: nowrap !important;
-                overflow: hidden !important;
-                text-overflow: ellipsis !important;
+                white-space: normal !important;
+                overflow: visible !important;
+                text-overflow: clip !important;
+                word-wrap: break-word !important;
+                hyphens: auto !important;
             }
         }
 
@@ -805,7 +807,7 @@ st.markdown("""
 st.markdown('</div>', unsafe_allow_html=True)
 
 # Create tabs
-tab1, tab2, tab3 = st.tabs(["Upcoming Events", "Past Events", "Standings"])
+tab1, tab2, tab3 = st.tabs(["Upcoming", "Past", "Standings"])
 
 # Function to display game schedule table
 def display_schedule_table(date, games, bootcamp):
@@ -993,8 +995,6 @@ with tab3:
 # Add a sidebar with mobile-friendly controls
 with st.sidebar:
     st.header("Quick Actions")
-    st.button("Add New Event", use_container_width=True)
-    st.button("Update Scores", use_container_width=True)
     st.button("Ultimate Rules GPT", use_container_width=True)
     
     st.markdown("---")
