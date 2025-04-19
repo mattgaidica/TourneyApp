@@ -12,45 +12,8 @@ st.set_page_config(
 # Custom CSS for mobile responsiveness
 st.markdown("""
     <style>
-        /* Make text more readable on mobile */
-        @media (max-width: 768px) {
-            .stMarkdown, .stText {
-                font-size: 16px;
-            }
-            h1 {
-                font-size: 24px !important;
-            }
-            h2 {
-                font-size: 20px !important;
-            }
-        }
-        /* Center the title and description */
-        .title-container {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        /* Center and style the tabs */
-        .stTabs [data-baseweb="tab-list"] {
-            justify-content: center;
-        }
-        .stTabs [data-baseweb="tab"] {
-            font-size: 20px;
-            padding: 15px 30px;
-        }
-        /* Note styling */
-        .note {
-            font-size: 0.9em;
-            color: #666;
-            font-style: italic;
-            margin-top: 1rem;
-        }
-        /* Ensure content doesn't overflow on mobile */
-        .main .block-container {
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-        /* Event section styling */
-        .event-section {
+        /* Event container */
+        .event-container {
             background-color: #1E1E1E;
             border-radius: 15px;
             margin: 2rem auto;
@@ -58,8 +21,8 @@ st.markdown("""
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             border: 1px solid #404040;
             max-width: 800px;
-            padding: 0;
         }
+        
         /* Date header styling */
         .date-header {
             color: #FAFAFA;
@@ -67,17 +30,19 @@ st.markdown("""
             font-weight: bold;
             padding: 25px;
             background-color: #1E1E1E;
-            margin: 0;
             text-align: center;
             border-bottom: 2px solid #404040;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+        
         /* Content container */
         .content-container {
-            padding: 20px;
             background-color: #262730;
+            padding: 20px;
+            border-radius: 0 0 12px 12px;
         }
+        
         /* Time slot styling */
         .time-slot {
             color: #00CCFF;
@@ -89,6 +54,7 @@ st.markdown("""
             padding: 10px;
             border-radius: 8px;
         }
+        
         /* Field styling */
         .field-label {
             color: #B0B0B0;
@@ -96,7 +62,11 @@ st.markdown("""
             font-weight: 500;
             margin-bottom: 5px;
             text-align: center;
+            background-color: #1E1E1E;
+            padding: 8px;
+            border-radius: 6px;
         }
+        
         /* Team styling */
         .team-info {
             background-color: #2D2D2D;
@@ -108,6 +78,7 @@ st.markdown("""
             border: 1px solid #404040;
             text-align: center;
         }
+        
         /* Winner styling */
         .winner-cell {
             background-color: #1E1E1E;
@@ -120,6 +91,7 @@ st.markdown("""
             text-align: center;
             border: 1px solid #00FF00;
         }
+        
         /* Bootcamp styling */
         .bootcamp-header {
             color: #FAFAFA;
@@ -132,6 +104,7 @@ st.markdown("""
             border-radius: 8px;
             border: 1px solid #404040;
         }
+        
         .bootcamp-info {
             background-color: #2D2D2D;
             color: #FAFAFA;
@@ -142,21 +115,21 @@ st.markdown("""
             border: 1px solid #404040;
             text-align: center;
         }
+        
         /* Column styling */
         .st-emotion-cache-1r6slb0 {
             background-color: transparent;
             padding: 10px;
             margin: 5px;
         }
-        /* Streamlit container styling */
-        div[data-testid="stVerticalBlock"] > div:has(div.date-header) {
-            background-color: #1E1E1E;
-            border-radius: 15px;
-            margin: 2rem auto;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            border: 1px solid #404040;
-            max-width: 800px;
+        
+        /* Streamlit column gaps */
+        div.stHorizontalBlock {
+            gap: 1rem;
+            padding: 0.5rem;
+        }
+        
+        div.stHorizontalBlock [data-testid="column"] {
             padding: 0;
         }
     </style>
@@ -252,68 +225,72 @@ def display_schedule_table(date, games, bootcamp):
     show_winners = any(game['status'] == 'completed' for game in games)
     
     # Create a container for the entire date section
-    with st.container():
-        # Date header
-        st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
-        
-        # Content container
-        st.markdown('<div class="content-container">', unsafe_allow_html=True)
-        
-        # Create a 2-column layout for the main time slots
-        time_col1, time_col2 = st.columns(2)
-        
-        # Time slots row
-        with time_col1:
-            st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
-        with time_col2:
-            st.markdown('<div class="time-slot">1630</div>', unsafe_allow_html=True)
-        
-        # Create a 4-column layout for the fields
-        field_col1, field_col2, field_col3, field_col4 = st.columns(4)
-        
-        # Field labels row
+    st.markdown('<div class="event-container">', unsafe_allow_html=True)
+    
+    # Date header
+    st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
+    
+    # Content container
+    st.markdown('<div class="content-container">', unsafe_allow_html=True)
+    
+    # Create a 2-column layout for the main time slots
+    time_col1, time_col2 = st.columns(2)
+    
+    # Time slots row
+    with time_col1:
+        st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
+    with time_col2:
+        st.markdown('<div class="time-slot">1630</div>', unsafe_allow_html=True)
+    
+    # Create a 4-column layout for the fields
+    field_col1, field_col2, field_col3, field_col4 = st.columns(4)
+    
+    # Field labels row
+    with field_col1:
+        st.markdown('<div class="field-label">Field A</div>', unsafe_allow_html=True)
+    with field_col2:
+        st.markdown('<div class="field-label">Field B</div>', unsafe_allow_html=True)
+    with field_col3:
+        st.markdown('<div class="field-label">Field A</div>', unsafe_allow_html=True)
+    with field_col4:
+        st.markdown('<div class="field-label">Field B</div>', unsafe_allow_html=True)
+    
+    # Teams row
+    with field_col1:
+        st.markdown(f'<div class="team-info">{games[0]["teams"]}</div>', unsafe_allow_html=True)
+    with field_col2:
+        st.markdown(f'<div class="team-info">{games[1]["teams"]}</div>', unsafe_allow_html=True)
+    with field_col3:
+        st.markdown(f'<div class="team-info">{games[2]["teams"]}</div>', unsafe_allow_html=True)
+    with field_col4:
+        st.markdown(f'<div class="team-info">{games[3]["teams"]}</div>', unsafe_allow_html=True)
+    
+    # Winners row (if applicable)
+    if show_winners:
         with field_col1:
-            st.markdown('<div class="field-label">Field A</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="winner-cell">Winner: {games[0]["winner"]}</div>', unsafe_allow_html=True)
         with field_col2:
-            st.markdown('<div class="field-label">Field B</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="winner-cell">Winner: {games[1]["winner"]}</div>', unsafe_allow_html=True)
         with field_col3:
-            st.markdown('<div class="field-label">Field A</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="winner-cell">Winner: {games[2]["winner"]}</div>', unsafe_allow_html=True)
         with field_col4:
-            st.markdown('<div class="field-label">Field B</div>', unsafe_allow_html=True)
-        
-        # Teams row
-        with field_col1:
-            st.markdown(f'<div class="team-info">{games[0]["teams"]}</div>', unsafe_allow_html=True)
-        with field_col2:
-            st.markdown(f'<div class="team-info">{games[1]["teams"]}</div>', unsafe_allow_html=True)
-        with field_col3:
-            st.markdown(f'<div class="team-info">{games[2]["teams"]}</div>', unsafe_allow_html=True)
-        with field_col4:
-            st.markdown(f'<div class="team-info">{games[3]["teams"]}</div>', unsafe_allow_html=True)
-        
-        # Winners row (if applicable)
-        if show_winners:
-            with field_col1:
-                st.markdown(f'<div class="winner-cell">Winner: {games[0]["winner"]}</div>', unsafe_allow_html=True)
-            with field_col2:
-                st.markdown(f'<div class="winner-cell">Winner: {games[1]["winner"]}</div>', unsafe_allow_html=True)
-            with field_col3:
-                st.markdown(f'<div class="winner-cell">Winner: {games[2]["winner"]}</div>', unsafe_allow_html=True)
-            with field_col4:
-                st.markdown(f'<div class="winner-cell">Winner: {games[3]["winner"]}</div>', unsafe_allow_html=True)
-        
-        # Bootcamp section
-        st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
-        bootcamp_col1, bootcamp_col2 = st.columns(2)
-        
-        with bootcamp_col1:
-            st.markdown(f'<div class="bootcamp-info">{bootcamp["games1_2"]}</div>', unsafe_allow_html=True)
-        
-        with bootcamp_col2:
-            st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
-        
-        # Close the content container
-        st.markdown('</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="winner-cell">Winner: {games[3]["winner"]}</div>', unsafe_allow_html=True)
+    
+    # Bootcamp section
+    st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
+    bootcamp_col1, bootcamp_col2 = st.columns(2)
+    
+    with bootcamp_col1:
+        st.markdown(f'<div class="bootcamp-info">{bootcamp["games1_2"]}</div>', unsafe_allow_html=True)
+    
+    with bootcamp_col2:
+        st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
+    
+    # Close the content container
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Close the event container
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # Upcoming Events Tab
 with tab1:
