@@ -5,8 +5,8 @@ import hashlib
 
 # Set page config with mobile-friendly settings
 st.set_page_config(
-    page_title="MGT101 25B Athletics",
-    page_icon="🏃",
+    page_title="MGT101 25B Ultimate Tournament",
+    page_icon="🏆",
     layout="wide",
     initial_sidebar_state="collapsed"  # Better for mobile
 )
@@ -704,8 +704,6 @@ with tab2:
     
 # Standings Tab
 with tab3:
-    st.markdown("<h2 style='text-align: center; margin-bottom: 30px;'>MGT101 25B Tournament Standings</h2>", unsafe_allow_html=True)
-    
     # Create a clean HTML table for the standings
     html = """
     <div style="display: flex; justify-content: center; width: 100%;">
@@ -780,12 +778,12 @@ with tab3:
 # Add a sidebar with mobile-friendly controls
 with st.sidebar:
     st.header("Quick Actions")
-    st.button("📝 Add New Event", use_container_width=True)
-    st.button("📊 Update Scores", use_container_width=True)
-    st.button("📋 View Rules", use_container_width=True)
+    st.button("Add New Event", use_container_width=True)
+    st.button("Update Scores", use_container_width=True)
+    st.button("Ultimate Rules GPT", use_container_width=True)
     
     st.markdown("---")
-    st.markdown("### Event Information")
+    st.markdown("### Game Play:")
     st.markdown("""
     - **Game Duration**: 30 minutes
     - **Game Times**: 1600 & 1630
