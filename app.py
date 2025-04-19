@@ -24,16 +24,39 @@ st.markdown("""
             --spacing-md: 16px;
             --spacing-lg: 24px;
             --border-radius: 8px;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 6px 16px rgba(0, 0, 0, 0.6);
         }
         
         /* Event container */
         .event-container {
             background-color: var(--secondary-bg);
             border-radius: var(--border-radius);
-            margin: var(--spacing-lg) auto;
+            margin: 3rem auto;
             border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
             max-width: 800px;
             overflow: hidden;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            position: relative;
+        }
+        
+        .event-container:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .event-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+            border-radius: 2px;
         }
         
         /* Date header */
@@ -48,6 +71,8 @@ st.markdown("""
             letter-spacing: 2px;
             border-bottom: 1px solid var(--border-color);
             margin: 0;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         /* Game content */
@@ -154,6 +179,30 @@ st.markdown("""
         
         div.stHorizontalBlock [data-testid="column"] {
             padding: 0;
+        }
+
+        /* Tab styling */
+        .stTabs [data-baseweb="tab-list"] {
+            gap: 10px;
+        }
+
+        .stTabs [data-baseweb="tab"] {
+            height: 50px;
+            white-space: pre-wrap;
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+        }
+
+        .stTabs [aria-selected="true"] {
+            background-color: var(--primary-bg);
+            border-color: var(--accent-blue);
+        }
+
+        /* Make the event sections more distinct in tab content */
+        .stTabs [role="tabpanel"] [data-testid="block-container"] {
+            padding-top: 2rem;
         }
     </style>
 """, unsafe_allow_html=True)
