@@ -172,53 +172,46 @@ st.markdown("""
         }
         
         /* Tab styling */
-        .stTabs [data-baseweb="tab-list"] {
-            gap: 10px;
+        .stTabs {
+            max-width: 90%;
+            margin: 0 auto 20px;
         }
         
-        .stTabs [data-baseweb="tab"] {
-            height: 50px;
-            white-space: pre-wrap;
-            background-color: var(--secondary-bg);
-            border-radius: var(--border-radius) var(--border-radius) 0 0;
-            border: 1px solid var(--border-color);
-            border-bottom: none;
-        }
-        
-        .stTabs [aria-selected="true"] {
-            background-color: var(--primary-bg);
-            border-color: var(--accent-blue);
-        }
-        
-        /* Add subtle separator between events */
-        .stTabs [role="tabpanel"] > div > div:not(:last-child) {
-            position: relative;
-        }
-        
-        .stTabs [role="tabpanel"] > div > div:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
-        }
-        
-        /* Tab panel background */
-        .stTabs [role="tabpanel"] {
-            background-color: #121218;
-            padding: 30px;
-            border-radius: 0 0 8px 8px;
-        }
-        
-        /* Add visible borders to tab panels for better visual hierarchy */
+        /* Remove distracting borders from tab panels */
         .stTabs [data-baseweb="tab-panel"] {
-            border-left: 1px solid #333;
-            border-right: 1px solid #333;
-            border-bottom: 1px solid #333;
+            border: none;
+            background-color: #121218;
             border-radius: 0 0 8px 8px;
+            padding-top: 20px;
+        }
+        
+        /* Style the tab list to be centered and more minimal */
+        .stTabs [data-baseweb="tab-list"] {
+            background-color: transparent !important;
+            border-bottom: 1px solid #333 !important;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            padding-bottom: 0;
+        }
+        
+        /* Style individual tabs */
+        .stTabs [data-baseweb="tab"] {
+            background-color: #1E1E1E !important;
+            border: 1px solid #333 !important;
+            border-bottom: none !important;
+            border-radius: 8px 8px 0 0 !important;
+            margin: 0 5px !important;
+            font-weight: 400;
+            transition: all 0.2s ease;
+        }
+        
+        /* Active tab styling */
+        .stTabs [aria-selected="true"] {
+            background-color: #2E2E3A !important;
+            border-color: var(--accent-blue) !important;
+            color: var(--accent-blue) !important;
+            font-weight: 500 !important;
         }
         
         /* Add a decorative element before each expander */
@@ -241,11 +234,11 @@ st.markdown("""
 
         /* Event separator styling */
         .event-separator {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(0, 204, 255, 0.3), transparent);
-            margin: 20px auto 40px;
-            width: 70%;
-            max-width: 600px;
+            height: 1px;
+            background: #333;
+            margin: 40px auto;
+            width: 80%;
+            opacity: 0.3;
         }
 
         /* Update the main background to be darker */
