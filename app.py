@@ -474,8 +474,15 @@ def display_schedule_table(date, games, bootcamp):
                 field_label = "Field A" if i % 2 == 0 else "Field B"
                 st.markdown(field_html(games[i], field_label), unsafe_allow_html=True)
         
-        # Bootcamp section
-        st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
+        # Bootcamp section - now in two columns aligned with time slots
+        bootcamp_header_col1, bootcamp_header_col2 = st.columns(2)
+        
+        with bootcamp_header_col1:
+            st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
+        with bootcamp_header_col2:
+            st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
+        
+        # Bootcamp info
         bootcamp_col1, bootcamp_col2 = st.columns(2)
         
         with bootcamp_col1:
