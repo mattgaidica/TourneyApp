@@ -230,14 +230,12 @@ def display_schedule_table(date, games, bootcamp):
     # Check if any games are completed to determine if we should show winners
     show_winners = any(game['status'] == 'completed' for game in games)
     
-    # Create a container for the entire date section
-    st.markdown('<div class="event-container">', unsafe_allow_html=True)
-    
-    # Date header
-    st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
-    
-    # Game content section
-    st.markdown('<div class="game-content">', unsafe_allow_html=True)
+    # Create the event container with date header in a single markdown element
+    st.markdown(f'''
+        <div class="event-container">
+            <div class="date-header">{date}</div>
+            <div class="game-content">
+    ''', unsafe_allow_html=True)
     
     # Create a 2-column layout for the main time slots
     time_col1, time_col2 = st.columns(2)
@@ -292,11 +290,11 @@ def display_schedule_table(date, games, bootcamp):
     with bootcamp_col2:
         st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
     
-    # Close the game content section
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Close the event container
-    st.markdown('</div>', unsafe_allow_html=True)
+    # Close both game-content and event-container divs
+    st.markdown('''
+            </div>
+        </div>
+    ''', unsafe_allow_html=True)
 
 # Upcoming Events Tab
 with tab1:
