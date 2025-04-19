@@ -297,11 +297,9 @@ def display_schedule_table(date, games, bootcamp):
     bootcamp_col1, bootcamp_col2 = st.columns(2)
     
     with bootcamp_col1:
-        st.markdown('<div class="field-label">Games 1-2</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="bootcamp-info">{bootcamp["games1_2"]}</div>', unsafe_allow_html=True)
     
     with bootcamp_col2:
-        st.markdown('<div class="field-label">Games 3-4</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
     
     # Close the content container
