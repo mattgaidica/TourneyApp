@@ -1,5 +1,6 @@
 import streamlit as st
 from datetime import datetime
+import hashlib
 
 # Set page config with mobile-friendly settings
 st.set_page_config(
@@ -336,60 +337,96 @@ def display_schedule_table(date, games, bootcamp):
     # Check if any games are completed to determine if we should show winners
     show_winners = any(game['status'] == 'completed' for game in games)
     
-    # Create a container for the entire event with additional styling for separation
-    st.markdown(f'''
-        <div class="event-container-wrapper">
-            <div class="event-separator"></div>
-            <div class="event-container">
-                <div class="date-header">{date}</div>
-                <div class="game-content">
-    ''', unsafe_allow_html=True)
+    # Generate a unique ID for this event
+    event_id = hashlib.md5(date.encode()).hexdigest()
     
-    # Create a 2-column layout for the main time slots
-    time_col1, time_col2 = st.columns(2)
+    # Create wrapper with event ID
+    st.markdown(f'<div class="event-container-wrapper" id="event-{event_id}">', unsafe_allow_html=True)
+    st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
     
-    # Time slots row
-    with time_col1:
-        st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
-    with time_col2:
-        st.markdown('<div class="time-slot">1630</div>', unsafe_allow_html=True)
+    # Create the main event container that will hold all content
+    event_container = st.container()
     
-    # Create a 4-column layout for the fields
-    field_col1, field_col2, field_col3, field_col4 = st.columns(4)
+    with event_container:
+        # Date header and initial game content container
+        st.markdown(f'<div class="event-container" id="container-{event_id}">', unsafe_allow_html=True)
+        st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
+        st.markdown('<div class="game-content">', unsafe_allow_html=True)
+        
+        # Create a 2-column layout for the main time slots
+        time_col1, time_col2 = st.columns(2)
+        
+        # Time slots row
+        with time_col1:
+            st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
+        with time_col2:
+            st.markdown('<div class="time-slot">1630</div>', unsafe_allow_html=True)
+        
+        # Create a 4-column layout for the fields
+        field_cols = st.columns(4)
+        
+        # Helper function to create field HTML
+        def field_html(game, field_label):
+            winner_html = f'<div class="winner-cell">Winner: {game["winner"]}</div>' if show_winners else ''
+            return f'''
+                <div class="field-column">
+                    <div class="field-label">{field_label}</div>
+                    <div class="team-info">{game["teams"]}</div>
+                    {winner_html}
+                </div>
+            '''
+        
+        # Field labels and team info
+        for i, col in enumerate(field_cols):
+            with col:
+                field_label = "Field A" if i % 2 == 0 else "Field B"
+                st.markdown(field_html(games[i], field_label), unsafe_allow_html=True)
+        
+        # Bootcamp section
+        st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
+        bootcamp_col1, bootcamp_col2 = st.columns(2)
+        
+        with bootcamp_col1:
+            st.markdown(f'<div class="bootcamp-info">{bootcamp["games1_2"]}</div>', unsafe_allow_html=True)
+        
+        with bootcamp_col2:
+            st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
+        
+        # Close the inner containers
+        st.markdown('</div></div>', unsafe_allow_html=True)
     
-    # Helper function to create field HTML
-    def field_html(game, field_label):
-        winner_html = f'<div class="winner-cell">Winner: {game["winner"]}</div>' if show_winners else ''
-        return f'''
-            <div class="field-column">
-                <div class="field-label">{field_label}</div>
-                <div class="team-info">{game["teams"]}</div>
-                {winner_html}
-            </div>
-        '''
+    # Close the wrapper container
+    st.markdown('</div>', unsafe_allow_html=True)
     
-    # Field labels and team info
-    with field_col1:
-        st.markdown(field_html(games[0], "Field A"), unsafe_allow_html=True)
-    with field_col2:
-        st.markdown(field_html(games[1], "Field B"), unsafe_allow_html=True)
-    with field_col3:
-        st.markdown(field_html(games[2], "Field A"), unsafe_allow_html=True)
-    with field_col4:
-        st.markdown(field_html(games[3], "Field B"), unsafe_allow_html=True)
-    
-    # Bootcamp section
-    st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
-    bootcamp_col1, bootcamp_col2 = st.columns(2)
-    
-    with bootcamp_col1:
-        st.markdown(f'<div class="bootcamp-info">{bootcamp["games1_2"]}</div>', unsafe_allow_html=True)
-    
-    with bootcamp_col2:
-        st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
-    
-    # Close the containers
-    st.markdown('</div></div></div>', unsafe_allow_html=True)
+    # Add custom JS to ensure all content stays within the container
+    st.markdown(f"""
+    <script>
+        // This script will execute when the page loads
+        (function() {{
+            // Get all content related to this event container
+            const eventContainer = document.getElementById('container-{event_id}');
+            const wrapper = document.getElementById('event-{event_id}');
+            
+            // If elements exist, ensure proper nesting
+            if (eventContainer && wrapper) {{
+                // Find all related content
+                const parentDiv = eventContainer.closest('.element-container').parentNode;
+                const siblingDivs = Array.from(parentDiv.querySelectorAll('.element-container')).
+                    filter(el => el.closest('#event-{event_id}') === null && 
+                           !el.contains(document.getElementById('event-{event_id}')));
+                
+                // Move all content inside the event container
+                siblingDivs.forEach(div => {{
+                    if (div.querySelector('.game-content')) return; // Skip the game-content div
+                    const gameContent = eventContainer.querySelector('.game-content');
+                    if (gameContent) {{
+                        gameContent.appendChild(div);
+                    }}
+                }});
+            }}
+        }})();
+    </script>
+    """, unsafe_allow_html=True)
 
 # Upcoming Events Tab
 with tab1:
