@@ -438,10 +438,10 @@ def display_schedule_table(date, games, bootcamp):
     show_winners = any(game['status'] == 'completed' for game in games)
     
     # Create a unique identifier for this date section
-    date_id = "date_" + date.replace(" ", "_").replace(".", "")
+    date_id = date.replace(" ", "_").replace(".", "")
     
     # Create an expander with custom styling for the date (expanded by default)
-    with st.expander("", expanded=True, key=date_id):
+    with st.expander("", expanded=True):
         # Apply custom CSS to style the expander
         st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
         
@@ -487,15 +487,18 @@ def display_schedule_table(date, games, bootcamp):
     # Add spacing and separator after the expander
     st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
     
-    # Apply custom class to the expander after it's created
+    # Apply custom class to the expander after it's created - using a more reliable approach
     components.html(
-        f"""
+        """
         <script>
-            // Add custom class to the specific expander for this date
-            const dateExpander = window.parent.document.querySelector('[data-baseweb="accordion-item"][data-testid="{date_id}"]');
-            if (dateExpander) {{
-                dateExpander.closest('[data-testid="stVerticalBlock"]').classList.add('date-expander');
-            }}
+            // Find the most recently created expander and add the date-expander class
+            (function() {
+                const expanders = Array.from(window.parent.document.querySelectorAll('[data-testid="stExpander"]'));
+                const lastExpander = expanders[expanders.length - 1];
+                if (lastExpander) {
+                    lastExpander.closest('[data-testid="stVerticalBlock"]').classList.add('date-expander');
+                }
+            })();
         </script>
         """,
         height=0,
