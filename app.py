@@ -37,10 +37,17 @@ st.markdown("""
             border-radius: var(--border-radius) !important;
             border: 1px solid var(--accent-blue) !important;
             background-color: #262730 !important;
-            box-shadow: var(--shadow-md), 0 0 15px rgba(0, 204, 255, 0.25) !important;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 204, 255, 0.25) !important;
             overflow: hidden !important;
             max-width: 850px !important;
             position: relative !important;
+            transform: translateZ(0);
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .date-expander:hover {
+            transform: translateY(-2px) translateZ(0);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 204, 255, 0.3) !important;
         }
         
         /* Style the expander header */
@@ -230,6 +237,20 @@ st.markdown("""
         /* Main app background - make it even darker */
         section[data-testid="stSidebar"] + section > div:first-child {
             background-color: #121218;
+        }
+
+        /* Event separator styling */
+        .event-separator {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0, 204, 255, 0.3), transparent);
+            margin: 20px auto 40px;
+            width: 70%;
+            max-width: 600px;
+        }
+
+        /* Update the main background to be darker */
+        .stApp {
+            background-color: #0E1117 !important;
         }
     </style>
 """, unsafe_allow_html=True)
