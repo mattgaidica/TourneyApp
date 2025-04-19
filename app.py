@@ -56,6 +56,7 @@ st.markdown("""
             margin: 20px 0;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 0;
         }
         /* Date header styling */
         .date-header {
@@ -75,22 +76,25 @@ st.markdown("""
             border-spacing: 0;
             margin: 0;
             background-color: #262730;
+            table-layout: fixed;
         }
         .schedule-table th {
             background-color: #1E1E1E;
             color: #FAFAFA;
-            padding: 15px;
+            padding: 15px 10px;
             text-align: center;
             border-bottom: 2px solid #404040;
             font-size: 18px;
             font-weight: bold;
         }
         .schedule-table td {
-            padding: 12px 15px;
+            padding: 10px;
             text-align: center;
             color: #FAFAFA;
             border-bottom: 1px solid #404040;
             font-size: 16px;
+            vertical-align: middle;
+            height: 40px;
         }
         .time-slot {
             font-weight: bold;
@@ -101,11 +105,13 @@ st.markdown("""
             background-color: #2D2D2D;
             color: #B0B0B0;
             font-weight: 500;
+            height: 35px;
         }
         .team-cell {
             background-color: #262730;
             color: #FAFAFA;
             font-weight: normal;
+            height: 45px;
         }
         .schedule-table tr:last-child td {
             border-bottom: none;
