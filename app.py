@@ -77,6 +77,7 @@ st.markdown("""
             margin: 0;
             background-color: #262730;
             table-layout: fixed;
+            border: 0;
         }
         .schedule-table th {
             background-color: #1E1E1E;
@@ -86,9 +87,15 @@ st.markdown("""
             font-size: 18px;
             font-weight: bold;
             border-right: 1px solid #404040;
+            border-left: 0;
+            border-top: 0;
+            border-bottom: 0;
+        }
+        .schedule-table th:first-child {
+            border-left: 0;
         }
         .schedule-table th:last-child {
-            border-right: none;
+            border-right: 0;
         }
         .schedule-table td {
             padding: 10px;
@@ -98,9 +105,15 @@ st.markdown("""
             vertical-align: middle;
             height: 40px;
             border-right: 1px solid #404040;
+            border-left: 0;
+            border-top: 0;
+            border-bottom: 0;
+        }
+        .schedule-table td:first-child {
+            border-left: 0;
         }
         .schedule-table td:last-child {
-            border-right: none;
+            border-right: 0;
         }
         .time-slot {
             font-weight: bold;
@@ -127,6 +140,8 @@ st.markdown("""
             padding: 10px;
             text-align: center;
             border-top: 1px solid #404040;
+            border-left: 0;
+            border-right: 0;
         }
         .bootcamp-cell {
             background-color: #2D2D2D;
@@ -136,9 +151,11 @@ st.markdown("""
             padding: 10px;
             text-align: center;
             border-top: 1px solid #404040;
+            border-left: 0;
+            border-right: 0;
         }
         .schedule-table tr:last-child td {
-            border-bottom: none;
+            border-bottom: 0;
         }
     </style>
 """, unsafe_allow_html=True)
