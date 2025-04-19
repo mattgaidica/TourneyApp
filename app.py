@@ -116,6 +116,22 @@ st.markdown("""
         .schedule-table tr:last-child td {
             border-bottom: none;
         }
+        .bootcamp-header {
+            background-color: #1E1E1E;
+            color: #FAFAFA;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px;
+            text-align: center;
+        }
+        .bootcamp-cell {
+            background-color: #2D2D2D;
+            color: #FAFAFA;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 10px;
+            text-align: center;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -212,23 +228,25 @@ def display_schedule_table(date, games, bootcamp):
             <tr>
                 <th colspan='2' class='time-slot'>1600</th>
                 <th colspan='2' class='time-slot'>1630</th>
-                <th colspan='2' class='time-slot'>BOOTCAMP</th>
             </tr>
             <tr>
                 <td class='field-cell'>Field A</td>
                 <td class='field-cell'>Field B</td>
                 <td class='field-cell'>Field A</td>
                 <td class='field-cell'>Field B</td>
-                <td class='field-cell'>Games 1-2</td>
-                <td class='field-cell'>Games 3-4</td>
             </tr>
             <tr>
                 <td class='team-cell'>{games[0]['teams']}</td>
                 <td class='team-cell'>{games[1]['teams']}</td>
                 <td class='team-cell'>{games[2]['teams']}</td>
                 <td class='team-cell'>{games[3]['teams']}</td>
-                <td class='team-cell'>{bootcamp['games1_2']}</td>
-                <td class='team-cell'>{bootcamp['games3_4']}</td>
+            </tr>
+            <tr>
+                <th colspan='4' class='bootcamp-header'>BOOTCAMP</th>
+            </tr>
+            <tr>
+                <td colspan='2' class='bootcamp-cell'>Games 1-2: {bootcamp['games1_2']}</td>
+                <td colspan='2' class='bootcamp-cell'>Games 3-4: {bootcamp['games3_4']}</td>
             </tr>
         </table>
     </div>
