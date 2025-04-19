@@ -1,5 +1,6 @@
 import streamlit as st
 from datetime import datetime
+import streamlit.components.v1 as components
 import hashlib
 
 # Set page config with mobile-friendly settings
@@ -30,74 +31,32 @@ st.markdown("""
             --shadow-lg: 0 6px 16px rgba(0, 0, 0, 0.6);
         }
         
-        /* Event container wrapper and separator */
-        .event-container-wrapper {
-            position: relative;
-            margin: 3.5rem auto 5rem;
-            padding-top: 1.5rem;
+        /* Expander styling for date sections */
+        .date-expander {
+            margin-bottom: 40px !important;
+            border-radius: var(--border-radius) !important;
+            border: 1px solid var(--border-color) !important;
+            background-color: var(--secondary-bg) !important;
+            box-shadow: var(--shadow-md) !important;
+            overflow: hidden !important;
         }
         
-        .event-separator {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent 0%, var(--accent-blue) 50%, transparent 100%);
-            box-shadow: 0 0 8px rgba(0, 204, 255, 0.5);
+        /* Style the expander header */
+        .date-expander > div[data-testid="stExpander"] > div:first-child {
+            background-color: var(--primary-bg) !important;
+            border-bottom: 1px solid var(--border-color) !important;
+            padding: 0 !important;
         }
         
-        .event-container-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 30px;
-            background-color: var(--primary-bg);
-            border-radius: 50%;
-            border: 2px solid var(--accent-blue);
-            z-index: 2;
-            box-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
+        /* Remove the default arrow */
+        .date-expander [data-testid="stExpander"] > div:first-child > div:first-child {
+            display: none !important;
         }
         
-        /* First event wrapper shouldn't have a separator */
-        .stTabs [role="tabpanel"] .event-container-wrapper:first-child .event-separator {
-            display: none;
-        }
-        
-        .stTabs [role="tabpanel"] .event-container-wrapper:first-child {
-            margin-top: 1.5rem;
-        }
-        
-        /* Event container */
-        .event-container {
-            background-color: var(--secondary-bg);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-            max-width: 800px;
-            overflow: hidden;
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            position: relative;
-        }
-        
-        .event-container:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .event-container::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
-            border-radius: 2px;
+        /* Style the expander content area */
+        .date-expander > div[data-testid="stExpander"] > div:nth-child(2) {
+            background-color: var(--secondary-bg) !important;
+            padding: var(--spacing-lg) !important;
         }
         
         /* Date header */
@@ -106,19 +65,12 @@ st.markdown("""
             font-size: 32px;
             font-weight: bold;
             padding: var(--spacing-lg);
-            background-color: var(--primary-bg);
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 2px;
-            border-bottom: 1px solid var(--border-color);
             margin: 0;
             position: relative;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Game content */
-        .game-content {
-            padding: var(--spacing-lg);
         }
         
         /* Time slot */
@@ -200,18 +152,6 @@ st.markdown("""
             text-align: center;
         }
 
-        /* Make sure Streamlit containers don't add unwanted spacing */
-        .stHorizontalBlock {
-            gap: var(--spacing-md);
-        }
-        
-        /* Ensure content stays within container boundaries */
-        .main .block-container {
-            max-width: 1000px;
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
-        
         /* Streamlit column spacing */
         div.stHorizontalBlock {
             gap: var(--spacing-md);
@@ -221,12 +161,12 @@ st.markdown("""
         div.stHorizontalBlock [data-testid="column"] {
             padding: 0;
         }
-
+        
         /* Tab styling */
         .stTabs [data-baseweb="tab-list"] {
             gap: 10px;
         }
-
+        
         .stTabs [data-baseweb="tab"] {
             height: 50px;
             white-space: pre-wrap;
@@ -235,15 +175,26 @@ st.markdown("""
             border: 1px solid var(--border-color);
             border-bottom: none;
         }
-
+        
         .stTabs [aria-selected="true"] {
             background-color: var(--primary-bg);
             border-color: var(--accent-blue);
         }
-
-        /* Make the event sections more distinct in tab content */
-        .stTabs [role="tabpanel"] [data-testid="block-container"] {
-            padding-top: 2rem;
+        
+        /* Add subtle separator between events */
+        .stTabs [role="tabpanel"] > div > div:not(:last-child) {
+            position: relative;
+        }
+        
+        .stTabs [role="tabpanel"] > div > div:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
         }
     </style>
 """, unsafe_allow_html=True)
@@ -337,21 +288,10 @@ def display_schedule_table(date, games, bootcamp):
     # Check if any games are completed to determine if we should show winners
     show_winners = any(game['status'] == 'completed' for game in games)
     
-    # Generate a unique ID for this event
-    event_id = hashlib.md5(date.encode()).hexdigest()
-    
-    # Create wrapper with event ID
-    st.markdown(f'<div class="event-container-wrapper" id="event-{event_id}">', unsafe_allow_html=True)
-    st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
-    
-    # Create the main event container that will hold all content
-    event_container = st.container()
-    
-    with event_container:
-        # Date header and initial game content container
-        st.markdown(f'<div class="event-container" id="container-{event_id}">', unsafe_allow_html=True)
+    # Create an expander with custom styling for the date
+    with st.expander(f"", expanded=True):
+        # Apply custom CSS to style the expander
         st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
-        st.markdown('<div class="game-content">', unsafe_allow_html=True)
         
         # Create a 2-column layout for the main time slots
         time_col1, time_col2 = st.columns(2)
@@ -391,42 +331,20 @@ def display_schedule_table(date, games, bootcamp):
         
         with bootcamp_col2:
             st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
-        
-        # Close the inner containers
-        st.markdown('</div></div>', unsafe_allow_html=True)
     
-    # Close the wrapper container
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Add custom JS to ensure all content stays within the container
-    st.markdown(f"""
-    <script>
-        // This script will execute when the page loads
-        (function() {{
-            // Get all content related to this event container
-            const eventContainer = document.getElementById('container-{event_id}');
-            const wrapper = document.getElementById('event-{event_id}');
-            
-            // If elements exist, ensure proper nesting
-            if (eventContainer && wrapper) {{
-                // Find all related content
-                const parentDiv = eventContainer.closest('.element-container').parentNode;
-                const siblingDivs = Array.from(parentDiv.querySelectorAll('.element-container')).
-                    filter(el => el.closest('#event-{event_id}') === null && 
-                           !el.contains(document.getElementById('event-{event_id}')));
-                
-                // Move all content inside the event container
-                siblingDivs.forEach(div => {{
-                    if (div.querySelector('.game-content')) return; // Skip the game-content div
-                    const gameContent = eventContainer.querySelector('.game-content');
-                    if (gameContent) {{
-                        gameContent.appendChild(div);
-                    }}
-                }});
-            }}
-        }})();
-    </script>
-    """, unsafe_allow_html=True)
+    # Apply custom class to the expander after it's created
+    components.html(
+        f"""
+        <script>
+            // Add custom class to expanders
+            const expanders = window.parent.document.querySelectorAll('[data-testid="stExpander"]');
+            expanders.forEach(expander => {{
+                expander.parentElement.classList.add('date-expander');
+            }});
+        </script>
+        """,
+        height=0,
+    )
 
 # Upcoming Events Tab
 with tab1:
