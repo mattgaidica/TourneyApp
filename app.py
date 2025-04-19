@@ -615,6 +615,77 @@ st.markdown("""
                 padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-md) !important;
             }
         }
+
+        /* Styles to prevent column stacking at all sizes */
+        @media screen and (max-width: 640px) {
+            /* Force columns to remain in a row */
+            .stHorizontalBlock {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                width: 100% !important;
+                gap: 4px !important;
+            }
+            
+            /* Ensure each column takes equal width and doesn't try to expand */
+            .stHorizontalBlock [data-testid="column"] {
+                width: 25% !important;
+                min-width: 0 !important;
+                flex: 1 1 0 !important;
+                padding: 0 2px !important;
+            }
+            
+            /* Make sure each column's content fits within */
+            [data-testid="column"] > div {
+                width: 100% !important;
+                min-width: 0 !important;
+            }
+            
+            /* Make content elements more compact */
+            .time-slot, .field-label, .team-info, .bootcamp-header, .bootcamp-info {
+                padding: 4px 2px !important;
+                margin-bottom: 4px !important;
+                font-size: 12px !important;
+                border-radius: 4px !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
+            
+            .time-slot {
+                font-size: 14px !important;
+            }
+            
+            .winner-cell {
+                font-size: 10px !important;
+                padding: 2px !important;
+            }
+            
+            /* Reduce overall padding in the expander content */
+            .date-expander > div[data-testid="stExpander"] > div:nth-child(2) {
+                padding: 8px 4px 16px !important;
+            }
+            
+            /* Make date headers smaller */
+            .date-header {
+                font-size: 20px !important;
+                padding: 8px 4px !important;
+                letter-spacing: 1px !important;
+            }
+        }
+
+        /* Target Streamlit's block structure explicitly to prevent stacking */
+        div[data-testid="stHorizontalBlock"] {
+            display: flex !important;
+            flex-direction: row !important;
+        }
+
+        /* Enforce equal width columns regardless of content */
+        div[data-testid="stHorizontalBlock"] > div[data-testid="column"] {
+            flex: 1 1 0 !important;
+            width: 0 !important;
+            min-width: 0 !important;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -704,24 +775,24 @@ def display_schedule_table(date, games, bootcamp):
     # Check if any games are completed to determine if we should show winners
     show_winners = any(game['status'] == 'completed' for game in games)
     
-    # Create a unique identifier for this date section
-    date_id = date.replace(" ", "_").replace(".", "")
-    
     # Create an expander with custom styling for the date (expanded by default)
     with st.expander("", expanded=True):
         # Apply custom CSS to style the expander
         st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
         
-        # Create a 2-column layout for the main time slots
-        time_col1, time_col2 = st.columns([1, 1])
+        # Use the smallest possible column container for better control
+        st.write('<style>.row-container { display: flex; width: 100%; }</style>', unsafe_allow_html=True)
         
-        # Time slots row
-        with time_col1:
+        # Create a 2-column layout with fixed ratio for time slots
+        cols = st.columns([1, 1])
+        
+        # Time slots row - force them to stay side by side
+        with cols[0]:
             st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
-        with time_col2:
+        with cols[1]:
             st.markdown('<div class="time-slot">1630</div>', unsafe_allow_html=True)
         
-        # Create a 4-column layout for the fields with flexible width
+        # Create a 4-column layout with equal widths for fields
         field_cols = st.columns([1, 1, 1, 1])
         
         # Helper function to create field HTML
@@ -745,27 +816,24 @@ def display_schedule_table(date, games, bootcamp):
                 field_label = "Field A" if i % 2 == 0 else "Field B"
                 st.markdown(field_html(games[i], field_label), unsafe_allow_html=True)
         
-        # Bootcamp section - now in two columns aligned with time slots
-        bootcamp_header_col1, bootcamp_header_col2 = st.columns([1, 1])
-        
-        with bootcamp_header_col1:
+        # Bootcamp section headers
+        bootcamp_cols = st.columns([1, 1])
+        with bootcamp_cols[0]:
             st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
-        with bootcamp_header_col2:
+        with bootcamp_cols[1]:
             st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
         
         # Bootcamp info
-        bootcamp_col1, bootcamp_col2 = st.columns([1, 1])
-        
-        with bootcamp_col1:
+        bootcamp_info_cols = st.columns([1, 1])
+        with bootcamp_info_cols[0]:
             st.markdown(f'<div class="bootcamp-info">{bootcamp["games1_2"]}</div>', unsafe_allow_html=True)
-        
-        with bootcamp_col2:
+        with bootcamp_info_cols[1]:
             st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
     
     # Add spacing and separator after the expander
     st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
     
-    # Apply custom class to the expander after it's created - using a more reliable approach
+    # Apply custom class to the expander after it's created
     components.html(
         """
         <script>
@@ -776,6 +844,22 @@ def display_schedule_table(date, games, bootcamp):
                 if (lastExpander) {
                     lastExpander.closest('[data-testid="stVerticalBlock"]').classList.add('date-expander');
                 }
+                
+                // Enforce column layout on small screens
+                const columns = window.parent.document.querySelectorAll('[data-testid="column"]');
+                columns.forEach(col => {
+                    col.style.minWidth = '0';
+                    col.style.width = '0';
+                    col.style.flex = '1 1 0%';
+                });
+                
+                // Ensure horizontal blocks stay horizontal
+                const blocks = window.parent.document.querySelectorAll('[data-testid="stHorizontalBlock"]');
+                blocks.forEach(block => {
+                    block.style.display = 'flex';
+                    block.style.flexDirection = 'row';
+                    block.style.flexWrap = 'nowrap';
+                });
             })();
         </script>
         """,
