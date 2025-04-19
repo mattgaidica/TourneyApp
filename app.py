@@ -53,10 +53,10 @@ st.markdown("""
         .schedule-container {
             background-color: #262730;
             border-radius: 12px;
-            margin: 20px 0;
+            margin: 20px auto;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 0;
+            max-width: 800px;
         }
         /* Date header styling */
         .date-header {
@@ -65,7 +65,6 @@ st.markdown("""
             font-weight: bold;
             padding: 20px;
             background-color: #1E1E1E;
-            border-bottom: 2px solid #404040;
             margin: 0;
             text-align: center;
         }
@@ -83,18 +82,24 @@ st.markdown("""
             color: #FAFAFA;
             padding: 15px 10px;
             text-align: center;
-            border-bottom: 2px solid #404040;
             font-size: 18px;
             font-weight: bold;
+            border-right: 1px solid #404040;
+        }
+        .schedule-table th:last-child {
+            border-right: none;
         }
         .schedule-table td {
             padding: 10px;
             text-align: center;
             color: #FAFAFA;
-            border-bottom: 1px solid #404040;
             font-size: 16px;
             vertical-align: middle;
             height: 40px;
+            border-right: 1px solid #404040;
+        }
+        .schedule-table td:last-child {
+            border-right: none;
         }
         .time-slot {
             font-weight: bold;
@@ -113,9 +118,6 @@ st.markdown("""
             font-weight: normal;
             height: 45px;
         }
-        .schedule-table tr:last-child td {
-            border-bottom: none;
-        }
         .bootcamp-header {
             background-color: #1E1E1E;
             color: #FAFAFA;
@@ -123,6 +125,7 @@ st.markdown("""
             font-weight: bold;
             padding: 10px;
             text-align: center;
+            border-top: 1px solid #404040;
         }
         .bootcamp-cell {
             background-color: #2D2D2D;
@@ -131,6 +134,10 @@ st.markdown("""
             font-weight: 500;
             padding: 10px;
             text-align: center;
+            border-top: 1px solid #404040;
+        }
+        .schedule-table tr:last-child td {
+            border-bottom: none;
         }
     </style>
 """, unsafe_allow_html=True)
