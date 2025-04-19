@@ -128,7 +128,11 @@ TOURNAMENT_SCHEDULE = {
             {"time": "1600", "field": "Field B", "status": "completed", "teams": "Charlie vs. Delta"},
             {"time": "1630", "field": "Field A", "status": "completed", "teams": ""},
             {"time": "1630", "field": "Field B", "status": "completed", "teams": ""}
-        ]
+        ],
+        "bootcamp": {
+            "games1_2": "Echo, Cadre",
+            "games3_4": "Echo, Cadre"
+        }
     },
     "2025-04-15": {
         "date": "15 Apr 2025",
@@ -137,7 +141,11 @@ TOURNAMENT_SCHEDULE = {
             {"time": "1600", "field": "Field B", "status": "completed", "teams": "Bravo vs. Delta"},
             {"time": "1630", "field": "Field A", "status": "completed", "teams": ""},
             {"time": "1630", "field": "Field B", "status": "completed", "teams": ""}
-        ]
+        ],
+        "bootcamp": {
+            "games1_2": "Alpha, Charlie",
+            "games3_4": "Alpha, Charlie"
+        }
     },
     "2025-04-23": {
         "date": "23 Apr 2025",
@@ -146,7 +154,11 @@ TOURNAMENT_SCHEDULE = {
             {"time": "1600", "field": "Field B", "status": "upcoming", "teams": "Alpha vs. Echo"},
             {"time": "1630", "field": "Field A", "status": "upcoming", "teams": "Charlie vs. Cadre"},
             {"time": "1630", "field": "Field B", "status": "upcoming", "teams": "Bravo vs. Echo"}
-        ]
+        ],
+        "bootcamp": {
+            "games1_2": "Delta, Echo",
+            "games3_4": "Alpha, Bravo"
+        }
     },
     "2025-04-29": {
         "date": "29 Apr 2025",
@@ -155,7 +167,11 @@ TOURNAMENT_SCHEDULE = {
             {"time": "1600", "field": "Field B", "status": "upcoming", "teams": "Delta vs. Echo"},
             {"time": "1630", "field": "Field A", "status": "upcoming", "teams": "Bravo vs. Cadre"},
             {"time": "1630", "field": "Field B", "status": "upcoming", "teams": "Alpha vs. Delta"}
-        ]
+        ],
+        "bootcamp": {
+            "games1_2": "Bravo, Cadre",
+            "games3_4": "Charlie, Echo"
+        }
     },
     "2025-05-07": {
         "date": "07 May 2025",
@@ -164,7 +180,11 @@ TOURNAMENT_SCHEDULE = {
             {"time": "1600", "field": "Field B", "status": "upcoming", "teams": "Delta vs. Cadre"},
             {"time": "1630", "field": "Field A", "status": "upcoming", "teams": "Alpha vs. Charlie"},
             {"time": "1630", "field": "Field B", "status": "upcoming", "teams": "Sudden Death"}
-        ]
+        ],
+        "bootcamp": {
+            "games1_2": "Alpha, Bravo",
+            "games3_4": "N/A"
+        }
     }
 }
 
@@ -184,7 +204,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 tab1, tab2, tab3 = st.tabs(["Upcoming Events", "Past Events", "Standings"])
 
 # Function to display game schedule table
-def display_schedule_table(date, games):
+def display_schedule_table(date, games, bootcamp):
     table_html = f"""
     <div class='schedule-container'>
         <div class='date-header'>{date}</div>
@@ -192,18 +212,23 @@ def display_schedule_table(date, games):
             <tr>
                 <th colspan='2' class='time-slot'>1600</th>
                 <th colspan='2' class='time-slot'>1630</th>
+                <th colspan='2' class='time-slot'>BOOTCAMP</th>
             </tr>
             <tr>
                 <td class='field-cell'>Field A</td>
                 <td class='field-cell'>Field B</td>
                 <td class='field-cell'>Field A</td>
                 <td class='field-cell'>Field B</td>
+                <td class='field-cell'>Games 1-2</td>
+                <td class='field-cell'>Games 3-4</td>
             </tr>
             <tr>
                 <td class='team-cell'>{games[0]['teams']}</td>
                 <td class='team-cell'>{games[1]['teams']}</td>
                 <td class='team-cell'>{games[2]['teams']}</td>
                 <td class='team-cell'>{games[3]['teams']}</td>
+                <td class='team-cell'>{bootcamp['games1_2']}</td>
+                <td class='team-cell'>{bootcamp['games3_4']}</td>
             </tr>
         </table>
     </div>
@@ -215,14 +240,14 @@ with tab1:
     # Display upcoming games
     for date, schedule in TOURNAMENT_SCHEDULE.items():
         if any(game['status'] == 'upcoming' for game in schedule['games']):
-            display_schedule_table(schedule['date'], schedule['games'])
+            display_schedule_table(schedule['date'], schedule['games'], schedule['bootcamp'])
     
 # Past Events Tab
 with tab2:
     # Display past games
     for date, schedule in TOURNAMENT_SCHEDULE.items():
         if any(game['status'] == 'completed' for game in schedule['games']):
-            display_schedule_table(schedule['date'], schedule['games'])
+            display_schedule_table(schedule['date'], schedule['games'], schedule['bootcamp'])
     
 # Standings Tab
 with tab3:
