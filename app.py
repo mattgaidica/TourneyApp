@@ -165,7 +165,7 @@ st.markdown("""
             background-color: var(--primary-bg);
             border-radius: var(--border-radius);
             border: 1px solid var(--border-color);
-            margin: var(--spacing-lg) 0 var(--spacing-md);
+            margin: var(--spacing-lg) 0 var(--spacing-sm);
         }
         
         /* Bootcamp info */
