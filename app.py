@@ -33,16 +33,25 @@ st.markdown("""
         .game-card {
             padding: 15px;
             border-radius: 8px;
-            background-color: #f0f2f6;
+            background-color: #262730;
             margin: 10px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            color: #FAFAFA;
+        }
+        .game-card h3 {
+            color: #FAFAFA;
+            margin-bottom: 10px;
+        }
+        .game-card p {
+            color: #FAFAFA;
+            margin: 5px 0;
         }
         .game-time {
-            color: #1f77b4;
+            color: #00CCFF;
             font-weight: bold;
         }
         .game-field {
-            color: #2ca02c;
+            color: #00FF99;
             font-weight: bold;
         }
     </style>
