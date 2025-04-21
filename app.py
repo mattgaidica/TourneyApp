@@ -803,8 +803,8 @@ TOURNAMENT_SCHEDULE = {
             "games3_4": "Alpha, Delta"
         }
     },
-    "2025-04-29": {
-        "date": "29 Apr 2025",
+    "2025-04-28": {
+        "date": "28 Apr 2025",
         "games": [
             {"time": "1600", "field": "Field A", "status": "upcoming", "teams": "Alpha vs. Cadre"},
             {"time": "1600", "field": "Field B", "status": "upcoming", "teams": "Delta vs. Echo"},
