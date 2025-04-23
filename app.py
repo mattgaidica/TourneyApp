@@ -22,10 +22,10 @@ st.markdown("""
             --accent-blue: #00CCFF;
             --accent-green: #00FF00;
             --text-color: #FAFAFA;
-            --field-a-bg: #473800;
-            --field-a-glow: rgba(255, 217, 0, 0.15);
-            --field-b-bg: #4D0000;
-            --field-b-glow: rgba(255, 0, 0, 0.15);
+            --field-a-bg: #03355A;
+            --field-a-glow: rgba(0, 102, 204, 0.15);
+            --field-b-bg: #572700;
+            --field-b-glow: rgba(255, 102, 0, 0.15);
             --spacing-sm: 8px;
             --spacing-md: 16px;
             --spacing-lg: 24px;
@@ -144,17 +144,17 @@ st.markdown("""
         /* Field A styling */
         .field-a .field-label {
             background-color: var(--field-a-bg);
-            border-color: #8B7500;
+            border-color: #0066CC;
             box-shadow: 0 0 10px var(--field-a-glow);
-            color: #FFD700;
+            color: #66B2FF;
         }
         
         /* Field B styling */
         .field-b .field-label {
             background-color: var(--field-b-bg);
-            border-color: #8B0000;
+            border-color: #CC5200;
             box-shadow: 0 0 10px var(--field-b-glow);
-            color: #FF6B6B;
+            color: #FF9966;
         }
         
         /* Team info */
