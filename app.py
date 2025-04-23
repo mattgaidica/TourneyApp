@@ -971,42 +971,42 @@ with tab3:
             <tbody>
                 <tr class="highlight-row">
                     <td>Alpha</td>
-                    <td>2</td>
+                    <td>2 / 5</td>
                     <td>2</td>
                     <td class="win-rate">100%</td>
                     <td class="placing placing-first">First, tied</td>
                 </tr>
                 <tr class="highlight-row">
                     <td>Cadre</td>
-                    <td>2</td>
+                    <td>2 / 5</td>
                     <td>2</td>
                     <td class="win-rate">100%</td>
                     <td class="placing placing-first">First, tied</td>
                 </tr>
                 <tr>
                     <td>Bravo</td>
-                    <td>4</td>
+                    <td>4 / 5</td>
                     <td>3</td>
                     <td class="win-rate">75%</td>
                     <td class="placing placing-middle">Second</td>
                 </tr>
                 <tr>
                     <td>Charlie</td>
-                    <td>3</td>
+                    <td>3 / 5</td>
                     <td>1</td>
                     <td class="win-rate">33%</td>
                     <td class="placing placing-middle">Third</td>
                 </tr>
                 <tr>
                     <td>Delta</td>
-                    <td>2</td>
+                    <td>2 / 5</td>
                     <td>0</td>
                     <td class="win-rate">0%</td>
                     <td class="placing placing-last">Last, tied</td>
                 </tr>
                 <tr>
                     <td>Echo</td>
-                    <td>3</td>
+                    <td>3 / 5</td>
                     <td>0</td>
                     <td class="win-rate">0%</td>
                     <td class="placing placing-last">Last, tied</td>
