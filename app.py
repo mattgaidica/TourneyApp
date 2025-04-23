@@ -1044,8 +1044,31 @@ with st.sidebar:
                 cursor: pointer;
                 width: 100%;
                 transition: all 0.2s;
+                margin-bottom: 8px;
             ">
                 Ultimate Rules GPT
+            </button>
+        </a>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    # Create a button that links to the official rules document
+    st.markdown(
+        """
+        <a href="https://drive.google.com/file/d/1N7zJ9mA2Jft4Y9Wae8I333l5iJgfIDz7/view?usp=sharing" target="_blank">
+            <button style="
+                background-color: #262730;
+                color: #FAFAFA;
+                border: 1px solid #404040;
+                border-radius: 4px;
+                padding: 0.5rem 1rem;
+                font-size: 1rem;
+                cursor: pointer;
+                width: 100%;
+                transition: all 0.2s;
+            ">
+                Official Rules for MGT 101
             </button>
         </a>
         """,
