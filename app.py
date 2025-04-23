@@ -1056,7 +1056,7 @@ with st.sidebar:
     # Create a button that links to the official rules document
     st.markdown(
         """
-        <a href="https://drive.google.com/file/d/1N7zJ9mA2Jft4Y9Wae8I333l5iJgfIDz7/view?usp=sharing" target="_blank">
+        <a href="https://drive.google.com/file/d/1k-y8qDlXMqLd9z82zBIX0GdK35bIoBl9/view?usp=sharing" target="_blank">
             <button style="
                 background-color: #262730;
                 color: #FAFAFA;
