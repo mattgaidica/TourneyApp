@@ -806,10 +806,10 @@ TOURNAMENT_SCHEDULE = {
     "2025-04-28": {
         "date": "28 Apr 2025",
         "games": [
-            {"time": "1550", "field": "Field Blue", "status": "upcoming", "teams": "Alpha vs. Cadre"},
-            {"time": "1550", "field": "Field Orange", "status": "upcoming", "teams": "Delta vs. Echo"},
-            {"time": "1620", "field": "Field Blue", "status": "upcoming", "teams": "Bravo vs. Cadre"},
-            {"time": "1620", "field": "Field Orange", "status": "upcoming", "teams": "Alpha vs. Delta"}
+            {"time": "1550", "field": "Field Blue", "status": "completed", "teams": "Alpha vs. Cadre", "winner": "Cadre"},
+            {"time": "1550", "field": "Field Orange", "status": "completed", "teams": "Delta vs. Echo", "winner": "Delta"},
+            {"time": "1620", "field": "Field Blue", "status": "completed", "teams": "Bravo vs. Cadre", "winner": "Bravo"},
+            {"time": "1620", "field": "Field Orange", "status": "completed", "teams": "Alpha vs. Delta", "winner": "Alpha"}
         ],
         "bootcamp": {
             "games1_2": "Bravo, Charlie",
@@ -970,25 +970,25 @@ with tab3:
             </thead>
             <tbody>
                 <tr class="highlight-row">
-                    <td>Alpha</td>
-                    <td>2 / 5</td>
-                    <td>2</td>
-                    <td class="win-rate">100%</td>
-                    <td class="placing placing-first">First, tied</td>
+                    <td>Bravo</td>
+                    <td>5 / 5</td>
+                    <td>4</td>
+                    <td class="win-rate">80%</td>
+                    <td class="placing placing-first">First</td>
                 </tr>
                 <tr class="highlight-row">
-                    <td>Cadre</td>
-                    <td>2 / 5</td>
-                    <td>2</td>
-                    <td class="win-rate">100%</td>
-                    <td class="placing placing-first">First, tied</td>
-                </tr>
-                <tr>
-                    <td>Bravo</td>
+                    <td>Alpha</td>
                     <td>4 / 5</td>
                     <td>3</td>
                     <td class="win-rate">75%</td>
                     <td class="placing placing-middle">Second</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td>Cadre</td>
+                    <td>4 / 5</td>
+                    <td>3</td>
+                    <td class="win-rate">75%</td>
+                    <td class="placing">Not ranked</td>
                 </tr>
                 <tr>
                     <td>Charlie</td>
@@ -999,17 +999,17 @@ with tab3:
                 </tr>
                 <tr>
                     <td>Delta</td>
-                    <td>2 / 5</td>
-                    <td>0</td>
-                    <td class="win-rate">0%</td>
-                    <td class="placing placing-last">Last, tied</td>
+                    <td>4 / 5</td>
+                    <td>1</td>
+                    <td class="win-rate">25%</td>
+                    <td class="placing placing-middle">Fourth</td>
                 </tr>
                 <tr>
                     <td>Echo</td>
-                    <td>3 / 5</td>
+                    <td>4 / 5</td>
                     <td>0</td>
                     <td class="win-rate">0%</td>
-                    <td class="placing placing-last">Last, tied</td>
+                    <td class="placing placing-last">Fifth</td>
                 </tr>
             </tbody>
         </table>
