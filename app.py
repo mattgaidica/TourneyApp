@@ -976,14 +976,14 @@ with tab3:
                     <td class="win-rate">80%</td>
                     <td class="placing placing-first">First</td>
                 </tr>
-                <tr class="highlight-row">
+                <tr>
                     <td>Alpha</td>
                     <td>4 / 5</td>
                     <td>3</td>
                     <td class="win-rate">75%</td>
                     <td class="placing placing-middle">Second</td>
                 </tr>
-                <tr class="highlight-row">
+                <tr>
                     <td>Cadre</td>
                     <td>4 / 5</td>
                     <td>3</td>
