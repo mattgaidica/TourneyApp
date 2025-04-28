@@ -806,10 +806,10 @@ TOURNAMENT_SCHEDULE = {
     "2025-04-28": {
         "date": "28 Apr 2025",
         "games": [
-            {"time": "1600", "field": "Field Blue", "status": "upcoming", "teams": "Alpha vs. Cadre"},
-            {"time": "1600", "field": "Field Orange", "status": "upcoming", "teams": "Delta vs. Echo"},
-            {"time": "1630", "field": "Field Blue", "status": "upcoming", "teams": "Bravo vs. Cadre"},
-            {"time": "1630", "field": "Field Orange", "status": "upcoming", "teams": "Alpha vs. Delta"}
+            {"time": "1550", "field": "Field Blue", "status": "upcoming", "teams": "Alpha vs. Cadre"},
+            {"time": "1550", "field": "Field Orange", "status": "upcoming", "teams": "Delta vs. Echo"},
+            {"time": "1620", "field": "Field Blue", "status": "upcoming", "teams": "Bravo vs. Cadre"},
+            {"time": "1620", "field": "Field Orange", "status": "upcoming", "teams": "Alpha vs. Delta"}
         ],
         "bootcamp": {
             "games1_2": "Bravo, Charlie",
@@ -819,10 +819,10 @@ TOURNAMENT_SCHEDULE = {
     "2025-05-07": {
         "date": "07 May 2025",
         "games": [
-            {"time": "1600", "field": "Field Blue", "status": "upcoming", "teams": "Charlie vs. Echo"},
-            {"time": "1600", "field": "Field Orange", "status": "upcoming", "teams": "Delta vs. Cadre"},
-            {"time": "1630", "field": "Field Blue", "status": "upcoming", "teams": "Alpha vs. Charlie"},
-            {"time": "1630", "field": "Field Orange", "status": "upcoming", "teams": "Sudden Death"}
+            {"time": "1550", "field": "Field Blue", "status": "upcoming", "teams": "Charlie vs. Echo"},
+            {"time": "1550", "field": "Field Orange", "status": "upcoming", "teams": "Delta vs. Cadre"},
+            {"time": "1620", "field": "Field Blue", "status": "upcoming", "teams": "Alpha vs. Charlie"},
+            {"time": "1620", "field": "Field Orange", "status": "upcoming", "teams": "Sudden Death"}
         ],
         "bootcamp": {
             "games1_2": "Alpha, Bravo",
