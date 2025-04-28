@@ -861,9 +861,9 @@ def display_schedule_table(date, games, bootcamp):
         
         # Time slots row - force them to stay side by side
         with cols[0]:
-            st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
+            st.markdown('<div class="time-slot">1550</div>', unsafe_allow_html=True)
         with cols[1]:
-            st.markdown('<div class="time-slot">1630</div>', unsafe_allow_html=True)
+            st.markdown('<div class="time-slot">1620</div>', unsafe_allow_html=True)
         
         # Create a 4-column layout with equal widths for fields
         field_cols = st.columns([1, 1, 1, 1])
