@@ -767,10 +767,10 @@ TOURNAMENT_SCHEDULE = {
     "2025-04-08": {
         "date": "08 Apr 2025",
         "games": [
-            {"time": "1600", "field": "Field Blue", "status": "completed", "teams": "Alpha vs. Bravo", "winner": "Alpha"},
-            {"time": "1600", "field": "Field Orange", "status": "completed", "teams": "Charlie vs. Delta", "winner": "Charlie"},
-            {"time": "1630", "field": "Field Blue", "status": "completed", "teams": "Alpha vs. Bravo", "winner": "Alpha"},
-            {"time": "1630", "field": "Field Orange", "status": "completed", "teams": "Charlie vs. Delta", "winner": "Charlie"}
+            {"time": "1550", "field": "Field Blue", "status": "completed", "teams": "Alpha vs. Bravo", "winner": "Alpha"},
+            {"time": "1550", "field": "Field Orange", "status": "completed", "teams": "Charlie vs. Delta", "winner": "Charlie"},
+            {"time": "1620", "field": "Field Blue", "status": "completed", "teams": "Alpha vs. Bravo", "winner": "Alpha"},
+            {"time": "1620", "field": "Field Orange", "status": "completed", "teams": "Charlie vs. Delta", "winner": "Charlie"}
         ],
         "bootcamp": {
             "games1_2": "Echo, Cadre",
@@ -780,10 +780,10 @@ TOURNAMENT_SCHEDULE = {
     "2025-04-15": {
         "date": "15 Apr 2025",
         "games": [
-            {"time": "1600", "field": "Field Blue", "status": "completed", "teams": "Echo vs. Cadre", "winner": "Cadre"},
-            {"time": "1600", "field": "Field Orange", "status": "completed", "teams": "Bravo vs. Delta", "winner": "Bravo"},
-            {"time": "1630", "field": "Field Blue", "status": "completed", "teams": "Echo vs. Cadre", "winner": "Cadre"},
-            {"time": "1630", "field": "Field Orange", "status": "completed", "teams": "Bravo vs. Delta", "winner": "Bravo"}
+            {"time": "1550", "field": "Field Blue", "status": "completed", "teams": "Echo vs. Cadre", "winner": "Cadre"},
+            {"time": "1550", "field": "Field Orange", "status": "completed", "teams": "Bravo vs. Delta", "winner": "Bravo"},
+            {"time": "1620", "field": "Field Blue", "status": "completed", "teams": "Echo vs. Cadre", "winner": "Cadre"},
+            {"time": "1620", "field": "Field Orange", "status": "completed", "teams": "Bravo vs. Delta", "winner": "Bravo"}
         ],
         "bootcamp": {
             "games1_2": "Alpha, Charlie",
@@ -793,10 +793,10 @@ TOURNAMENT_SCHEDULE = {
     "2025-04-23": {
         "date": "23 Apr 2025",
         "games": [
-            {"time": "1600", "field": "Field Blue", "status": "completed", "teams": "Bravo vs. Charlie", "winner": "Bravo"},
-            {"time": "1600", "field": "Field Orange", "status": "completed", "teams": "Alpha vs. Echo", "winner": "Alpha"},
-            {"time": "1630", "field": "Field Blue", "status": "completed", "teams": "Charlie vs. Cadre", "winner": "Cadre"},
-            {"time": "1630", "field": "Field Orange", "status": "completed", "teams": "Bravo vs. Echo", "winner": "Bravo"}
+            {"time": "1550", "field": "Field Blue", "status": "completed", "teams": "Bravo vs. Charlie", "winner": "Bravo"},
+            {"time": "1550", "field": "Field Orange", "status": "completed", "teams": "Alpha vs. Echo", "winner": "Alpha"},
+            {"time": "1620", "field": "Field Blue", "status": "completed", "teams": "Charlie vs. Cadre", "winner": "Cadre"},
+            {"time": "1620", "field": "Field Orange", "status": "completed", "teams": "Bravo vs. Echo", "winner": "Bravo"}
         ],
         "bootcamp": {
             "games1_2": "Delta, Cadre",
@@ -1079,7 +1079,7 @@ with st.sidebar:
     st.markdown("### Game Play:")
     st.markdown("""
     - **Game Duration**: 30 minutes
-    - **Game Times**: 1600 & 1630
+    - **Game Times**: 1550 & 1620
     - **Fields**: A & B
     - **Format**: Single Elimination
     """) 
