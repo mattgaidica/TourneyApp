@@ -997,11 +997,11 @@ def display_finals_table(date, games):
     # Create a 2-column layout for sudden death fields
     sudden_death_cols = st.columns([1, 1])
     
-    # Add field elements
+    # Add field elements with colored styling
     with sudden_death_cols[0]:
-        st.markdown('<div class="field-label">Field Blue</div>', unsafe_allow_html=True)
+        st.markdown('<div class="field-column field-blue"><div class="field-label">Field Blue</div></div>', unsafe_allow_html=True)
     with sudden_death_cols[1]:
-        st.markdown('<div class="field-label">Field Orange</div>', unsafe_allow_html=True)
+        st.markdown('<div class="field-column field-orange"><div class="field-label">Field Orange</div></div>', unsafe_allow_html=True)
     
     # Add spacing and separator
     st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
