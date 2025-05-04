@@ -946,13 +946,13 @@ def display_finals_table(date, games):
         # Apply custom CSS to style the expander
         st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
         
-        # Create a 3-column layout for time slots (2:1 ratio)
-        cols = st.columns([2, 0, 1])
+        # Create a 2-column layout for time slots (2:1 ratio)
+        time_cols = st.columns([2, 1])
         
         # Time slots row
-        with cols[0]:
+        with time_cols[0]:
             st.markdown('<div class="time-slot" style="text-align: center;">1540</div>', unsafe_allow_html=True)
-        with cols[2]:
+        with time_cols[1]:
             st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
         
         # Create a 3-column layout for fields
