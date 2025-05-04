@@ -957,12 +957,12 @@ def determine_sudden_death_teams(winners):
     Args:
         winners: List of three winners in order of their games
     Returns:
-        Tuple of (blue_field_teams, orange_field_teams, blue_label, orange_label)
+        Tuple of (blue_field_teams, orange_field_teams, blue_label, orange_label, fixed_placing)
     """
     # Example logic for the given case
     if winners == ["Charlie", "Delta", "Alpha"]:
-        return "Alpha vs. Bravo", "Charlie vs. Delta", "FIRST/SECOND PLACE", "THIRD/FOURTH PLACE"
-    return "TBD vs TBD", "TBD vs TBD", "", ""
+        return "Alpha vs. Bravo", "Charlie vs. Delta", "FIRST/SECOND PLACE", "THIRD/FOURTH PLACE", "Echo came in FIFTH PLACE"
+    return "TBD vs TBD", "TBD vs TBD", "", "", ""
 
 def display_finals_table(date, games):
     # Apply custom CSS to style the section
@@ -1024,9 +1024,9 @@ def display_finals_table(date, games):
     # Determine sudden death teams based on winners
     winners = [winner_1540_blue, winner_1540_orange, winner_1600_blue]
     if all(winner != "Select winner..." for winner in winners):
-        blue_teams, orange_teams, blue_label, orange_label = determine_sudden_death_teams(winners)
+        blue_teams, orange_teams, blue_label, orange_label, fixed_placing = determine_sudden_death_teams(winners)
     else:
-        blue_teams, orange_teams, blue_label, orange_label = "TBD vs TBD", "TBD vs TBD", "", ""
+        blue_teams, orange_teams, blue_label, orange_label, fixed_placing = "TBD vs TBD", "TBD vs TBD", "", "", ""
     
     # Add field elements with colored styling and team info
     with sudden_death_cols[0]:
@@ -1047,6 +1047,14 @@ def display_finals_table(date, games):
                     <div class="placement-label">{orange_label}</div>
                     {orange_teams}
                 </div>
+            </div>
+        ''', unsafe_allow_html=True)
+    
+    # Add fixed placing if it exists
+    if fixed_placing:
+        st.markdown(f'''
+            <div class="fixed-placing">
+                {fixed_placing}
             </div>
         ''', unsafe_allow_html=True)
     
