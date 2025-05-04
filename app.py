@@ -692,10 +692,14 @@ st.markdown("""
             /* Target the specific emotion class that controls min-width */
             .st-emotion-cache-t74pzu,
             .st-emotion-cache-180ybpv,
-            [class*="st-emotion-cache-"] {
+            [class*="st-emotion-cache-"],
+            [data-testid="column"],
+            [data-testid="stHorizontalBlock"] > div {
                 min-width: 0 !important;
-                width: auto !important;
-                flex: 1 !important;
+                width: 0 !important;
+                flex: 1 1 0 !important;
+                padding: 0 !important;
+                margin: 0 !important;
             }
             
             /* Override any grid-based layouts */
@@ -703,6 +707,8 @@ st.markdown("""
                 display: flex !important;
                 grid-template-columns: none !important;
                 grid-gap: 0 !important;
+                padding: 0 !important;
+                margin: 0 !important;
             }
             
             /* Allow text to wrap instead of truncating with ellipsis */
