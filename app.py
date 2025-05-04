@@ -1009,7 +1009,7 @@ def determine_sudden_death_teams(winners):
     
     # Case 9: Echo, Cadre, Charlie
     elif winners_tuple == ("Echo", "Cadre", "Charlie"):
-        return "None", "COMPLETE", "FOURTH/FIFTH PLACE", "Delta vs. Echo", "Bravo came in FIRST PLACE<br>Alpha came in SECOND PLACE<br>Charlie came in THIRD PLACE"
+        return "Delta vs. Echo", "None", "FOURTH/FIFTH PLACE", "", "Bravo came in FIRST PLACE<br>Alpha came in SECOND PLACE<br>Charlie came in THIRD PLACE"
     
     # Default case
     return "TBD vs TBD", "TBD vs TBD", "", "", ""
