@@ -774,7 +774,7 @@ st.markdown("""
 
         /* Fixed placing */
         .fixed-placing {
-            color: var(--accent-blue);
+            color: #FFD700;
             font-size: 18px;
             font-weight: bold;
             text-align: center;
@@ -784,7 +784,7 @@ st.markdown("""
             border-radius: var(--border-radius);
             border: 2px solid #FFD700;
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-            text-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
         }
     </style>
 """, unsafe_allow_html=True)
@@ -1306,13 +1306,4 @@ with st.sidebar:
         </a>
         """,
         unsafe_allow_html=True
-    )
-    
-    st.markdown("---")
-    st.markdown("### Game Play:")
-    st.markdown("""
-    - **Game Duration**: 30 minutes
-    - **Game Times**: 1550 & 1620
-    - **Fields**: A & B
-    - **Format**: Single Elimination
-    """) 
+    ) 
