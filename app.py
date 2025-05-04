@@ -992,6 +992,9 @@ def display_finals_table(date, games):
     
     # Add spacing and separator after the expander
     st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
+    
+    # Add SUDDEN DEATH header
+    st.markdown('<div style="text-align: center; color: #00CCFF; font-size: 24px; font-weight: bold; margin: 20px 0;">SUDDEN DEATH</div>', unsafe_allow_html=True)
 
 # Upcoming Events Tab
 with tab1:
