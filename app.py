@@ -972,9 +972,46 @@ def determine_sudden_death_teams(winners):
     Returns:
         Tuple of (blue_field_teams, orange_field_teams, blue_label, orange_label, fixed_placing)
     """
-    # Example logic for the given case
-    if winners == ["Charlie", "Delta", "Alpha"]:
+    # Convert winners to a tuple for easier comparison
+    winners_tuple = tuple(winners)
+    
+    # Case 1: Charlie, Delta, Alpha
+    if winners_tuple == ("Charlie", "Delta", "Alpha"):
         return "Alpha vs. Bravo", "Charlie vs. Delta", "FIRST/SECOND PLACE", "THIRD/FOURTH PLACE", "Echo came in FIFTH PLACE"
+    
+    # Case 2: Charlie, Delta, Charlie
+    elif winners_tuple == ("Charlie", "Delta", "Charlie"):
+        return "COMPLETE", "COMPLETE", "", "", "Bravo came in FIRST PLACE<br>Charlie came in SECOND PLACE<br>Alpha came in THIRD PLACE<br>Delta came in FOURTH PLACE<br>Echo came in FIFTH PLACE"
+    
+    # Case 3: Echo, Delta, Alpha
+    elif winners_tuple == ("Echo", "Delta", "Alpha"):
+        return "Alpha vs. Bravo", "Charlie vs. Echo", "FIRST/SECOND PLACE", "FOURTH/FIFTH PLACE", "Delta came in THIRD PLACE"
+    
+    # Case 4: Echo, Delta, Alpha (different outcome)
+    elif winners_tuple == ("Echo", "Delta", "Charlie"):
+        return "Charlie vs. Delta", "None", "THIRD/FOURTH PLACE", "", "Bravo came in FIRST PLACE<br>Alpha came in SECOND PLACE<br>Echo came in FIFTH PLACE"
+    
+    # Case 5: Charlie, Cadre, Alpha
+    elif winners_tuple == ("Charlie", "Cadre", "Alpha"):
+        return "Alpha vs. Bravo", "COMPLETE", "FIRST/SECOND PLACE", "", "Charlie came in THIRD PLACE<br>Delta came in FOURTH PLACE<br>Echo came in FIFTH PLACE"
+    
+    # Case 6: Charlie, Cadre, Charlie
+    elif winners_tuple == ("Charlie", "Cadre", "Charlie"):
+        return "COMPLETE", "COMPLETE", "", "", "Bravo came in FIRST PLACE<br>Charlie came in SECOND PLACE<br>Alpha came in THIRD PLACE<br>Delta came in FOURTH PLACE<br>Echo came in FIFTH PLACE"
+    
+    # Case 7: Charlie, Cadre, Alpha (different outcome)
+    elif winners_tuple == ("Charlie", "Cadre", "Alpha"):
+        return "COMPLETE", "COMPLETE", "", "", "Bravo came in FIRST PLACE<br>Alpha came in SECOND PLACE<br>Charlie came in THIRD PLACE<br>Delta came in FOURTH PLACE<br>Echo came in FIFTH PLACE"
+    
+    # Case 8: Echo, Cadre, Alpha
+    elif winners_tuple == ("Echo", "Cadre", "Alpha"):
+        return "Alpha vs. Bravo", "Delta vs. Echo", "FIRST/SECOND PLACE", "FOURTH/FIFTH PLACE", "Charlie came in THIRD PLACE"
+    
+    # Case 9: Echo, Cadre, Charlie
+    elif winners_tuple == ("Echo", "Cadre", "Charlie"):
+        return "None", "COMPLETE", "FOURTH/FIFTH PLACE", "", "Bravo came in FIRST PLACE<br>Alpha came in SECOND PLACE<br>Charlie came in THIRD PLACE"
+    
+    # Default case
     return "TBD vs TBD", "TBD vs TBD", "", "", ""
 
 def display_finals_table(date, games):
