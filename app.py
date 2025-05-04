@@ -974,6 +974,7 @@ def display_finals_table(date, games):
         st.markdown(field_html(games[0], "Field Blue"), unsafe_allow_html=True)
         # Get teams for dropdown
         teams = games[0]["teams"].split(" vs. ")
+        st.markdown('<style>.stSelectbox > div { background-color: var(--primary-bg); color: var(--accent-green); font-weight: bold; padding: var(--spacing-sm); border-radius: var(--border-radius); font-size: 14px; text-align: center; }</style>', unsafe_allow_html=True)
         st.selectbox("Winner", ["Select winner..."] + teams, key=f"winner_{date}_1540_blue")
     with field_cols[1]:
         st.markdown(field_html(games[1], "Field Orange"), unsafe_allow_html=True)
