@@ -1021,16 +1021,20 @@ def display_finals_table(date, games):
         st.markdown(f'''
             <div class="field-column field-blue">
                 <div class="field-label">Field Blue</div>
-                <div class="placement-label">{blue_label}</div>
-                <div class="team-info">{blue_teams}</div>
+                <div class="team-info">
+                    <div class="placement-label">{blue_label}</div>
+                    {blue_teams}
+                </div>
             </div>
         ''', unsafe_allow_html=True)
     with sudden_death_cols[1]:
         st.markdown(f'''
             <div class="field-column field-orange">
                 <div class="field-label">Field Orange</div>
-                <div class="placement-label">{orange_label}</div>
-                <div class="team-info">{orange_teams}</div>
+                <div class="team-info">
+                    <div class="placement-label">{orange_label}</div>
+                    {orange_teams}
+                </div>
             </div>
         ''', unsafe_allow_html=True)
     
