@@ -947,16 +947,16 @@ def display_finals_table(date, games):
         st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
         
         # Create a 3-column layout for time slots
-        cols = st.columns([2, 1, 1])  # First time slot spans 2 columns
+        cols = st.columns([1, 1, 1])
         
         # Time slots row
         with cols[0]:
             st.markdown('<div class="time-slot">1540</div>', unsafe_allow_html=True)
-        with cols[2]:  # Skip middle column for time slot
+        with cols[2]:
             st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
         
         # Create a 3-column layout for fields
-        field_cols = st.columns([2, 1, 1])
+        field_cols = st.columns([1, 1, 1])
         
         # Helper function to create field HTML
         def field_html(game, field_label):
