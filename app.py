@@ -939,7 +939,19 @@ def display_schedule_table(date, games, bootcamp):
         height=0,
     )
 
-# Function to display finals table
+def determine_sudden_death_teams(winners):
+    """
+    Determine the teams for the sudden death games based on the winners.
+    Args:
+        winners: List of three winners in order of their games
+    Returns:
+        Tuple of (blue_field_teams, orange_field_teams)
+    """
+    # Example logic for the given case
+    if winners == ["Charlie", "Delta", "Alpha"]:
+        return "Alpha vs. Bravo", "Charlie vs. Delta"
+    return "TBD vs TBD", "TBD vs TBD"
+
 def display_finals_table(date, games):
     # Apply custom CSS to style the section
     st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
@@ -974,19 +986,19 @@ def display_finals_table(date, games):
         st.markdown(field_html(games[0], "Field Blue"), unsafe_allow_html=True)
         # Get teams for dropdown
         teams = games[0]["teams"].split(" vs. ")
-        st.selectbox("Winner", ["Select winner..."] + teams, key=f"winner_{date}_1540_blue")
+        winner_1540_blue = st.selectbox("Winner", ["Select winner..."] + teams, key=f"winner_{date}_1540_blue")
     with field_cols[1]:
         st.markdown(field_html(games[1], "Field Orange"), unsafe_allow_html=True)
         # Get teams for dropdown
         teams = games[1]["teams"].split(" vs. ")
-        st.selectbox("Winner", ["Select winner..."] + teams, key=f"winner_{date}_1540_orange")
+        winner_1540_orange = st.selectbox("Winner", ["Select winner..."] + teams, key=f"winner_{date}_1540_orange")
     
     # Second time slot (1600) - only Blue field
     with field_cols[2]:
         st.markdown(field_html(games[2], "Field Blue"), unsafe_allow_html=True)
         # Get teams for dropdown
         teams = games[2]["teams"].split(" vs. ")
-        st.selectbox("Winner", ["Select winner..."] + teams, key=f"winner_{date}_1600_blue")
+        winner_1600_blue = st.selectbox("Winner", ["Select winner..."] + teams, key=f"winner_{date}_1600_blue")
     
     # Add SUDDEN DEATH header
     st.markdown('<div style="text-align: center; color: #00CCFF; font-size: 24px; font-weight: bold; margin: 20px 0;">SUDDEN DEATH</div>', unsafe_allow_html=True)
@@ -997,11 +1009,18 @@ def display_finals_table(date, games):
     # Create a 2-column layout for sudden death fields
     sudden_death_cols = st.columns([1, 1])
     
-    # Add field elements with colored styling
+    # Determine sudden death teams based on winners
+    winners = [winner_1540_blue, winner_1540_orange, winner_1600_blue]
+    if all(winner != "Select winner..." for winner in winners):
+        blue_teams, orange_teams = determine_sudden_death_teams(winners)
+    else:
+        blue_teams, orange_teams = "TBD vs TBD", "TBD vs TBD"
+    
+    # Add field elements with colored styling and team info
     with sudden_death_cols[0]:
-        st.markdown('<div class="field-column field-blue"><div class="field-label">Field Blue</div><div class="team-info">TBD vs TBD</div></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="field-column field-blue"><div class="field-label">Field Blue</div><div class="team-info">{blue_teams}</div></div>', unsafe_allow_html=True)
     with sudden_death_cols[1]:
-        st.markdown('<div class="field-column field-orange"><div class="field-label">Field Orange</div><div class="team-info">TBD vs TBD</div></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="field-column field-orange"><div class="field-label">Field Orange</div><div class="team-info">{orange_teams}</div></div>', unsafe_allow_html=True)
     
     # Add spacing and separator
     st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
