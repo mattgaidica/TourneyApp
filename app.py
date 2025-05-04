@@ -1025,6 +1025,14 @@ def display_finals_table(date, games):
         teams = games[2]["teams"].split(" vs. ")
         winner_1600_blue = st.selectbox("Winner", ["Select winner..."] + teams, key=f"winner_{date}_1600_blue")
     
+    # Add fixed placing if it exists
+    if fixed_placing:
+        st.markdown(f'''
+            <div class="fixed-placing">
+                {fixed_placing}
+            </div>
+        ''', unsafe_allow_html=True)
+    
     # Add SUDDEN DEATH header
     st.markdown('<div style="text-align: center; color: #00CCFF; font-size: 24px; font-weight: bold; margin: 20px 0;">SUDDEN DEATH</div>', unsafe_allow_html=True)
     
@@ -1060,14 +1068,6 @@ def display_finals_table(date, games):
                     <div class="placement-label">{orange_label}</div>
                     {orange_teams}
                 </div>
-            </div>
-        ''', unsafe_allow_html=True)
-    
-    # Add fixed placing if it exists
-    if fixed_placing:
-        st.markdown(f'''
-            <div class="fixed-placing">
-                {fixed_placing}
             </div>
         ''', unsafe_allow_html=True)
     
