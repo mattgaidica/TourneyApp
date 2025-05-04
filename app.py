@@ -1069,6 +1069,9 @@ def display_finals_table(date, games):
     else:
         blue_teams, orange_teams, blue_label, orange_label, fixed_placing = "TBD vs TBD", "TBD vs TBD", "", "", ""
     
+    # Add SUDDEN DEATH header
+    st.markdown('<div style="text-align: center; color: #00CCFF; font-size: 24px; font-weight: bold; margin: 20px 0;">SUDDEN DEATH</div>', unsafe_allow_html=True)
+    
     # Add fixed placing if it exists
     if fixed_placing:
         st.markdown(f'''
@@ -1076,9 +1079,6 @@ def display_finals_table(date, games):
                 {fixed_placing}
             </div>
         ''', unsafe_allow_html=True)
-    
-    # Add SUDDEN DEATH header
-    st.markdown('<div style="text-align: center; color: #00CCFF; font-size: 24px; font-weight: bold; margin: 20px 0;">SUDDEN DEATH</div>', unsafe_allow_html=True)
     
     # Add time element for sudden death
     st.markdown('<div class="time-slot" style="text-align: center; width: 100%;">1620</div>', unsafe_allow_html=True)
