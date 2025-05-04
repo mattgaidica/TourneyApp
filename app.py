@@ -771,6 +771,19 @@ st.markdown("""
             text-align: center;
             text-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
         }
+
+        /* Fixed placing */
+        .fixed-placing {
+            color: var(--accent-blue);
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: var(--primary-bg);
+            border-radius: var(--border-radius);
+            text-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
+        }
     </style>
 """, unsafe_allow_html=True)
 
