@@ -945,12 +945,12 @@ def determine_sudden_death_teams(winners):
     Args:
         winners: List of three winners in order of their games
     Returns:
-        Tuple of (blue_field_teams, orange_field_teams)
+        Tuple of (blue_field_teams, orange_field_teams, blue_label, orange_label)
     """
     # Example logic for the given case
     if winners == ["Charlie", "Delta", "Alpha"]:
-        return "Alpha vs. Bravo", "Charlie vs. Delta"
-    return "TBD vs TBD", "TBD vs TBD"
+        return "Alpha vs. Bravo", "Charlie vs. Delta", "FIRST/SECOND PLACE", "THIRD/FOURTH PLACE"
+    return "TBD vs TBD", "TBD vs TBD", "", ""
 
 def display_finals_table(date, games):
     # Apply custom CSS to style the section
@@ -1012,15 +1012,27 @@ def display_finals_table(date, games):
     # Determine sudden death teams based on winners
     winners = [winner_1540_blue, winner_1540_orange, winner_1600_blue]
     if all(winner != "Select winner..." for winner in winners):
-        blue_teams, orange_teams = determine_sudden_death_teams(winners)
+        blue_teams, orange_teams, blue_label, orange_label = determine_sudden_death_teams(winners)
     else:
-        blue_teams, orange_teams = "TBD vs TBD", "TBD vs TBD"
+        blue_teams, orange_teams, blue_label, orange_label = "TBD vs TBD", "TBD vs TBD", "", ""
     
     # Add field elements with colored styling and team info
     with sudden_death_cols[0]:
-        st.markdown(f'<div class="field-column field-blue"><div class="field-label">Field Blue</div><div class="team-info">{blue_teams}</div></div>', unsafe_allow_html=True)
+        st.markdown(f'''
+            <div class="field-column field-blue">
+                <div class="field-label">Field Blue</div>
+                <div class="placement-label">{blue_label}</div>
+                <div class="team-info">{blue_teams}</div>
+            </div>
+        ''', unsafe_allow_html=True)
     with sudden_death_cols[1]:
-        st.markdown(f'<div class="field-column field-orange"><div class="field-label">Field Orange</div><div class="team-info">{orange_teams}</div></div>', unsafe_allow_html=True)
+        st.markdown(f'''
+            <div class="field-column field-orange">
+                <div class="field-label">Field Orange</div>
+                <div class="placement-label">{orange_label}</div>
+                <div class="team-info">{orange_teams}</div>
+            </div>
+        ''', unsafe_allow_html=True)
     
     # Add spacing and separator
     st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
