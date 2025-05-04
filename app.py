@@ -941,60 +941,58 @@ def display_schedule_table(date, games, bootcamp):
 
 # Function to display finals table
 def display_finals_table(date, games):
-    # Create an expander with custom styling for the date (expanded by default)
-    with st.expander("", expanded=True):
-        # Apply custom CSS to style the expander
-        st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
-        
-        # Create a 2-column layout for time slots (2:1 ratio)
-        time_cols = st.columns([2, 1])
-        
-        # Time slots row
-        with time_cols[0]:
-            st.markdown('<div class="time-slot" style="text-align: center;">1540</div>', unsafe_allow_html=True)
-        with time_cols[1]:
-            st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
-        
-        # Create a 3-column layout for fields
-        field_cols = st.columns([1, 1, 1])
-        
-        # Helper function to create field HTML
-        def field_html(game, field_label):
-            # Set CSS class based on field
-            field_class = "field-blue" if field_label == "Field Blue" else "field-orange"
-            
-            return f'''
-                <div class="field-column {field_class}">
-                    <div class="field-label">{field_label}</div>
-                    <div class="team-info">{game["teams"]}</div>
-                </div>
-            '''
-        
-        # Field labels and team info
-        # First time slot (1540) - both fields
-        with field_cols[0]:
-            st.markdown(field_html(games[0], "Field Blue"), unsafe_allow_html=True)
-            # Get teams for dropdown
-            teams = games[0]["teams"].split(" vs. ")
-            st.selectbox("Winner", ["Select winner..."] + teams, key=f"winner_{date}_1540_blue")
-        with field_cols[1]:
-            st.markdown(field_html(games[1], "Field Orange"), unsafe_allow_html=True)
-            # Get teams for dropdown
-            teams = games[1]["teams"].split(" vs. ")
-            st.selectbox("Winner", ["Select winner..."] + teams, key=f"winner_{date}_1540_orange")
-        
-        # Second time slot (1600) - only Blue field
-        with field_cols[2]:
-            st.markdown(field_html(games[2], "Field Blue"), unsafe_allow_html=True)
-            # Get teams for dropdown
-            teams = games[2]["teams"].split(" vs. ")
-            st.selectbox("Winner", ["Select winner..."] + teams, key=f"winner_{date}_1600_blue")
+    # Apply custom CSS to style the section
+    st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
     
-    # Add spacing and separator after the expander
-    st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
+    # Create a 2-column layout for time slots (2:1 ratio)
+    time_cols = st.columns([2, 1])
+    
+    # Time slots row
+    with time_cols[0]:
+        st.markdown('<div class="time-slot" style="text-align: center;">1540</div>', unsafe_allow_html=True)
+    with time_cols[1]:
+        st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
+    
+    # Create a 3-column layout for fields
+    field_cols = st.columns([1, 1, 1])
+    
+    # Helper function to create field HTML
+    def field_html(game, field_label):
+        # Set CSS class based on field
+        field_class = "field-blue" if field_label == "Field Blue" else "field-orange"
+        
+        return f'''
+            <div class="field-column {field_class}">
+                <div class="field-label">{field_label}</div>
+                <div class="team-info">{game["teams"]}</div>
+            </div>
+        '''
+    
+    # Field labels and team info
+    # First time slot (1540) - both fields
+    with field_cols[0]:
+        st.markdown(field_html(games[0], "Field Blue"), unsafe_allow_html=True)
+        # Get teams for dropdown
+        teams = games[0]["teams"].split(" vs. ")
+        st.selectbox("Winner", ["Select winner..."] + teams, key=f"winner_{date}_1540_blue")
+    with field_cols[1]:
+        st.markdown(field_html(games[1], "Field Orange"), unsafe_allow_html=True)
+        # Get teams for dropdown
+        teams = games[1]["teams"].split(" vs. ")
+        st.selectbox("Winner", ["Select winner..."] + teams, key=f"winner_{date}_1540_orange")
+    
+    # Second time slot (1600) - only Blue field
+    with field_cols[2]:
+        st.markdown(field_html(games[2], "Field Blue"), unsafe_allow_html=True)
+        # Get teams for dropdown
+        teams = games[2]["teams"].split(" vs. ")
+        st.selectbox("Winner", ["Select winner..."] + teams, key=f"winner_{date}_1600_blue")
     
     # Add SUDDEN DEATH header
     st.markdown('<div style="text-align: center; color: #00CCFF; font-size: 24px; font-weight: bold; margin: 20px 0;">SUDDEN DEATH</div>', unsafe_allow_html=True)
+    
+    # Add spacing and separator
+    st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
 
 # Upcoming Events Tab
 with tab1:
