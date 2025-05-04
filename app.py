@@ -994,6 +994,65 @@ def display_finals_table(date, games):
     # Add spacing and separator
     st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
 
+def display_past_table(date, games, bootcamp):
+    # Create an expander with custom styling for the date (expanded by default)
+    with st.expander("", expanded=True):
+        # Apply custom CSS to style the expander
+        st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
+        
+        # Use the smallest possible column container for better control
+        st.write('<style>.row-container { display: flex; width: 100%; }</style>', unsafe_allow_html=True)
+        
+        # Create a 2-column layout with fixed ratio for time slots
+        cols = st.columns([1, 1])
+        
+        # Time slots row - force them to stay side by side
+        with cols[0]:
+            st.markdown('<div class="time-slot">1550</div>', unsafe_allow_html=True)
+        with cols[1]:
+            st.markdown('<div class="time-slot">1620</div>', unsafe_allow_html=True)
+        
+        # Create a 4-column layout with equal widths for fields
+        field_cols = st.columns([1, 1, 1, 1])
+        
+        # Helper function to create field HTML
+        def field_html(game, field_label):
+            winner_html = f'<div class="winner-cell">Winner: {game["winner"]}</div>' if "winner" in game else ''
+            
+            # Set CSS class based on field
+            field_class = "field-blue" if field_label == "Field Blue" else "field-orange"
+            
+            return f'''
+                <div class="field-column {field_class}">
+                    <div class="field-label">{field_label}</div>
+                    <div class="team-info">{game["teams"]}</div>
+                    {winner_html}
+                </div>
+            '''
+        
+        # Field labels and team info
+        for i, col in enumerate(field_cols):
+            with col:
+                field_label = "Field Blue" if i % 2 == 0 else "Field Orange"
+                st.markdown(field_html(games[i], field_label), unsafe_allow_html=True)
+        
+        # Bootcamp section headers
+        bootcamp_cols = st.columns([1, 1])
+        with bootcamp_cols[0]:
+            st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
+        with bootcamp_cols[1]:
+            st.markdown('<div class="bootcamp-header">BOOTCAMP</div>', unsafe_allow_html=True)
+        
+        # Bootcamp info
+        bootcamp_info_cols = st.columns([1, 1])
+        with bootcamp_info_cols[0]:
+            st.markdown(f'<div class="bootcamp-info">{bootcamp["games1_2"]}</div>', unsafe_allow_html=True)
+        with bootcamp_info_cols[1]:
+            st.markdown(f'<div class="bootcamp-info">{bootcamp["games3_4"]}</div>', unsafe_allow_html=True)
+    
+    # Add spacing and separator after the expander
+    st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
+
 # Upcoming Events Tab
 with tab1:
     # Display finals games
@@ -1006,7 +1065,7 @@ with tab2:
     # Display past games
     for date, schedule in TOURNAMENT_SCHEDULE.items():
         if any(game['status'] == 'completed' for game in schedule['games']):
-            display_schedule_table(schedule['date'], schedule['games'], schedule['bootcamp'])
+            display_past_table(schedule['date'], schedule['games'], schedule['bootcamp'])
     
 # Standings Tab
 with tab3:
