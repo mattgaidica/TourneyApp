@@ -759,6 +759,18 @@ st.markdown("""
                 padding-top: 15px !important;
             }
         }
+
+        /* Placement label */
+        .placement-label {
+            color: var(--accent-blue);
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
+        }
     </style>
 """, unsafe_allow_html=True)
 
