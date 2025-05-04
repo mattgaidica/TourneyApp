@@ -861,9 +861,9 @@ TOURNAMENT_SCHEDULE = {
 # Main title and description in a centered container
 st.markdown('<div class="title-container">', unsafe_allow_html=True)
 st.markdown('<h1 class="main-title">MGT101 25B Ultimate Tournament</h1>', unsafe_allow_html=True)
-st.markdown('<div class="main-description">Each flight (plus Cadre) will play against each other once, with standings based on total number of wins and sudden death matches for tiebreakers.</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-description">Each flight (plus Cadre) will play against each other once, with standings based on win rate and sudden death matches for tiebreakers.</div>', unsafe_allow_html=True)
 st.markdown("""
-<div class="note">Note: The standings are calculated based on the total number of wins—this eliminates the initial condition bias of typical brackets.</div>
+<div class="note">Note: The standings were calculated based on win rate to eliminate the initial condition bias (i.e., seeding) of typical brackets.</div>
 """, unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
