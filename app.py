@@ -1188,6 +1188,9 @@ with tab2:
     
 # Standings Tab
 with tab3:
+    # Add header above standings table
+    st.markdown('<h2 style="text-align: center; color: var(--accent-blue); margin-bottom: 20px;">Standings going into Finals</h2>', unsafe_allow_html=True)
+    
     # Create a clean HTML table for the standings
     html = """
     <div style="display: flex; justify-content: center; width: 100%;">
