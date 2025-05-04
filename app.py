@@ -1025,6 +1025,13 @@ def display_finals_table(date, games):
         teams = games[2]["teams"].split(" vs. ")
         winner_1600_blue = st.selectbox("Winner", ["Select winner..."] + teams, key=f"winner_{date}_1600_blue")
     
+    # Determine sudden death teams based on winners
+    winners = [winner_1540_blue, winner_1540_orange, winner_1600_blue]
+    if all(winner != "Select winner..." for winner in winners):
+        blue_teams, orange_teams, blue_label, orange_label, fixed_placing = determine_sudden_death_teams(winners)
+    else:
+        blue_teams, orange_teams, blue_label, orange_label, fixed_placing = "TBD vs TBD", "TBD vs TBD", "", "", ""
+    
     # Add fixed placing if it exists
     if fixed_placing:
         st.markdown(f'''
@@ -1041,13 +1048,6 @@ def display_finals_table(date, games):
     
     # Create a 2-column layout for sudden death fields
     sudden_death_cols = st.columns([1, 1])
-    
-    # Determine sudden death teams based on winners
-    winners = [winner_1540_blue, winner_1540_orange, winner_1600_blue]
-    if all(winner != "Select winner..." for winner in winners):
-        blue_teams, orange_teams, blue_label, orange_label, fixed_placing = determine_sudden_death_teams(winners)
-    else:
-        blue_teams, orange_teams, blue_label, orange_label, fixed_placing = "TBD vs TBD", "TBD vs TBD", "", "", ""
     
     # Add field elements with colored styling and team info
     with sudden_death_cols[0]:
