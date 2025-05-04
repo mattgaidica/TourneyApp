@@ -841,7 +841,7 @@ st.markdown("""
 st.markdown('</div>', unsafe_allow_html=True)
 
 # Create tabs
-tab1, tab2, tab3 = st.tabs(["Upcoming", "Past", "Standings"])
+tab1, tab2, tab3 = st.tabs(["Finals", "Past", "Standings"])
 
 # Function to display game schedule table
 def display_schedule_table(date, games, bootcamp):
@@ -939,12 +939,52 @@ def display_schedule_table(date, games, bootcamp):
         height=0,
     )
 
+# Function to display finals table
+def display_finals_table(date, games):
+    # Create an expander with custom styling for the date (expanded by default)
+    with st.expander("", expanded=True):
+        # Apply custom CSS to style the expander
+        st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
+        
+        # Create a 2-column layout for time slots
+        cols = st.columns([1, 1])
+        
+        # Time slots row
+        with cols[0]:
+            st.markdown('<div class="time-slot">1550</div>', unsafe_allow_html=True)
+        with cols[1]:
+            st.markdown('<div class="time-slot">1620</div>', unsafe_allow_html=True)
+        
+        # Create a 2-column layout for fields
+        field_cols = st.columns([1, 1])
+        
+        # Helper function to create field HTML
+        def field_html(game, field_label):
+            # Set CSS class based on field
+            field_class = "field-blue" if field_label == "Field Blue" else "field-orange"
+            
+            return f'''
+                <div class="field-column {field_class}">
+                    <div class="field-label">{field_label}</div>
+                    <div class="team-info">{game["teams"]}</div>
+                </div>
+            '''
+        
+        # Field labels and team info
+        for i, col in enumerate(field_cols):
+            with col:
+                field_label = "Field Blue" if i % 2 == 0 else "Field Orange"
+                st.markdown(field_html(games[i], field_label), unsafe_allow_html=True)
+    
+    # Add spacing and separator after the expander
+    st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
+
 # Upcoming Events Tab
 with tab1:
-    # Display upcoming games
+    # Display finals games
     for date, schedule in TOURNAMENT_SCHEDULE.items():
         if any(game['status'] == 'upcoming' for game in schedule['games']):
-            display_schedule_table(schedule['date'], schedule['games'], schedule['bootcamp'])
+            display_finals_table(schedule['date'], schedule['games'])
     
 # Past Events Tab
 with tab2:
