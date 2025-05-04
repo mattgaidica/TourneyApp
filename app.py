@@ -992,7 +992,7 @@ def display_finals_table(date, games):
     st.markdown('<div style="text-align: center; color: #00CCFF; font-size: 24px; font-weight: bold; margin: 20px 0;">SUDDEN DEATH</div>', unsafe_allow_html=True)
     
     # Add time element for sudden death
-    st.markdown('<div class="time-slot" style="text-align: center; width: 100%; margin: 0 auto;">1620</div>', unsafe_allow_html=True)
+    st.markdown('<div class="time-slot" style="text-align: center; width: 100%;">1620</div>', unsafe_allow_html=True)
     
     # Create a 2-column layout for sudden death fields
     sudden_death_cols = st.columns([1, 1])
