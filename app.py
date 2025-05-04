@@ -949,8 +949,9 @@ def display_schedule_table(date, games, bootcamp):
                 const columns = window.parent.document.querySelectorAll('[data-testid="column"]');
                 columns.forEach(col => {
                     col.style.minWidth = '0';
-                    col.style.width = '0';
-                    col.style.flex = '1 1 0%';
+                    col.style.width = 'auto';
+                    col.style.flex = '1 1 auto';
+                    col.style.overflow = 'hidden';
                 });
                 
                 // Ensure horizontal blocks stay horizontal
@@ -958,7 +959,8 @@ def display_schedule_table(date, games, bootcamp):
                 blocks.forEach(block => {
                     block.style.display = 'flex';
                     block.style.flexDirection = 'row';
-                    block.style.flexWrap = 'nowrap';
+                    block.style.flexWrap = 'wrap';
+                    block.style.gap = '1rem';
                 });
             })();
         </script>
