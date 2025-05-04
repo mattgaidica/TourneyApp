@@ -946,17 +946,17 @@ def display_finals_table(date, games):
         # Apply custom CSS to style the expander
         st.markdown(f'<div class="date-header">{date}</div>', unsafe_allow_html=True)
         
-        # Create a 2-column layout for time slots
-        cols = st.columns([1, 1])
+        # Create a 3-column layout for time slots
+        cols = st.columns([2, 1, 1])  # First time slot spans 2 columns
         
         # Time slots row
         with cols[0]:
-            st.markdown('<div class="time-slot">1550</div>', unsafe_allow_html=True)
-        with cols[1]:
-            st.markdown('<div class="time-slot">1620</div>', unsafe_allow_html=True)
+            st.markdown('<div class="time-slot">1540</div>', unsafe_allow_html=True)
+        with cols[2]:  # Skip middle column for time slot
+            st.markdown('<div class="time-slot">1600</div>', unsafe_allow_html=True)
         
-        # Create a 2-column layout for fields
-        field_cols = st.columns([1, 1])
+        # Create a 3-column layout for fields
+        field_cols = st.columns([2, 1, 1])
         
         # Helper function to create field HTML
         def field_html(game, field_label):
@@ -971,10 +971,15 @@ def display_finals_table(date, games):
             '''
         
         # Field labels and team info
-        for i, col in enumerate(field_cols):
-            with col:
-                field_label = "Field Blue" if i % 2 == 0 else "Field Orange"
-                st.markdown(field_html(games[i], field_label), unsafe_allow_html=True)
+        # First time slot (1540) - both fields
+        with field_cols[0]:
+            st.markdown(field_html(games[0], "Field Blue"), unsafe_allow_html=True)
+        with field_cols[1]:
+            st.markdown(field_html(games[1], "Field Orange"), unsafe_allow_html=True)
+        
+        # Second time slot (1600) - only Blue field
+        with field_cols[2]:
+            st.markdown(field_html(games[2], "Field Blue"), unsafe_allow_html=True)
     
     # Add spacing and separator after the expander
     st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
