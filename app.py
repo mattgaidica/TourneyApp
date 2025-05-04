@@ -694,7 +694,6 @@ st.markdown("""
             .st-emotion-cache-180ybpv,
             [class*="st-emotion-cache-"] {
                 min-width: 0 !important;
-                width: auto !important;
                 flex: 1 !important;
             }
             
