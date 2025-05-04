@@ -779,9 +779,11 @@ st.markdown("""
             font-weight: bold;
             text-align: center;
             margin: 20px 0;
-            padding: 10px;
+            padding: 15px;
             background-color: var(--primary-bg);
             border-radius: var(--border-radius);
+            border: 2px solid #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
             text-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
         }
     </style>
