@@ -974,12 +974,21 @@ def display_finals_table(date, games):
         # First time slot (1540) - both fields
         with field_cols[0]:
             st.markdown(field_html(games[0], "Field Blue"), unsafe_allow_html=True)
+            # Get teams for dropdown
+            teams = games[0]["teams"].split(" vs. ")
+            st.selectbox("Winner", teams, key=f"winner_{date}_1540_blue")
         with field_cols[1]:
             st.markdown(field_html(games[1], "Field Orange"), unsafe_allow_html=True)
+            # Get teams for dropdown
+            teams = games[1]["teams"].split(" vs. ")
+            st.selectbox("Winner", teams, key=f"winner_{date}_1540_orange")
         
         # Second time slot (1600) - only Blue field
         with field_cols[2]:
             st.markdown(field_html(games[2], "Field Blue"), unsafe_allow_html=True)
+            # Get teams for dropdown
+            teams = games[2]["teams"].split(" vs. ")
+            st.selectbox("Winner", teams, key=f"winner_{date}_1600_blue")
     
     # Add spacing and separator after the expander
     st.markdown('<div class="event-separator"></div>', unsafe_allow_html=True)
